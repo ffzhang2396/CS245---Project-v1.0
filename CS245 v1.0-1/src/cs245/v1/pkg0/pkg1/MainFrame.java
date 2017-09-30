@@ -28,6 +28,8 @@ public class MainFrame  extends JFrame{
         mainP.add(credit, "credits");
         
         mainMenu.setMain(this);
+        credit.setMain(this);
+        hScore.setMain(this);
         
         setTitle("PlaceHolder title");
         setSize(600, 400);
