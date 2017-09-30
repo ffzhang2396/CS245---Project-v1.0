@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author FelixZhang
+ *Need to figure out how to display high scores.
+ * 
  */
 public class HighScore extends JPanel {
     private MainFrame main;
