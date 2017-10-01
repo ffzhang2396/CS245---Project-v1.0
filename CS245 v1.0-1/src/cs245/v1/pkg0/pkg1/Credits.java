@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author FelixZhang
+ *Need to display our names and make them unselectable.
+ * 
  */
 public class Credits extends JPanel {
     private MainFrame main;
@@ -37,6 +37,7 @@ public class Credits extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                main.startMenuTimer();
                 main.swapView("menu");
             }
             

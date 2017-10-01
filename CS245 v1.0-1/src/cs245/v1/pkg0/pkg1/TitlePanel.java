@@ -17,7 +17,11 @@ public class TitlePanel extends JPanel {
     JLabel projName = new JLabel();
     
     public TitlePanel() {
+        setLayout(new BorderLayout());
         
+        groupName.setText("title");
+        
+        add(groupName, BorderLayout.CENTER);
     }
     
 }

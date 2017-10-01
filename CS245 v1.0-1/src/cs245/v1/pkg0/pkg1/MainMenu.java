@@ -14,13 +14,22 @@ public class MainMenu extends JPanel {
     private JButton credit = new JButton("Credits");
     private JPanel menuButtons = new JPanel();
     private JPanel buttons = new JPanel();
+    private CardLayout slideShow = new CardLayout();
+    private JPanel pictures = new JPanel(slideShow);
+    private boolean show = false;
+    private Timer timer;
     private MainFrame main;
     
     
     public MainMenu() {
+        setBackground(Color.black);
+        pictures.setBackground(Color.black);
         setLayout(new BorderLayout());
         
         add(menuBtns(), BorderLayout.LINE_END);
+        add(pictures, BorderLayout.LINE_START);
+        
+        displayLogo();
         
         
     }
@@ -30,7 +39,45 @@ public class MainMenu extends JPanel {
     
     }
     
+    public void stopTimer() {
+        timer.stop();
+    }
     
+    public void startTimer() {
+        timer.start();
+    }
+    
+    
+    /*
+    I used a java swing timer to slideshow the two 
+    logo pictures.
+    */
+    private void displayLogo() {
+        ImageIcon img = new ImageIcon(new ImageIcon("thunking.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
+        JLabel label = new JLabel("", img, JLabel.CENTER);
+        ImageIcon img2 = new ImageIcon(new ImageIcon("thunking2.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
+        JLabel label2 = new JLabel("", img2, JLabel.CENTER);
+        
+        pictures.add(label, "one");
+        pictures.add(label2, "two");
+        
+        
+        timer = new Timer(1000, new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (show) {
+                    slideShow.show(pictures, "one");
+                    show = false;
+                } else {
+                    slideShow.show(pictures, "two");
+                    show = true;
+                }
+            }
+            
+        });
+        timer.start();
+    }
     
     
     private JComponent menuBtns() {
@@ -69,6 +116,7 @@ public class MainMenu extends JPanel {
         hScore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                stopTimer();
                 main.swapView("High Score");
             }
         });
@@ -76,11 +124,15 @@ public class MainMenu extends JPanel {
         credit.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
+                stopTimer();
                 main.swapView("credits");
             }
         });
         
-        
+        menuButtons.setBackground(Color.black);
+        buttons.setBackground(Color.black);
+        menuButtons.setOpaque(false);
+        buttons.setOpaque(false);
 
         return menuButtons;
         
