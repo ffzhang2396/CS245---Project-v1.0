@@ -6,4 +6,4 @@ Version 1.0 of this project a GUI based hangman game.
 - [ ] Create accessor methods to receive high score info from backend data structure.
 - [ ] Add in the formatted text for Credits Panel.
 - [ ] Create the actual game panel and implement accessor methods for backend
-- [ ] create Backend.
+- [ ] Start working on Backend of game.
