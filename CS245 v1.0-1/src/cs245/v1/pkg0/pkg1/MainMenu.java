@@ -129,6 +129,15 @@ public class MainMenu extends JPanel {
             }
         });
         
+        
+        play.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                stopTimer();
+                main.swapView("play");
+            }
+        });
+        
         menuButtons.setBackground(Color.black);
         buttons.setBackground(Color.black);
         menuButtons.setOpaque(false);

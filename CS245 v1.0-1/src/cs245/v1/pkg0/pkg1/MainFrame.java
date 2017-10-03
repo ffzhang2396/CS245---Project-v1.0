@@ -16,6 +16,7 @@ public class MainFrame  extends JFrame{
     private HighScore hScore = new HighScore();
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
+    private PlayGame play = new PlayGame();
     private Timer timer;
     
     /*
@@ -53,6 +54,7 @@ public class MainFrame  extends JFrame{
         
         
         add(mainP);
+        //pack();
     }
     /*
     I moved the panel initializations into another method
@@ -63,10 +65,12 @@ public class MainFrame  extends JFrame{
         mainP.add(mainMenu, "menu");
         mainP.add(hScore, "High Score");
         mainP.add(credit, "credits");
+        mainP.add(play, "play");
         
         mainMenu.setMain(this);
         credit.setMain(this);
         hScore.setMain(this);
+
     }
     
     
