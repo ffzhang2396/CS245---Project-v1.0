@@ -57,6 +57,13 @@ public class PlayGame extends JPanel implements ActionListener {
       
     }
     
+    private void gamePanel() {
+        add(centerPanel, BorderLayout.CENTER);
+        
+        
+        
+    }
+    
     
     /*
     Draws the title bar for the hangman game where it includes the stylized drawing
@@ -109,5 +116,21 @@ public class PlayGame extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        System.out.println(e.getActionCommand());
     }
+    
+   
+
+   private static class GamePanel extends JPanel {
+       
+       public GamePanel() {
+           
+       }
+       
+       public void paintComponent(Graphics g) {
+           super.paintComponent(g);
+           
+           
+       }
+    
+} 
     
 }

@@ -52,6 +52,7 @@ public class MainMenu extends JPanel {
     I used a java swing timer to slideshow the two 
     logo pictures.
     */
+    //NEED TO CHANGE TO USE BUFFERED IMAGE FOR AUTOMATIC IMAGE SCALING.
     private void displayLogo() {
         ImageIcon img = new ImageIcon(new ImageIcon("thunking.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
         JLabel label = new JLabel("", img, JLabel.CENTER);
