@@ -4,8 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 /**
- *
- * @author FelixZhang
+ *Main Controller class for all of the FrontEnd.
+ * includes a card layout to easily switch between different
+ * JPanels.
  */
 public class MainMenu extends JPanel {
     
@@ -20,7 +21,9 @@ public class MainMenu extends JPanel {
     private Timer timer;
     private MainFrame main;
     
-    
+    /*
+    Constructor for the mainMenu class
+    */
     public MainMenu() {
         setBackground(Color.black);
         pictures.setBackground(Color.black);
@@ -29,20 +32,31 @@ public class MainMenu extends JPanel {
         add(menuBtns(), BorderLayout.LINE_END);
         add(pictures, BorderLayout.LINE_START);
         
-        displayLogo();
-        
-        
+        displayLogo();  
     }
     
+    /*
+    accessor method for subclasses to be able to set the
+    current instance of the MainMenu to be able to access
+    certain methods from a subclass.
+    */
     public void setMain(MainFrame panel) {
         this.main = panel;
     
     }
     
+    /*
+    accessor method for subclasses to be able to stop the timer
+    once the user leaves the main menu so the animation does not keep playing.
+    */
     public void stopTimer() {
         timer.stop();
     }
     
+    /*
+    accesssor method for sublcasses to be able to stop the timer once the user leaves
+    the main menu so the animation does not keep going.
+    */
     public void startTimer() {
         timer.start();
     }
@@ -62,7 +76,6 @@ public class MainMenu extends JPanel {
         pictures.add(label, "one");
         pictures.add(label2, "two");
         
-        
         timer = new Timer(1000, new ActionListener() {
             
             @Override
@@ -80,7 +93,10 @@ public class MainMenu extends JPanel {
         timer.start();
     }
     
-    
+    /*
+    Method that sets the main menu buttons and adds functions
+    to them.
+    */
     private JComponent menuBtns() {
         
         //setting layout of inner panel
@@ -111,9 +127,8 @@ public class MainMenu extends JPanel {
         //finally add the inner panel to menu panel and return.
         menuButtons.add(buttons, BorderLayout.PAGE_END);
         
-        //menuButtons.setBackground(Color.BLACK);
-        //buttons.setBackground(Color.BLACK);
         
+        // Action Listeners for the 3 main buttons.
         hScore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,15 +158,7 @@ public class MainMenu extends JPanel {
         buttons.setBackground(Color.black);
         menuButtons.setOpaque(false);
         buttons.setOpaque(false);
-
+        
         return menuButtons;
-        
-        
-        
-    }
-    
-    
-    
-    
-    
+    } 
 }

@@ -26,18 +26,24 @@ public class MainFrame  extends JFrame{
         initUI();
     }
     
-    
+    /*
+    accessor method for sub classes to access mainMenu class
+    to stop the timer for the main menu animation once the 
+    user leaves the main menu.
+    */
     public void stopMenuTimer() {
         mainMenu.stopTimer();
     }
     
+    /*
+    accessor method for sub classes to access mainMenu class 
+    method to start the timer for the main menu animation once 
+    the user returns to the main menu.
+    */
     public void startMenuTimer() {
         mainMenu.startTimer();
     }
-    
-    
-    
-    
+
     /*
     initializer method to draw the frame and add elements to it.
     */
@@ -54,8 +60,9 @@ public class MainFrame  extends JFrame{
         
         
         add(mainP);
-        //pack();
+        //pack(); idk if i actually need this yet.
     }
+    
     /*
     I moved the panel initializations into another method
     to clean up the initUI() method.
@@ -73,7 +80,6 @@ public class MainFrame  extends JFrame{
 
     }
     
-    
     /*
     Timer to set the 3 second delay between the title panel
     and the main menu.
@@ -85,13 +91,15 @@ public class MainFrame  extends JFrame{
         timer = new Timer(delay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timer.stop();
+                
                 layout.show(mainP, "menu");
             }
             
         });
+        timer.setRepeats(false);
         timer.start();
     }
+    
     /*
     This is used by the sub panels inside the layout to be able to change to
     other panels. Not sure if this is the correct way to do this but it works.
@@ -100,12 +108,10 @@ public class MainFrame  extends JFrame{
         layout.show(mainP, key);
     }
     
-    
-   
-    
-
     /**
-     * 
+     * Main method that uses EventQueue.invokeLater in order to 
+     * have the GUI execute in the Event Dispatch Thread so backend
+     * calculations do not cause the GUI to freeze or lag.
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {

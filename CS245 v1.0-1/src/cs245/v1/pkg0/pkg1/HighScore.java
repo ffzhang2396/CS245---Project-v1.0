@@ -17,10 +17,7 @@ import javax.swing.*;
  */
 public class HighScore extends JPanel {
     private MainFrame main;
-    private CardLayout layout = new CardLayout();
-    private JPanel holdPanel = new JPanel();
-    private JPanel thunk1 = new JPanel();
-    private JPanel thunk2 = new JPanel();
+
     
     public HighScore() {
         JButton backButton = new JButton("Back");
@@ -29,17 +26,12 @@ public class HighScore extends JPanel {
 
         
         setLayout(new BorderLayout());
-        holdPanel.setLayout(layout);
-        
 
-        
-        
-        
+ 
         buttons.add(backButton, BorderLayout.PAGE_END);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.LINE_START);
-        add(holdPanel, BorderLayout.CENTER);
-        
+
         
         
         backButton.addActionListener(new ActionListener() {
@@ -50,17 +42,14 @@ public class HighScore extends JPanel {
             }
             
         });
-        
-        
-        
     }
     
-    
-    
-    
-    
-    
-    
+   
+    /*
+    This method is used to set this instance of MainFrame to the current
+    main frame so that the swapview method can be accessed to change the
+    panel back to the main menu once the back button is pressed.
+    */
     public void setMain(MainFrame panel) {
         this.main = panel;
     }
