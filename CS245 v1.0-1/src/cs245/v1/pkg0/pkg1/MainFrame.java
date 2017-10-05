@@ -60,6 +60,7 @@ public class MainFrame  extends JFrame{
         
         
         add(mainP);
+        pack();
         //pack(); idk if i actually need this yet.
     }
     

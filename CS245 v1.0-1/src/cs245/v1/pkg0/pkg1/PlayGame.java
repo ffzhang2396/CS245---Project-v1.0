@@ -8,6 +8,7 @@ package cs245.v1.pkg0.pkg1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Line2D;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -26,6 +27,8 @@ public class PlayGame extends JPanel implements ActionListener {
     private JPanel btnPanel = new JPanel(new GridLayout(2, 13, 5, 5));
     private JPanel titleBar = new JPanel(new BorderLayout());
     private JPanel centerPanel = new JPanel(new BorderLayout());
+    private GamePanel game = new GamePanel();
+    private GameEngine engine = new GameEngine();
     private JButton skip = new JButton("Skip");
     private JButton[] buttons = new JButton[26];
     private String[] letters = {"A", "B", "C", "D", "E", "F",
@@ -39,30 +42,21 @@ public class PlayGame extends JPanel implements ActionListener {
         btnPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
         loadUI();
         
-        
-        
-  
+
     }
     
 
-    
-    
-    
     private void loadUI() {
         addButtons();
         
         add(btnPanel, BorderLayout.PAGE_END);
         add(titleBar, BorderLayout.PAGE_START);
+        add(game, BorderLayout.CENTER);
         drawTitle();
       
     }
     
-    private void gamePanel() {
-        add(centerPanel, BorderLayout.CENTER);
-        
-        
-        
-    }
+    
     
     
     /*
@@ -114,23 +108,93 @@ public class PlayGame extends JPanel implements ActionListener {
     */
     @Override
     public void actionPerformed(ActionEvent e) {
-       System.out.println(e.getActionCommand());
+       if(!engine.containsLetter(e.getActionCommand())) {
+           JButton button = (JButton) e.getSource();
+           game.addCount();
+           game.repaint();
+           button.setEnabled(false);
+       } else {
+           //increment the wrong tries count
+           if (game.getTries() == 6) {
+               //Game Over
+           }
+       }
     }
     
    
 
    private static class GamePanel extends JPanel {
+       private int wrongTries;
        
        public GamePanel() {
            
        }
        
+       public int getTries() {
+           return wrongTries;
+       }
+       
+       public void addCount() {
+           wrongTries++;
+       }
+       
+       
        public void paintComponent(Graphics g) {
            super.paintComponent(g);
+           Graphics2D g2 = (Graphics2D) g;
+           
+           g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+           
+           g2.setStroke(new BasicStroke(10));
+           Line2D base = new Line2D.Double(500, 250, 80, 250); // base
+           Line2D vLine = new Line2D.Double(400, 250, 400, 20); // vertical line for pole
+           Line2D hLine = new Line2D.Double(400, 20, 300, 20); // horizontal line for beam
+           Line2D hangRope = new Line2D.Double(300, 20, 300, 80); // rope
            
            
+           g2.draw(base);
+           g2.draw(vLine); 
+           g2.draw(hLine);
+           g2.setStroke(new BasicStroke(1));
+           g2.draw(hangRope);
+           
+           g2.setStroke(new BasicStroke(4));
+           
+           if (wrongTries >= 1) {
+               g2.drawOval(279, 75, 20, 20);
+           }
+           
+           if (wrongTries >= 2) {
+               g2.drawLine(299, 90, 299, 150);
+           }
+           
+           g2.setStroke(new BasicStroke(3));
+           
+           if (wrongTries >= 3) {
+               g2.drawLine(299, 100, 325, 125);
+           }
+           
+           if (wrongTries >= 4) {
+               g2.drawLine(299, 100, 273, 110);
+           }
+           
+           if (wrongTries >= 5) {
+               g2.drawLine(299, 150, 326, 170);
+           }
+           
+           if (wrongTries >= 6) {
+               g2.drawLine(299, 150, 283, 180);
+           }
+           
+           
+
+           
+           repaint();
        }
     
 } 
+   
+
+   
     
 }
