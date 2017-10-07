@@ -72,7 +72,7 @@ public class PlayGame extends JPanel implements ActionListener {
         skip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //game over
+                engine.setScore(score);
                 main.swapView("over");
             }     
         });
@@ -184,6 +184,7 @@ public class PlayGame extends JPanel implements ActionListener {
             //increment the wrong tries count
             if (game.getTries() == 6) {
                 //Game Over
+                engine.setScore(score);
             }
         }
     }

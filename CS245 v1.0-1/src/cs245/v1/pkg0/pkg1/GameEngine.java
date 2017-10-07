@@ -12,22 +12,41 @@ package cs245.v1.pkg0.pkg1;
  *
  */
 public class GameEngine {
-    //private PlayGame game = new PlayGame();
+    private int finalScore;
 
     public GameEngine() {
 
     }
+    
+    /*
+    sets the final score for the 
+    end of the game.
+    */
+    public void setScore(int score) {
+        finalScore = score;
+    }
 
+    /*
+    Returns the letter position in the
+    secret word string.
+    */
     public int getLetterPosition() {
         
         return 2;
     }
     
+    /*
+    returns the length of the secret word.
+    */
     public int getWordLength() {
         
         return 4;
     }
     
+    /*
+    Checks if the letter pressed is contained
+    inside the secret word string.
+    */
     public boolean containsLetter(String letter) {
 
         return false;
