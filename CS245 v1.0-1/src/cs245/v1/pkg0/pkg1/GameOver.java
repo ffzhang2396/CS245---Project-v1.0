@@ -14,8 +14,13 @@ import java.awt.*;
  */
 public class GameOver extends JPanel {
     private JButton done = new JButton();
+    private MainFrame main;
     
     public GameOver() {
         
+    }
+    
+    public void setMain(MainFrame panel) {
+        this.main = panel;
     }
 }

@@ -17,6 +17,7 @@ public class MainFrame  extends JFrame{
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
     private PlayGame play = new PlayGame();
+    private GameOver over = new GameOver();
     private Timer timer;
     
     /*
@@ -74,10 +75,13 @@ public class MainFrame  extends JFrame{
         mainP.add(hScore, "High Score");
         mainP.add(credit, "credits");
         mainP.add(play, "play");
+        mainP.add(over, "over");
         
         mainMenu.setMain(this);
         credit.setMain(this);
         hScore.setMain(this);
+        play.setMain(this);
+        over.setMain(this);
 
     }
     
