@@ -13,15 +13,27 @@ package cs245.v1.pkg0.pkg1;
  */
 public class GameEngine {
     private int finalScore;
+    private int wordLength = 6;
+    private MainFrame main;
     private String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     public GameEngine() {
+       
 
+    }
+    
+    public void initEngine() {
+        
+    }
+    
+    public void setMain(MainFrame main) {
+        this.main = main;
     }
     
     /*
     picks a new word for the game.
+    also updates the length of the word
     */
     public void pickWord() {
         
@@ -48,8 +60,8 @@ public class GameEngine {
     returns the length of the secret word.
     */
     public int getWordLength() {
-        
-        return 6;
+        wordLength = 6;
+        return wordLength;
     }
     
     /*

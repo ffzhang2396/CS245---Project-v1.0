@@ -17,8 +17,13 @@ public class MainFrame extends JFrame {
     private HighScore hScore = new HighScore();
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
-    private PlayGame play = new PlayGame();
-    private GameOver over = new GameOver();
+    private GameEngine engine = new GameEngine();
+    private GameOver over = new GameOver(engine);
+    
+    
+    private PlayGame play = new PlayGame(engine);
+    
+    
     private Timer timer;
 
     /*
@@ -94,7 +99,10 @@ public class MainFrame extends JFrame {
         hScore.setMain(this);
         play.setMain(this);
         over.setMain(this);
+        
+        
     }
+    
 
     /*
     Timer to set the 3 second delay between the title panel

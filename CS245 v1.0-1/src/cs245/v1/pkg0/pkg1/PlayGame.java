@@ -25,14 +25,14 @@ public class PlayGame extends JPanel implements ActionListener {
     private int score = 100;
     private MainFrame main;
     private GamePanel game = new GamePanel();
-    private GameEngine engine = new GameEngine();
+    private GameEngine engine;
     private JPanel btnPanel = new JPanel(new GridLayout(2, 13, 5, 5));
     private JPanel titleBar = new JPanel(new BorderLayout());
     private JPanel centerPanel = new JPanel(new BorderLayout());  
     private JPanel skipPanel = new JPanel();
     private JButton skip = new JButton("Skip");
     private JLabel points = new JLabel();
-    private JLabel[] guessWord = new JLabel[engine.getWordLength()];
+    private JLabel[] guessWord;
     private JButton[] buttons = new JButton[26];
     private String[] letters = {"A", "B", "C", "D", "E", "F",
         "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
@@ -41,9 +41,14 @@ public class PlayGame extends JPanel implements ActionListener {
     /*Constructor
     for Game UI panel.
     */
-    public PlayGame() {
+    public PlayGame(GameEngine engine) {
+        
+        this.engine = engine;
+        
         setLayout(new BorderLayout());
         loadUI();
+        
+        
     }
 
     /*
@@ -51,6 +56,7 @@ public class PlayGame extends JPanel implements ActionListener {
     to display them.
     */
     private void loadUI() {
+              
         addButtons();
         add(titleBar, BorderLayout.PAGE_START);
         add(centerPanel, BorderLayout.CENTER);
@@ -60,8 +66,9 @@ public class PlayGame extends JPanel implements ActionListener {
         drawGame();
         skipButton();
         
-
     }
+    
+   
     
     
     /*
@@ -70,7 +77,7 @@ public class PlayGame extends JPanel implements ActionListener {
     public void startNewGame() {
         game.resetCount(); //reset # of wrong tries
         score = 100; // reset the score back to 100
-        engine = new GameEngine(); // pick a secret word
+        engine.pickWord(); // pick a secret word
         
         //enable all of the buttons
         for (int i = 0; i < buttons.length; i++) {
@@ -107,6 +114,7 @@ public class PlayGame extends JPanel implements ActionListener {
     private void drawGame() {
         JPanel word = new JPanel();
         int length = engine.getWordLength();
+        guessWord = new JLabel[length];
 
         centerPanel.setLayout(new BorderLayout());
         centerPanel.add(game, BorderLayout.CENTER);
