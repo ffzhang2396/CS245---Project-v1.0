@@ -27,6 +27,10 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         initUI();
     }
+    
+    public void reload() {
+        play.startNewGame();
+    }
 
     /*
     accessor method for sub classes to access mainMenu class

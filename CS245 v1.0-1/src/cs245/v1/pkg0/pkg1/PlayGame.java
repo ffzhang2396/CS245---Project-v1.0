@@ -59,6 +59,7 @@ public class PlayGame extends JPanel implements ActionListener {
         drawTitle();
         drawGame();
         skipButton();
+        
 
     }
     
@@ -66,8 +67,21 @@ public class PlayGame extends JPanel implements ActionListener {
     /*
     need to find a way to reset the game.
     */
-    private void reloadGame() {
-        game.resetCount();
+    public void startNewGame() {
+        game.resetCount(); //reset # of wrong tries
+        score = 100; // reset the score back to 100
+        engine.setWord(); // pick a secret word
+        
+        //enable all of the buttons
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setEnabled(true);
+        }
+        
+        //clear the word box of the old word
+        for (int i = 0; i < guessWord.length; i++) {
+            guessWord[i].setText(" ");
+        }
+        
     }
     
     /*
@@ -176,7 +190,7 @@ public class PlayGame extends JPanel implements ActionListener {
         //if the user chooses the correct letter
         // disable the letter and add the letter
         // to the screen.
-        if (engine.containsLetter(e.getActionCommand())) {
+        if (!engine.containsLetter(e.getActionCommand())) {
             int pos = engine.getLetterPosition();
             JButton button = (JButton) e.getSource();
             

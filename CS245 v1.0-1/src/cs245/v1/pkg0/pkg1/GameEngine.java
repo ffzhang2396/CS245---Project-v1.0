@@ -13,9 +13,16 @@ package cs245.v1.pkg0.pkg1;
  */
 public class GameEngine {
     private int finalScore;
+    private String word;
+    private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     public GameEngine() {
 
+    }
+    
+    
+    public void setWord() {
+        
     }
     
     /*
@@ -40,7 +47,7 @@ public class GameEngine {
     */
     public int getWordLength() {
         
-        return 4;
+        return 6;
     }
     
     /*

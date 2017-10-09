@@ -152,6 +152,7 @@ public class MainMenu extends JPanel {
             
             public void actionPerformed(ActionEvent e) {
                 stopTimer();
+                main.reload();
                 main.swapView("play");
             }
         });
