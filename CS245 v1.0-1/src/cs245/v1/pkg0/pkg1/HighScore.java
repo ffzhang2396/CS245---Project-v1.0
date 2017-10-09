@@ -17,30 +17,32 @@ import javax.swing.*;
  */
 public class HighScore extends JPanel {
     private MainFrame main;
+    private JButton backButton = new JButton("Back");
+    private JPanel buttons = new JPanel(new BorderLayout());
 
     
     public HighScore() {
-        JButton backButton = new JButton("Back");
-        JPanel buttons = new JPanel(new BorderLayout());
-        
-
-        
+            
         setLayout(new BorderLayout());
-
+        addBackButtons();
  
+        
+    }
+    
+    /*
+    adding the back button.
+    */
+    private void addBackButtons() {
         buttons.add(backButton, BorderLayout.PAGE_END);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.LINE_START);
-
-        
-        
+ 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 main.startMenuTimer();
                 main.swapView("menu");
-            }
-            
+            }           
         });
     }
     

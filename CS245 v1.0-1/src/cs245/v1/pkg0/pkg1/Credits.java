@@ -17,18 +17,26 @@ import javax.swing.*;
  */
 public class Credits extends JPanel {
     private MainFrame main;
+    private JButton backButton = new JButton("Back");
+    private JLabel credits = new JLabel();
+    private JPanel buttons = new JPanel(new BorderLayout());
     
     public Credits() {
-        JButton backButton = new JButton("Back");
-        JLabel credits = new JLabel();
-        JPanel buttons = new JPanel(new BorderLayout());
-        
-        
+
         setLayout(new BorderLayout());
+        addBackButton();
         credits.setText("Brandon Nguyen\nCharly Dang\nColin Koo\nFelix Zhang\nGerianna Geminiano");
         
         
         
+        
+        
+    }
+    
+    /*
+    adds the back button and its functionality.
+    */
+    private void addBackButton() {
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         buttons.add(backButton, BorderLayout.PAGE_END);
         add(buttons, BorderLayout.LINE_START);
@@ -42,7 +50,6 @@ public class Credits extends JPanel {
             }
             
         });
-        
     }
     
     public void setMain(MainFrame panel) {
