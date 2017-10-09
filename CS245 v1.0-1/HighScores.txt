@@ -1,0 +1,4 @@
+colin 50
+felix 40
+janny 30
+ben 10
