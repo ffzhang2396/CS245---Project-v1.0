@@ -13,7 +13,7 @@ package cs245.v1.pkg0.pkg1;
  */
 public class GameEngine {
     private int finalScore;
-    private int wordLength = 6;
+    private int wordLength;
     private MainFrame main;
     private String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
@@ -27,9 +27,7 @@ public class GameEngine {
         
     }
     
-    public void setMain(MainFrame main) {
-        this.main = main;
-    }
+
     
     /*
     picks a new word for the game.

@@ -31,8 +31,7 @@ public class TitlePanel extends JPanel {
     Creates the title and sets the font as well as the
     positioning of the Label within the window.
     */
-    private void drawTitle() {
-        
+    private void drawTitle() {       
         projName.setText("ThinkMan's Hangman");
         projName.setFont(new Font("Kristen ITC", Font.ITALIC, 50 ));
         projName.setHorizontalAlignment(SwingConstants.CENTER);

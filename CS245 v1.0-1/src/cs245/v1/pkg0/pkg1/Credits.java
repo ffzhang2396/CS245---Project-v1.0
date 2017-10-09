@@ -47,7 +47,6 @@ public class Credits extends JPanel {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < 6; i++) {
-
             if (names[i] != null) {
                 scores.add(names[i]);
             }
@@ -70,13 +69,11 @@ public class Credits extends JPanel {
         names[0].setAlignmentX(Component.CENTER_ALIGNMENT);
 
         for (int i = 1; i < 6; i++) {
-
             input = entries[i].split(" ");
             names[i] = new JLabel(input[0] + " " + input[1] + "........." + input[2]);
             names[i].setFont(new Font("Papyrus", Font.BOLD, 24));
             names[i].setAlignmentX(Component.CENTER_ALIGNMENT);
         }
-
     }
 
     /*

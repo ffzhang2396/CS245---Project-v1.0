@@ -15,6 +15,9 @@ public class GameOver extends JPanel {
     private GameEngine engine;
     private PlayGame game;
     
+    /*
+    Constructor
+    */
     public GameOver(GameEngine engine) {
         this.engine = engine;
         
@@ -31,11 +34,7 @@ public class GameOver extends JPanel {
     public void setMain(MainFrame panel) {
         this.main = panel;
     }
-    
-    public void setEngine(GameEngine engine) {
-        this.engine = engine;
-    }
-    
+       
     
     /*
     adds the done button that lets the user return
