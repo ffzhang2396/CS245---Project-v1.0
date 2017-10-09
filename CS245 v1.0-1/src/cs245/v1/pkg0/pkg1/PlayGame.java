@@ -62,6 +62,14 @@ public class PlayGame extends JPanel implements ActionListener {
 
     }
     
+    
+    /*
+    need to find a way to reset the game.
+    */
+    private void reloadGame() {
+        game.resetCount();
+    }
+    
     /*
     skip button to end game functionality needs
     to be implemented here.
@@ -216,6 +224,10 @@ public class PlayGame extends JPanel implements ActionListener {
 
         public void addCount() {
             wrongTries++;
+        }
+        
+        public void resetCount() {
+            wrongTries = 0;
         }
 
         public void paintComponent(Graphics g) {
