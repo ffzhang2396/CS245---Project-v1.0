@@ -20,8 +20,10 @@ public class GameEngine {
 
     }
     
-    
-    public void setWord() {
+    /*
+    picks a new word for the game.
+    */
+    public void pickWord() {
         
     }
     

@@ -28,7 +28,7 @@ public class HighScore extends JPanel {
 
     /*
     Constructor
-    */
+     */
     public HighScore() {
 
         setLayout(new BorderLayout());
@@ -39,8 +39,18 @@ public class HighScore extends JPanel {
     }
 
     /*
+    This method is used to set this instance of MainFrame to the current
+    main frame so that the swapview method can be accessed to change the
+    panel back to the main menu once the back button is pressed.
+     */
+    public void setMain(MainFrame panel) {
+        this.main = panel;
+    }
+
+
+    /*
     Displaying the High Scores.
-    */
+     */
     private void showHighScores() {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
 
@@ -94,14 +104,5 @@ public class HighScore extends JPanel {
                 main.swapView("menu");
             }
         });
-    }
-
-    /*
-    This method is used to set this instance of MainFrame to the current
-    main frame so that the swapview method can be accessed to change the
-    panel back to the main menu once the back button is pressed.
-     */
-    public void setMain(MainFrame panel) {
-        this.main = panel;
     }
 }
