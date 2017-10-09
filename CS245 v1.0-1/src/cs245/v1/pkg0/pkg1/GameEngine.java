@@ -49,7 +49,7 @@ public class GameEngine {
     */
     public int getWordLength() {
         
-        return 6;
+        return word.length();
     }
     
     /*
@@ -57,7 +57,7 @@ public class GameEngine {
     inside the secret word string.
     */
     public boolean containsLetter(String letter) {
-
+        
         return false;
     }
 
