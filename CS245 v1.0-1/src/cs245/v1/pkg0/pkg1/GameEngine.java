@@ -4,27 +4,28 @@
  * and open the template in the editor.
  */
 package cs245.v1.pkg0.pkg1;
+import java.util.Scanner;
 
-/**
- * Game Engine. Selects a word and its only function is to save the high score
- * and store it into a text file as well as choose a random word and be able to
- * tell if a character is in that word or not.
- *
- */
+
+
 public class GameEngine {
     private int finalScore;
-    private String word;
-    private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
+    private static String word;
+    private static String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     public GameEngine() {
 
     }
+  
     
     /*
     picks a new word for the game.
     */
-    public void pickWord() {
+    public static void pickWord() {
         
+        String rand = wordList[(int) (Math.random()*wordList.length)];
+        word = rand;
+        System.out.println(word);
     }
     
     /*
@@ -39,16 +40,37 @@ public class GameEngine {
     Returns the letter position in the
     secret word string.
     */
-    public int getLetterPosition() {
-        
-        return 2;
+    public int[] getLetterPositions(String input) {
+    	char letter = input.charAt(0);
+        int[] positions = new int[frequency(letter)];
+        int counter = 0;
+        for(int i = 0; i < getWordLength(); i++){
+        	if(letter == word.charAt(i)){
+        		positions[0] = i;
+        		counter++;
+        	}
+        }
+        return positions;
+    }
+    /**
+     * Returns the number of times a char
+     * is found in a string. Then returns 
+     * that as an int.
+     */
+    public int frequency(char letter){
+    	int counter = 0;
+    	for( int i = 0; i < getWordLength(); i++ ) {
+    	    if( word.charAt(i) == letter ) {
+    	        counter++;
+    	    } 
+    	}
+    	return counter;
     }
     
     /*
     returns the length of the secret word.
     */
-    public int getWordLength() {
-        
+    public static int getWordLength() {    
         return word.length();
     }
     
@@ -56,9 +78,16 @@ public class GameEngine {
     Checks if the letter pressed is contained
     inside the secret word string.
     */
-    public boolean containsLetter(String letter) {
-        
-        return false;
+    public static boolean containsLetter(String input) {
+    	boolean contains = false;
+    	char letter = input.charAt(0);
+    	for(int i = 0; i < getWordLength(); i++){
+    		if(letter == word.charAt(0)){
+    			contains = true;
+    		}
+    	}
+        return contains;
     }
-
+    
+   
 }
