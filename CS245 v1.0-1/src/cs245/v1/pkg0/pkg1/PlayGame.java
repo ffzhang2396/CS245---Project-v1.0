@@ -70,7 +70,7 @@ public class PlayGame extends JPanel implements ActionListener {
     public void startNewGame() {
         game.resetCount(); //reset # of wrong tries
         score = 100; // reset the score back to 100
-        engine.pickWord(); // pick a secret word
+        engine = new GameEngine(); // pick a secret word
         
         //enable all of the buttons
         for (int i = 0; i < buttons.length; i++) {
