@@ -68,9 +68,6 @@ public class PlayGame extends JPanel implements ActionListener {
         
     }
     
-   
-    
-    
     /*
     need to find a way to reset the game.
     */
@@ -214,6 +211,7 @@ public class PlayGame extends JPanel implements ActionListener {
             //increment the wrong tries count
             if (game.getTries() == 6) {
                 //Game Over
+                main.swapView("over");
                 engine.setScore(score);
             }
         }

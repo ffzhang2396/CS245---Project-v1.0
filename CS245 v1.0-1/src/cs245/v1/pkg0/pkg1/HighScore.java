@@ -32,6 +32,7 @@ public class HighScore extends JPanel {
     public HighScore() {
 
         setLayout(new BorderLayout());
+        addTitle();
         readHighScore();
         showHighScores();
         addBackButtons();
@@ -47,12 +48,21 @@ public class HighScore extends JPanel {
         this.main = panel;
     }
 
+    
+    private void addTitle() {
+        JLabel title = new JLabel("High Scores");
+        title.setFont(new Font("Papyrus", Font.BOLD, 30));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        add(title, BorderLayout.PAGE_START);
+    }
 
     /*
     Displaying the High Scores.
      */
     private void showHighScores() {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
+        scores.setBorder(BorderFactory.createEmptyBorder(20, 0, 0 ,0));
 
         for (int i = 0; i < 5; i++) {
 

@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
 public class Credits extends JPanel {
 
     private MainFrame main;
@@ -61,25 +60,23 @@ public class Credits extends JPanel {
     them to the JLabel array.
      */
     private void readcredits() {
-        //String[] entry;
-        
-        String[] entries = {"Credits", "Brandon Nguyen 011499566", "Charly Dang 010924537", "Colin Koo 010291242", 
-                            "Felix Zhang 010423283", "Gerianna Geminino 010662522"};
-        String[] input;
-      
-        	names[0] = new JLabel(entries[0]);
-        	names[0].setFont(new Font("Papyrus", Font.BOLD, 24));
-            names[0].setAlignmentX(Component.CENTER_ALIGNMENT);
-        	
-            for (int i = 1; i < 6; i++) {
 
-                    input = entries[i].split(" ");
-                    names[i] = new JLabel(input[0] + " " + input[1] + "........." + input[2]);
-                    names[i].setFont(new Font("Papyrus", Font.BOLD, 24));
-                    names[i].setAlignmentX(Component.CENTER_ALIGNMENT);
-                }
-            
-      
+        String[] entries = {"Credits", "Brandon Nguyen 011499566", "Charly Dang 010924537", "Colin Koo 010291242",
+            "Felix Zhang 010423283", "Gerianna Geminino 010662522"};
+        String[] input;
+
+        names[0] = new JLabel(entries[0]);
+        names[0].setFont(new Font("Papyrus", Font.BOLD, 30));
+        names[0].setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        for (int i = 1; i < 6; i++) {
+
+            input = entries[i].split(" ");
+            names[i] = new JLabel(input[0] + " " + input[1] + "........." + input[2]);
+            names[i].setFont(new Font("Papyrus", Font.BOLD, 24));
+            names[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+
     }
 
     /*
