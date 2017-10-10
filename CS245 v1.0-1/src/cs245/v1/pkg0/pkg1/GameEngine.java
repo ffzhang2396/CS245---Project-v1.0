@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cs245.v1.pkg0.pkg1;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
