@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cs245.v1.pkg0.pkg1;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -52,6 +53,66 @@ public class GameEngine {
     public void setScore(int score) {
         finalScore = score;
     }
+
+    
+ /*
+    gets the final score for the
+    end of the game.
+    */
+    public int getScore() {
+        return finalScore;
+    }
+    
+    /*
+    Gets players score and possibly adds it to the highscore list
+     */
+    public void updateHighScore(String name, int score) {
+
+        String scoreArr[] = new String[5];
+        try {
+            File f = new File("HighScores.txt");
+            BufferedReader br = new BufferedReader(new FileReader(f));
+
+            String readLine = "";
+            boolean replaced = false;
+            int i = 0;
+            while ((readLine = br.readLine()) != null) {
+                String[] splitted = readLine.split(" ");
+                if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
+                    if (i < 5) {
+                        scoreArr[i] = name + " " + Integer.toString(score);
+                        ++i;
+                    }
+                    if (i < 5) {
+                        scoreArr[i] = readLine;
+                        ++i;
+                    }
+                    replaced = true;
+                } else {
+                    if (i < 5) {
+                        scoreArr[i] = readLine;
+                        ++i;
+                    }
+                }
+            }
+            br.close();
+            f.delete();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
+
+            for (int n = 0; n < scoreArr.length; n++) {
+
+                bw.write(scoreArr[n]);
+                bw.newLine();
+                bw.flush();
+            }
+
+            bw.close();
+          
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /*
     Returns the letter position in the

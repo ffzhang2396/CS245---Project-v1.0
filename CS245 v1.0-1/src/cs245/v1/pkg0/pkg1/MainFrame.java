@@ -62,7 +62,14 @@ public class MainFrame extends JFrame {
     public void gameOverMessage() {
         over.addTitle();
     }
-
+    
+    /*
+    updates High Score
+    */
+    public void updateScore(){
+        hScore.updateHS();
+    }
+    
     /*
     accessor method for sub classes to access mainMenu class 
     method to start the timer for the main menu animation once 

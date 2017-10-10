@@ -72,7 +72,16 @@ public class HighScore extends JPanel {
         }
         add(scores, BorderLayout.CENTER);
     }
-
+    
+   /*
+    Updates the High Scores
+    */
+     public void updateHS(){
+        scores.removeAll();
+        readHighScore();
+        showHighScores();
+    }
+    
     /*
     Reading the High scores from the text file and adding 
     them to the JLabel array. Since There are only ever going
@@ -110,6 +119,7 @@ public class HighScore extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateHS();
                 main.startMenuTimer();
                 main.swapView("menu");
             }

@@ -260,6 +260,7 @@ public class PlayGame extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("playGame " + won);
                 engine.setWin(won);
+                engine.setScore(score);
                 main.gameOverMessage();
                 main.swapView("over");
             }            
