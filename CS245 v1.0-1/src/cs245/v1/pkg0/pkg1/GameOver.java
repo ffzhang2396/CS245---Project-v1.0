@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
  */
 public class GameOver extends JPanel {
     private JButton done = new JButton();
-    private JTextField input = new JTextField(10);
-    private JLabel userPrompt = new JLabel();
+    private JTextField input;//
+    private JLabel userPrompt;// = new JLabel();
     private JPanel titlePanel = new JPanel();
     private JPanel containerPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
@@ -70,6 +70,10 @@ public class GameOver extends JPanel {
     
     
     private void inputUserScore() {
+        containerPanel.removeAll();
+        userPrompt = new JLabel();
+        input = new JTextField(10);
+        
         JPanel inputPanel = new JPanel();
         
         JButton confirm = new JButton("OK");
