@@ -1,8 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/** *************************************************************
+ * file: Credits.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.0
+ * date last modified: 10/10/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, see the top 5
+ * high scores, and the credits. You will also be able to switch back and forth
+ * between the displays using the buttons integrated.
+ *
+ *************************************************************** */
 package cs245.v1.pkg0.pkg1;
 
 import java.awt.*;
@@ -55,7 +65,7 @@ public class Credits extends JPanel {
     }
 
     /*
-    Reading the Credits from the array and adding 
+    Reading the Credits from the array and adding
     them to the JLabel array.
      */
     private void readcredits() {

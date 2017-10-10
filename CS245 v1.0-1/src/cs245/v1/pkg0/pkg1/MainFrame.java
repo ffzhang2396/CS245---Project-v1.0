@@ -1,3 +1,18 @@
+/** *************************************************************
+ * file: MainFrame.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.0
+ * date last modified: 10/10/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, see the top 5
+ * high scores, and the credits. You will also be able to switch back and forth
+ * between the displays using the buttons integrated.
+ *
+ *************************************************************** */
 package cs245.v1.pkg0.pkg1;
 
 import java.awt.*;
@@ -18,10 +33,10 @@ public class MainFrame extends JFrame {
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
     private GameEngine engine = new GameEngine();
-    private GameOver over = new GameOver(engine);  
+    private GameOver over = new GameOver(engine);
     private PlayGame play = new PlayGame(engine);
-    
-    
+
+
     private Timer timer;
 
     /*
@@ -30,14 +45,14 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         initUI();
     }
-    
+
     public void reload() {
         play.startNewGame();
     }
 
     /*
     accessor method for sub classes to access mainMenu class
-    to stop the timer for the main menu animation once the 
+    to stop the timer for the main menu animation once the
     user leaves the main menu.
      */
     public void stopMenuTimer() {
@@ -51,28 +66,28 @@ public class MainFrame extends JFrame {
     public void swapView(String key) {
         layout.show(mainP, key);
     }
-    
+
     /*
     redraws the game GUI elment
     */
     public void startNewGame() {
-        play.startNewGame();       
+        play.startNewGame();
     }
-    
+
     public void gameOverMessage() {
         over.addTitle();
     }
-    
+
     /*
     updates High Score
     */
     public void updateScore(){
         hScore.updateHS();
     }
-    
+
     /*
-    accessor method for sub classes to access mainMenu class 
-    method to start the timer for the main menu animation once 
+    accessor method for sub classes to access mainMenu class
+    method to start the timer for the main menu animation once
     the user returns to the main menu.
      */
     public void startMenuTimer() {
@@ -115,11 +130,11 @@ public class MainFrame extends JFrame {
         hScore.setMain(this);
         play.setMain(this);
         over.setMain(this);
-        
-        
+
+
     }
-    
-    
+
+
 
     /*
     Timer to set the 3 second delay between the title panel

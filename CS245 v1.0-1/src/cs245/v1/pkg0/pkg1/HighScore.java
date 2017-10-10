@@ -1,9 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package cs245.v1.pkg0.pkg1;
+/** *************************************************************
+ * file: HighScore.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.0
+ * date last modified: 10/10/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, see the top 5
+ * high scores, and the credits. You will also be able to switch back and forth
+ * between the displays using the buttons integrated.
+ *
+ *************************************************************** */
+ package cs245.v1.pkg0.pkg1;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,12 +58,12 @@ public class HighScore extends JPanel {
         this.main = panel;
     }
 
-    
+
     private void addTitle() {
         JLabel title = new JLabel("High Scores");
         title.setFont(new Font("Papyrus", Font.BOLD, 30));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         add(title, BorderLayout.PAGE_START);
     }
 
@@ -72,7 +82,7 @@ public class HighScore extends JPanel {
         }
         add(scores, BorderLayout.CENTER);
     }
-    
+
    /*
     Updates the High Scores
     */
@@ -81,9 +91,9 @@ public class HighScore extends JPanel {
         readHighScore();
         showHighScores();
     }
-    
+
     /*
-    Reading the High scores from the text file and adding 
+    Reading the High scores from the text file and adding
     them to the JLabel array. Since There are only ever going
     to be the top 5 high scores, we can just run the loop 5 times.
      */

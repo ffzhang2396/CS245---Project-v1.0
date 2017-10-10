@@ -1,9 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package cs245.v1.pkg0.pkg1;
+/** *************************************************************
+ * file: PlayGame.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.0
+ * date last modified: 10/10/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, see the top 5
+ * high scores, and the credits. You will also be able to switch back and forth
+ * between the displays using the buttons integrated.
+ *
+ *************************************************************** */
+ package cs245.v1.pkg0.pkg1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +66,7 @@ public class PlayGame extends JPanel implements ActionListener {
      */
     private void loadUI() {
 
-        
+
         addButtons();
         add(titleBar, BorderLayout.PAGE_START);
         add(centerPanel, BorderLayout.CENTER);
@@ -65,7 +75,7 @@ public class PlayGame extends JPanel implements ActionListener {
         drawTitle();
         drawGame();
         skipButton();
-        
+
 
     }
 
@@ -85,8 +95,8 @@ public class PlayGame extends JPanel implements ActionListener {
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(true);
         }
-        
-        
+
+
 
     }
 
@@ -132,7 +142,7 @@ public class PlayGame extends JPanel implements ActionListener {
         }
 
         centerPanel.add(word, BorderLayout.PAGE_END);
-       
+
 
     }
 
@@ -159,7 +169,7 @@ public class PlayGame extends JPanel implements ActionListener {
         timer.start();
         titleBar.add(time, BorderLayout.LINE_END);
 
-        //adding the stylized HANGMAN      
+        //adding the stylized HANGMAN
         hangman.setFont(new Font("Papyrus", Font.BOLD, 18));
         titleBar.add(hangman, BorderLayout.LINE_START);
 
@@ -171,7 +181,7 @@ public class PlayGame extends JPanel implements ActionListener {
     }
 
     /*
-    adds an array of JButtons that make up the alphabet buttons for the 
+    adds an array of JButtons that make up the alphabet buttons for the
     user to click on when playing the game.
      */
     private void addButtons() {
@@ -206,13 +216,13 @@ public class PlayGame extends JPanel implements ActionListener {
                 guessWord[positions[i]].setText(button.getText());
 
             }
-            
+
             button.setEnabled(false);
             game.repaint();
-            
+
             if (wordFound()) {
                 gameFinished(true);
-            }                                   
+            }
         } else {
             System.out.println("The word is " + engine.word);
             // if the user chooses the incorrect letter
@@ -222,7 +232,7 @@ public class PlayGame extends JPanel implements ActionListener {
             points.setText("Points: " + score);
             game.addCount();
             button.setEnabled(false);
-            
+
             if (game.getTries() == 6) {
                 //Game Over
                 gameFinished(false);
@@ -230,7 +240,7 @@ public class PlayGame extends JPanel implements ActionListener {
             }
         }
     }
-    
+
     /*
     checks if the word has been filled out, if it has then end the game.
     */
@@ -239,22 +249,22 @@ public class PlayGame extends JPanel implements ActionListener {
         for (int i = 0; i < guessWord.length; i++) {
             if (guessWord[i].getText() == " ") {
                 found = false;
-            }            
+            }
         }
         return found;
     }
-    
+
     /*
-    This method is going to be used to transition into the 
+    This method is going to be used to transition into the
     game over panel.
     */
     private void gameFinished(boolean won) {
-        
+
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(false);
         }
-        
-        
+
+
         Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -263,9 +273,9 @@ public class PlayGame extends JPanel implements ActionListener {
                 engine.setScore(score);
                 main.gameOverMessage();
                 main.swapView("over");
-            }            
-        });        
-        timer.setRepeats(false);              
+            }
+        });
+        timer.setRepeats(false);
         timer.start();
     }
 
