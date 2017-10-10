@@ -27,6 +27,7 @@ public class GameEngine {
 
     public void setWin(boolean won) {
         this.won = won;
+        System.out.println("setWin " + this.won);
     }
 
     public boolean isWonnered() {

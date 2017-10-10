@@ -18,9 +18,7 @@ public class MainFrame extends JFrame {
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
     private GameEngine engine = new GameEngine();
-    private GameOver over = new GameOver(engine);
-    
-    
+    private GameOver over = new GameOver(engine);  
     private PlayGame play = new PlayGame(engine);
     
     
@@ -52,6 +50,17 @@ public class MainFrame extends JFrame {
      */
     public void swapView(String key) {
         layout.show(mainP, key);
+    }
+    
+    /*
+    redraws the game GUI elment
+    */
+    public void startNewGame() {
+        play.startNewGame();       
+    }
+    
+    public void gaveOverMessage() {
+        over.addTitle();
     }
 
     /*

@@ -13,6 +13,7 @@ public class GameOver extends JPanel {
     private JButton done = new JButton();
     private JTextField input = new JTextField();
     private JLabel userPrompt = new JLabel();
+    private JPanel titlePanel = new JPanel();
     private MainFrame main;
     private GameEngine engine;
     private PlayGame game;
@@ -24,7 +25,6 @@ public class GameOver extends JPanel {
         this.engine = engine;
         
         setLayout(new BorderLayout());
-        addTitle();
         addDoneButton();
         inputUserScore();
         
@@ -39,9 +39,12 @@ public class GameOver extends JPanel {
         this.main = panel;
     }
     
-    private void addTitle() {
-        JLabel title = new JLabel();
+    public void addTitle() {
         
+        JLabel title = new JLabel();
+        System.out.println("gameover " + engine.isWonnered());
+        
+        titlePanel.removeAll();
         
         if (engine.isWonnered()) {
             title.setText("Congratulations! You win!");
@@ -52,8 +55,8 @@ public class GameOver extends JPanel {
         title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         
-        
-        add(title, BorderLayout.PAGE_START);
+        titlePanel.add(title);
+        add(titlePanel, BorderLayout.PAGE_START);
         
         
         

@@ -76,17 +76,15 @@ public class PlayGame extends JPanel implements ActionListener {
         game.resetCount(); //reset # of wrong tries
         score = 100; // reset the score back to 100
         engine.pickWord(); // pick a secret word
-        drawTitle(); // redraw the title so the score updates
+        centerPanel.removeAll();
+        drawGame();
 
         //enable all of the buttons
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(true);
         }
-
-        //clear the word box of the old word
-        for (int i = 0; i < guessWord.length; i++) {
-            guessWord[i].setText(" ");
-        }
+        
+        
 
     }
 
@@ -131,6 +129,7 @@ public class PlayGame extends JPanel implements ActionListener {
         }
 
         centerPanel.add(word, BorderLayout.PAGE_END);
+       
 
     }
 
@@ -198,11 +197,11 @@ public class PlayGame extends JPanel implements ActionListener {
         JButton button = (JButton) e.getSource();
         if (engine.containsLetter(e.getActionCommand())) {
             System.out.println("The word is " + engine.word);
-            
             int[] positions = engine.getLetterPositions(button.getText());
 
             for (int i = 0; i < positions.length; i++) {
                 guessWord[positions[i]].setText(button.getText());
+
             }
             
             button.setEnabled(false);
@@ -213,7 +212,6 @@ public class PlayGame extends JPanel implements ActionListener {
             }                                   
         } else {
             System.out.println("The word is " + engine.word);
-            System.out.println(e.getActionCommand());
             // if the user chooses the incorrect letter
             //increment the wrong tries count and subtract 10 from score.
             //update the count.
@@ -251,7 +249,9 @@ public class PlayGame extends JPanel implements ActionListener {
         Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("playGame " + won);
                 engine.setWin(won);
+                main.gaveOverMessage();
                 main.swapView("over");
             }            
         });        
