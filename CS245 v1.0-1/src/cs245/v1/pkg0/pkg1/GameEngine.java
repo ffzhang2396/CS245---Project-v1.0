@@ -68,7 +68,7 @@ public class GameEngine {
      */
     public void updateHighScore(String name, int score) {
 
-        String scoreArr[] = new String[5];
+         String scoreArr[] = new String[5];
         try {
             File f = new File("HighScores.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -76,25 +76,42 @@ public class GameEngine {
             String readLine = "";
             boolean replaced = false;
             int i = 0;
-            while ((readLine = br.readLine()) != null) {
-                String[] splitted = readLine.split(" ");
+            // if File is empty
+            String line;
+            if ((line = br.readLine())== null ) { 
+                scoreArr[i] = name + " " + Integer.toString(score);
+                ++i;
+            } else {
+                while ((line) != null) {
+                String[] splitted = line.split(" ");
                 if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
                     if (i < 5) {
                         scoreArr[i] = name + " " + Integer.toString(score);
                         ++i;
                     }
                     if (i < 5) {
-                        scoreArr[i] = readLine;
+                        scoreArr[i] = line;
                         ++i;
                     }
                     replaced = true;
                 } else {
                     if (i < 5) {
-                        scoreArr[i] = readLine;
+                        scoreArr[i] = line;
                         ++i;
                     }
                 }
+                line = br.readLine();
             }
+            }
+            if (i < 5) {
+                while (i < 5) {
+                    System.out.println(i);
+                    scoreArr[i] = "AAA 0";
+                    ++i;
+                }
+            }
+            i = 0;
+
             br.close();
             f.delete();
             BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
@@ -107,7 +124,7 @@ public class GameEngine {
             }
 
             bw.close();
-          
+
         } catch (IOException e) {
             e.printStackTrace();
         }
