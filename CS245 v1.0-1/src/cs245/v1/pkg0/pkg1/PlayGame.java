@@ -192,9 +192,10 @@ public class PlayGame extends JPanel implements ActionListener {
         //if the user chooses the correct letter
         // disable the letter and add the letter
         // to the screen.
+        JButton button = (JButton) e.getSource();
         if (engine.containsLetter(e.getActionCommand())) {
             System.out.println("The word is " + engine.word);
-            JButton button = (JButton) e.getSource();
+            
             int[] positions = engine.getLetterPositions(button.getText());
 
             for (int i = 0; i < positions.length; i++) {
@@ -205,22 +206,24 @@ public class PlayGame extends JPanel implements ActionListener {
             game.repaint();
             
             if (wordFound()) {
-                main.swapView("over");
+                gameFinished(true);
             }
             
-            
-            
+                       
         } else {
             System.out.println("The word is " + engine.word);
             System.out.println(e.getActionCommand());
             // if the user chooses the incorrect letter
+            //increment the wrong tries count and subtract 10 from score.
+            //update the count.
             score -= 10;
             points.setText("Points: " + score);
             game.addCount();
-            //increment the wrong tries count
+            button.setEnabled(false);
+            
             if (game.getTries() == 6) {
                 //Game Over
-                main.swapView("over");
+                gameFinished(false);
                 engine.setScore(score);
             }
         }
@@ -244,7 +247,19 @@ public class PlayGame extends JPanel implements ActionListener {
     game over panel.
     */
     private void gameFinished(boolean won) {
+        Timer timer = new Timer(1500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                engine.setWin(won);
+                main.swapView("over");
+            }
+            
+        });
         
+        timer.setRepeats(false);
+        timer.setInitialDelay(0);
+        
+        timer.start();
     }
 
     /*

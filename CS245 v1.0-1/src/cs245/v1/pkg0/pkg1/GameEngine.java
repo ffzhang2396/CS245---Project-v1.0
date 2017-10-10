@@ -13,8 +13,9 @@ public class GameEngine {
     private int finalScore;
     private int wordLength;
     private MainFrame main;
-    //private
-    String word;
+    private boolean won;
+    //private 
+            String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     public GameEngine() {
@@ -24,7 +25,13 @@ public class GameEngine {
     }
 
 
+    public void setWin(boolean won) {
+        this.won = won;
+    }
 
+    public boolean isWonnered() {
+        return won;
+    }
 
 
 
