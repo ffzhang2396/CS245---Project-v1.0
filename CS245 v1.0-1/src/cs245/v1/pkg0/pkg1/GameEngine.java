@@ -85,42 +85,57 @@ public class GameEngine {
      */
     public void updateHighScore(String name, int score) {
 
+        String scoreArr[] = new String[5];
         try {
             File f = new File("HighScores.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
-            BufferedWriter bw = new BufferedWriter(new FileWriter("TempFile.txt"));
+
             String readLine = "";
             boolean replaced = false;
-            int lines = 0;
+            int i = 0;
             while ((readLine = br.readLine()) != null) {
                 //System.out.println(readLine);
                 String[] splitted = readLine.split(" ");
                 if ((Integer.parseInt(splitted[1]) < score) && replaced == false) {
-                    if (lines < 5) {
-                        bw.write(name + " " + Integer.toString(score));
-                        bw.flush();
+                    if (i < 5) {
+                        scoreArr[i] = name + " " + Integer.toString(score);
+                        //bw.write(name + " " + Integer.toString(score));
+                        //bw.flush();
                         System.out.print(name + " " + Integer.toString(score));
-                        ++lines;
+                        ++i;
                     }
-                    if (lines < 5) {
-                        bw.write(readLine);
-                        bw.flush();
+                    if (i < 5) {
+                        //bw.write(readLine);
+                        //bw.flush();
+                        scoreArr[i] = readLine;
                         System.out.print(readLine);
-                        ++lines;
+                        ++i;
                     }
                     replaced = true;
                 } else {
-                    if (lines < 5) {
-                        bw.write(readLine);
-                        bw.flush();
+                    if (i < 5) {
+                        scoreArr[i] = readLine;
+                        //bw.write(readLine);
+                        //bw.flush();
                         System.out.print(readLine);
-                        ++lines;
+                        ++i;
                     }
                 }
             }
-            bw.close();
             br.close();
-            
+            f.delete();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
+
+            for (int n = 0; n < scoreArr.length; n++) {
+
+                bw.write(scoreArr[n]);
+                
+                bw.newLine();
+                bw.flush();
+            }
+
+            bw.close();
+          
         } catch (IOException e) {
             e.printStackTrace();
         }
