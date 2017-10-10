@@ -61,7 +61,7 @@ public class Credits extends JPanel {
     private void readcredits() {
 
         String[] entries = {"Credits", "Brandon Nguyen 011499566", "Charly Dang 010924537", "Colin Koo 010291242",
-            "Felix Zhang 010423283", "Gerianna Geminino 010662522"};
+            "Felix Zhang 010423283", "Gerianna Geminiano 010662522"};
         String[] input;
 
         names[0] = new JLabel(entries[0]);
