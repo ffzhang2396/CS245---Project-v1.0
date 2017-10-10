@@ -59,7 +59,7 @@ public class MainFrame extends JFrame {
         play.startNewGame();       
     }
     
-    public void gaveOverMessage() {
+    public void gameOverMessage() {
         over.addTitle();
     }
 

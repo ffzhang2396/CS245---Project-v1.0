@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  */
 public class GameOver extends JPanel {
     private JButton done = new JButton();
-    private JTextField input = new JTextField();
+    private JTextField input = new JTextField(10);
     private JLabel userPrompt = new JLabel();
     private JPanel titlePanel = new JPanel();
     private MainFrame main;
@@ -42,7 +42,6 @@ public class GameOver extends JPanel {
     public void addTitle() {
         
         JLabel title = new JLabel();
-        System.out.println("gameover " + engine.isWonnered());
         
         titlePanel.removeAll();
         
@@ -65,12 +64,20 @@ public class GameOver extends JPanel {
     
     private void inputUserScore() {
         JPanel inputPanel = new JPanel();
+        JPanel containerPanel = new JPanel();
         userPrompt.setText("Enter your name (No Spaces): ");
+        
+        
+        containerPanel.setLayout(new BorderLayout());
         inputPanel.setLayout(new FlowLayout());
         
         
         inputPanel.add(userPrompt);
         inputPanel.add(input);
+        
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(50, 0 ,0, 0));
+        inputPanel.setAlignmentX(CENTER_ALIGNMENT);
+        inputPanel.setAlignmentY(GameOver.CENTER_ALIGNMENT);
         
         add(inputPanel, BorderLayout.CENTER);
         

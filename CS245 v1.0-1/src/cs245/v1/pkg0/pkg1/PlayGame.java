@@ -77,6 +77,8 @@ public class PlayGame extends JPanel implements ActionListener {
         score = 100; // reset the score back to 100
         engine.pickWord(); // pick a secret word
         centerPanel.removeAll();
+        titleBar.removeAll();
+        drawTitle();
         drawGame();
 
         //enable all of the buttons
@@ -98,7 +100,8 @@ public class PlayGame extends JPanel implements ActionListener {
         skip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                engine.setScore(score);
+                engine.setWin(false);
+                main.gameOverMessage();
                 main.swapView("over");
             }
         });
@@ -251,7 +254,7 @@ public class PlayGame extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("playGame " + won);
                 engine.setWin(won);
-                main.gaveOverMessage();
+                main.gameOverMessage();
                 main.swapView("over");
             }            
         });        
