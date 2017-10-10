@@ -77,8 +77,8 @@ public class GameEngine {
             boolean replaced = false;
             int i = 0;
             // if File is empty
-            String line;
-            if ((line = br.readLine())== null ) { 
+           String line = br.readLine();
+            if (line.length() == 0 ) {  
                 scoreArr[i] = name + " " + Integer.toString(score);
                 ++i;
             } else {
