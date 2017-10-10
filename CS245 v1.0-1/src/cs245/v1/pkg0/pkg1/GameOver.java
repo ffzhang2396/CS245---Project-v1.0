@@ -14,6 +14,8 @@ public class GameOver extends JPanel {
     private JTextField input = new JTextField(10);
     private JLabel userPrompt = new JLabel();
     private JPanel titlePanel = new JPanel();
+    private JPanel containerPanel = new JPanel();
+    private JPanel buttonPanel = new JPanel();
     private MainFrame main;
     private GameEngine engine;
     private PlayGame game;
@@ -25,8 +27,8 @@ public class GameOver extends JPanel {
         this.engine = engine;
         
         setLayout(new BorderLayout());
-        addDoneButton();
-        inputUserScore();
+        //addDoneButton();
+        //inputUserScore();
         
         
     }
@@ -46,9 +48,14 @@ public class GameOver extends JPanel {
         titlePanel.removeAll();
         
         if (engine.isWonnered()) {
+            // need to check if the user is in the high score or not
             title.setText("Congratulations! You win!");
+            buttonPanel.removeAll();
+            inputUserScore();
         } else {
             title.setText("Aww you didnt win. Try again!");
+            containerPanel.removeAll();
+            addDoneButton();
         }
         
         title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
@@ -64,8 +71,11 @@ public class GameOver extends JPanel {
     
     private void inputUserScore() {
         JPanel inputPanel = new JPanel();
-        JPanel containerPanel = new JPanel();
-        userPrompt.setText("Enter your name (No Spaces): ");
+        
+        JButton confirm = new JButton("OK");
+        JLabel notice = new JLabel("Woo! You made the High Score!", SwingConstants.CENTER);
+        userPrompt.setText("Enter your name! (No Spaces): ");
+        notice.setFont(new Font("Kristen ITC", Font.BOLD, 20));
         
         
         containerPanel.setLayout(new BorderLayout());
@@ -74,12 +84,32 @@ public class GameOver extends JPanel {
         
         inputPanel.add(userPrompt);
         inputPanel.add(input);
+        inputPanel.add(confirm);
         
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(50, 0 ,0, 0));
+        notice.setAlignmentX(CENTER_ALIGNMENT);
+        notice.setAlignmentY(GameOver.CENTER_ALIGNMENT);
+        containerPanel.setBorder(BorderFactory.createEmptyBorder(50, 0 ,0, 0));
         inputPanel.setAlignmentX(CENTER_ALIGNMENT);
         inputPanel.setAlignmentY(GameOver.CENTER_ALIGNMENT);
         
-        add(inputPanel, BorderLayout.CENTER);
+        confirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               // engine.setUser(input.getText) gets the user name
+               main.swapView("menu");
+            }
+            
+        });
+        
+        
+        
+        containerPanel.add(notice, BorderLayout.PAGE_START);
+        containerPanel.add(inputPanel, BorderLayout.CENTER);
+        add(containerPanel, BorderLayout.CENTER);
+        
+        
+        
+        
         
     }
      
@@ -90,7 +120,7 @@ public class GameOver extends JPanel {
     to the main menu.
     */
     private void addDoneButton() {
-        JPanel buttonPanel = new JPanel();        
+                
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(done);
                 
