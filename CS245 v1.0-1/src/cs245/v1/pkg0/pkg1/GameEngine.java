@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cs245.v1.pkg0.pkg1;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -12,18 +13,18 @@ public class GameEngine {
     private int finalScore;
     private int wordLength;
     private MainFrame main;
-    private String word;
+    //private
+    String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     public GameEngine() {
+        pickWord();
 
 
     }
 
 
-    public void initEngine() {
 
-    }
 
 
 
@@ -31,11 +32,9 @@ public class GameEngine {
     picks a new word for the game.
     also updates the length of the word
     */
-    public static void pickWord() {
-
-        String rand = wordList[(int) (Math.random()*wordList.length)];
-        word = rand;
-        System.out.println(word);
+    public void pickWord() {
+        int rng = new Random().nextInt(wordList.length);       
+        word = wordList[rng];
     }
 
     /*
@@ -51,12 +50,12 @@ public class GameEngine {
     secret word string.
     */
     public int[] getLetterPositions(String input) {
-    	char letter = input.charAt(0);
+    	char letter = Character.toLowerCase(input.charAt(0));
         int[] positions = new int[frequency(letter)];
         int counter = 0;
         for(int i = 0; i < getWordLength(); i++){
         	if(letter == word.charAt(i)){
-        		positions[0] = i;
+        		positions[counter] = i;
         		counter++;
         	}
         }
@@ -80,7 +79,7 @@ public class GameEngine {
     /*
     returns the length of the secret word.
     */
-    public static int getWordLength() {
+    public int getWordLength() {
         return word.length();
     }
 
@@ -88,11 +87,13 @@ public class GameEngine {
     Checks if the letter pressed is contained
     inside the secret word string.
     */
-    public static boolean containsLetter(String input) {
+    public boolean containsLetter(String input) {
     	boolean contains = false;
-    	char letter = input.charAt(0);
+    	char letter = Character.toLowerCase(input.charAt(0)) ;
+        
+        
     	for(int i = 0; i < getWordLength(); i++){
-    		if(letter == word.charAt(0)){
+    		if(word.charAt(i) == letter){
     			contains = true;
     		}
     	}

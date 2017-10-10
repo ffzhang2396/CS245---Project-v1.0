@@ -28,7 +28,7 @@ public class PlayGame extends JPanel implements ActionListener {
     private GameEngine engine;
     private JPanel btnPanel = new JPanel(new GridLayout(2, 13, 5, 5));
     private JPanel titleBar = new JPanel(new BorderLayout());
-    private JPanel centerPanel = new JPanel(new BorderLayout());  
+    private JPanel centerPanel = new JPanel(new BorderLayout());
     private JPanel skipPanel = new JPanel();
     private JButton skip = new JButton("Skip");
     private JLabel points = new JLabel();
@@ -40,23 +40,22 @@ public class PlayGame extends JPanel implements ActionListener {
 
     /*Constructor
     for Game UI panel.
-    */
+     */
     public PlayGame(GameEngine engine) {
-        
+
         this.engine = engine;
-        
+
         setLayout(new BorderLayout());
         loadUI();
-        
-        
+
     }
 
     /*
     adds all of the panels in this panel to the screen
     to display them.
-    */
+     */
     private void loadUI() {
-              
+
         addButtons();
         add(titleBar, BorderLayout.PAGE_START);
         add(centerPanel, BorderLayout.CENTER);
@@ -65,34 +64,34 @@ public class PlayGame extends JPanel implements ActionListener {
         drawTitle();
         drawGame();
         skipButton();
-        
+
     }
-    
+
     /*
     need to find a way to reset the game.
-    */
+     */
     public void startNewGame() {
         game.resetCount(); //reset # of wrong tries
         score = 100; // reset the score back to 100
         engine.pickWord(); // pick a secret word
-        
+
         //enable all of the buttons
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(true);
         }
-        
+
         //clear the word box of the old word
         for (int i = 0; i < guessWord.length; i++) {
             guessWord[i].setText(" ");
         }
-        
+
     }
-    
+
     /*
     skip button to end game functionality needs
     to be implemented here.
-    */
-    private void skipButton() { 
+     */
+    private void skipButton() {
         skipPanel.add(skip);
 
         skip.addActionListener(new ActionListener() {
@@ -100,14 +99,14 @@ public class PlayGame extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 engine.setScore(score);
                 main.swapView("over");
-            }     
+            }
         });
     }
 
     /*
     Draws the visual representation of the game, which includes
     the hangman as well as the places for the word.
-    */
+     */
     private void drawGame() {
         JPanel word = new JPanel();
         int length = engine.getWordLength();
@@ -139,8 +138,7 @@ public class PlayGame extends JPanel implements ActionListener {
     private void drawTitle() {
         JLabel hangman = new JLabel("HANGMAN");
         JLabel time = new JLabel();
-       
-        
+
         // adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
         time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
@@ -155,12 +153,11 @@ public class PlayGame extends JPanel implements ActionListener {
         timer.setInitialDelay(0);
         timer.start();
         titleBar.add(time, BorderLayout.LINE_END);
-        
+
         //adding the stylized HANGMAN      
         hangman.setFont(new Font("Papyrus", Font.BOLD, 18));
         titleBar.add(hangman, BorderLayout.LINE_START);
-        
-        
+
         //adding the points
         points.setText("Points: " + score);
         points.setFont(new Font("Arial", Font.ITALIC, 14));
@@ -195,15 +192,27 @@ public class PlayGame extends JPanel implements ActionListener {
         //if the user chooses the correct letter
         // disable the letter and add the letter
         // to the screen.
-        if (!engine.containsLetter(e.getActionCommand())) {
-            int pos = engine.getLetterPosition();
+        if (engine.containsLetter(e.getActionCommand())) {
+            System.out.println("The word is " + engine.word);
             JButton button = (JButton) e.getSource();
+            int[] positions = engine.getLetterPositions(button.getText());
+
+            for (int i = 0; i < positions.length; i++) {
+                guessWord[positions[i]].setText(button.getText());
+            }
             
             button.setEnabled(false);
-            guessWord[pos].setText(button.getText());
+            game.repaint();
             
-            game.repaint();           
+            if (wordFound()) {
+                main.swapView("over");
+            }
+            
+            
+            
         } else {
+            System.out.println("The word is " + engine.word);
+            System.out.println(e.getActionCommand());
             // if the user chooses the incorrect letter
             score -= 10;
             points.setText("Points: " + score);
@@ -216,20 +225,41 @@ public class PlayGame extends JPanel implements ActionListener {
             }
         }
     }
+    
+    /*
+    checks if the word has been filled out, if it has then end the game.
+    */
+    private boolean wordFound() {
+        boolean found = true;
+        for (int i = 0; i < guessWord.length; i++) {
+            if (guessWord[i].getText() == " ") {
+                found = false;
+            }            
+        }
+        return found;
+    }
+    
+    /*
+    This method is going to be used to transition into the 
+    game over panel.
+    */
+    private void gameFinished(boolean won) {
+        
+    }
 
     /*
     setting the current mainFrame to the reference in this class
     to allow for panel switching.
-    */
+     */
     public void setMain(MainFrame panel) {
         this.main = panel;
     }
-    
+
     /*
     Inner class to utilize the paint() method in order to draw the
     hangman as well as to draw limbs onto the screen once the user
     has reached a certain number of incorrect tries.disc
-    */
+     */
     private static class GamePanel extends JPanel {
 
         private int wrongTries;
@@ -245,7 +275,7 @@ public class PlayGame extends JPanel implements ActionListener {
         public void addCount() {
             wrongTries++;
         }
-        
+
         public void resetCount() {
             wrongTries = 0;
         }
