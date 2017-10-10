@@ -95,30 +95,20 @@ public class GameEngine {
             boolean replaced = false;
             int i = 0;
             while ((readLine = br.readLine()) != null) {
-                //System.out.println(readLine);
                 String[] splitted = readLine.split(" ");
                 if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
                     if (i < 5) {
                         scoreArr[i] = name + " " + Integer.toString(score);
-                        //bw.write(name + " " + Integer.toString(score));
-                        //bw.flush();
-                        System.out.print(name + " " + Integer.toString(score));
                         ++i;
                     }
                     if (i < 5) {
-                        //bw.write(readLine);
-                        //bw.flush();
                         scoreArr[i] = readLine;
-                        System.out.print(readLine);
                         ++i;
                     }
                     replaced = true;
                 } else {
                     if (i < 5) {
                         scoreArr[i] = readLine;
-                        //bw.write(readLine);
-                        //bw.flush();
-                        System.out.print(readLine);
                         ++i;
                     }
                 }
@@ -130,7 +120,6 @@ public class GameEngine {
             for (int n = 0; n < scoreArr.length; n++) {
 
                 bw.write(scoreArr[n]);
-                
                 bw.newLine();
                 bw.flush();
             }
