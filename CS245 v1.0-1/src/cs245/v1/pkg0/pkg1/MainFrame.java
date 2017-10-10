@@ -103,6 +103,7 @@ public class MainFrame extends JFrame {
         
     }
     
+    
 
     /*
     Timer to set the 3 second delay between the title panel

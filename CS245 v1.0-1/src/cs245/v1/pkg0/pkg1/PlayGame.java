@@ -56,6 +56,7 @@ public class PlayGame extends JPanel implements ActionListener {
      */
     private void loadUI() {
 
+        
         addButtons();
         add(titleBar, BorderLayout.PAGE_START);
         add(centerPanel, BorderLayout.CENTER);
@@ -64,6 +65,7 @@ public class PlayGame extends JPanel implements ActionListener {
         drawTitle();
         drawGame();
         skipButton();
+        
 
     }
 
@@ -74,6 +76,7 @@ public class PlayGame extends JPanel implements ActionListener {
         game.resetCount(); //reset # of wrong tries
         score = 100; // reset the score back to 100
         engine.pickWord(); // pick a secret word
+        drawTitle(); // redraw the title so the score updates
 
         //enable all of the buttons
         for (int i = 0; i < buttons.length; i++) {
@@ -207,9 +210,7 @@ public class PlayGame extends JPanel implements ActionListener {
             
             if (wordFound()) {
                 gameFinished(true);
-            }
-            
-                       
+            }                                   
         } else {
             System.out.println("The word is " + engine.word);
             System.out.println(e.getActionCommand());

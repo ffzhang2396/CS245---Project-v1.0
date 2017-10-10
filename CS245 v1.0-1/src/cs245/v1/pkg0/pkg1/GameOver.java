@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
  */
 public class GameOver extends JPanel {
     private JButton done = new JButton();
+    private JTextField input = new JTextField();
+    private JLabel userPrompt = new JLabel();
     private MainFrame main;
     private GameEngine engine;
     private PlayGame game;
@@ -22,7 +24,9 @@ public class GameOver extends JPanel {
         this.engine = engine;
         
         setLayout(new BorderLayout());
+        addTitle();
         addDoneButton();
+        inputUserScore();
         
         
     }
@@ -34,20 +38,53 @@ public class GameOver extends JPanel {
     public void setMain(MainFrame panel) {
         this.main = panel;
     }
-       
+    
+    private void addTitle() {
+        JLabel title = new JLabel();
+        
+        
+        if (engine.isWonnered()) {
+            title.setText("Congratulations! You win!");
+        } else {
+            title.setText("Aww you didnt win. Try again!");
+        }
+        
+        title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        
+        add(title, BorderLayout.PAGE_START);
+        
+        
+        
+    }
+    
+    
+    private void inputUserScore() {
+        JPanel inputPanel = new JPanel();
+        userPrompt.setText("Enter your name (No Spaces): ");
+        inputPanel.setLayout(new FlowLayout());
+        
+        
+        inputPanel.add(userPrompt);
+        inputPanel.add(input);
+        
+        add(inputPanel, BorderLayout.CENTER);
+        
+    }
+     
+    
     
     /*
     adds the done button that lets the user return
     to the main menu.
     */
     private void addDoneButton() {
-        JPanel buttonPanel = new JPanel();
-        
+        JPanel buttonPanel = new JPanel();        
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(done);
                 
-        done.setText("End");
-                 
+        done.setText("End");                
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
