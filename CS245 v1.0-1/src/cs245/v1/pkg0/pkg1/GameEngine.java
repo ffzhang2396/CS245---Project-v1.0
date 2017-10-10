@@ -97,7 +97,7 @@ public class GameEngine {
             while ((readLine = br.readLine()) != null) {
                 //System.out.println(readLine);
                 String[] splitted = readLine.split(" ");
-                if ((Integer.parseInt(splitted[1]) < score) && replaced == false) {
+                if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
                     if (i < 5) {
                         scoreArr[i] = name + " " + Integer.toString(score);
                         //bw.write(name + " " + Integer.toString(score));
