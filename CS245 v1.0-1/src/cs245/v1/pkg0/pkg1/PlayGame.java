@@ -249,6 +249,12 @@ public class PlayGame extends JPanel implements ActionListener {
     game over panel.
     */
     private void gameFinished(boolean won) {
+        
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i].setEnabled(false);
+        }
+        
+        
         Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
