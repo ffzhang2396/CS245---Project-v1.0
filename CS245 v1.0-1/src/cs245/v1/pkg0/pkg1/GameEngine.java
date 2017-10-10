@@ -30,8 +30,27 @@ public class GameEngine {
         System.out.println("setWin " + this.won);
     }
 
-    public boolean isWonnered() {
-        return won;
+   public boolean isWonnered() {
+         try {
+            File file = new File("HighScores.txt");
+            BufferedReader buff = new BufferedReader(new FileReader(file));
+            String readLine = "", lastLine = "";
+            //Reads last line of file (the lowest score)
+            while ((readLine = buff.readLine()) != null) {
+                lastLine = readLine;
+            }
+            //Splits the string by name and score
+            String[] splitted = lastLine.split(" ");
+            //If old score is less than new player score 
+            if ((Integer.parseInt(splitted[1]) < (finalScore))) {
+                won = true;
+            } else {
+                won = false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         return won;
     }
 
 
@@ -51,6 +70,60 @@ public class GameEngine {
     */
     public void setScore(int score) {
         finalScore = score;
+    }
+    
+ /*
+    gets the final score for the
+    end of the game.
+    */
+    public int getScore() {
+        return finalScore;
+    }
+    
+    /*
+    Gets players score and possibly adds it to the highscore list
+     */
+    public void updateHighScore(String name, int score) {
+
+        try {
+            File f = new File("HighScores.txt");
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("TempFile.txt"));
+            String readLine = "";
+            boolean replaced = false;
+            int lines = 0;
+            while ((readLine = br.readLine()) != null) {
+                //System.out.println(readLine);
+                String[] splitted = readLine.split(" ");
+                if ((Integer.parseInt(splitted[1]) < score) && replaced == false) {
+                    if (lines < 5) {
+                        bw.write(name + " " + Integer.toString(score));
+                        bw.flush();
+                        System.out.print(name + " " + Integer.toString(score));
+                        ++lines;
+                    }
+                    if (lines < 5) {
+                        bw.write(readLine);
+                        bw.flush();
+                        System.out.print(readLine);
+                        ++lines;
+                    }
+                    replaced = true;
+                } else {
+                    if (lines < 5) {
+                        bw.write(readLine);
+                        bw.flush();
+                        System.out.print(readLine);
+                        ++lines;
+                    }
+                }
+            }
+            bw.close();
+            br.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*
