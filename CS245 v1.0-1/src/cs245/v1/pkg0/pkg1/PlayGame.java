@@ -252,13 +252,9 @@ public class PlayGame extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 engine.setWin(won);
                 main.swapView("over");
-            }
-            
-        });
-        
-        timer.setRepeats(false);
-        timer.setInitialDelay(0);
-        
+            }            
+        });        
+        timer.setRepeats(false);              
         timer.start();
     }
 
