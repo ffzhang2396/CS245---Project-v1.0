@@ -209,7 +209,7 @@ public class PlayGame extends JPanel implements ActionListener {
         // to the screen.
         JButton button = (JButton) e.getSource();
         if (engine.containsLetter(e.getActionCommand())) {
-            System.out.println("The word is " + engine.word);
+//            System.out.println("The word is " + engine.getWord());
             int[] positions = engine.getLetterPositions(button.getText());
 
             for (int i = 0; i < positions.length; i++) {
@@ -224,7 +224,7 @@ public class PlayGame extends JPanel implements ActionListener {
                 gameFinished(true);
             }
         } else {
-            System.out.println("The word is " + engine.word);
+//            System.out.println("The word is " + engine.getWord());
             // if the user chooses the incorrect letter
             //increment the wrong tries count and subtract 10 from score.
             //update the count.
@@ -268,7 +268,7 @@ public class PlayGame extends JPanel implements ActionListener {
         Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("playGame " + won);
+ //               System.out.println("playGame " + won);
                 engine.setWin(won);
                 engine.setScore(score);
                 main.gameOverMessage();

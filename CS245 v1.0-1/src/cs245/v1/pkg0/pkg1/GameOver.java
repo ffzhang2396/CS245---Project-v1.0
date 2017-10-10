@@ -118,7 +118,7 @@ public class GameOver extends JPanel {
                if(inputValue.length() == 0){
                    inputValue = "NONAME";
                }
-               System.out.println(inputValue + " score:"+ engine.getScore());
+//               System.out.println(inputValue + " score:"+ engine.getScore());
                engine.updateHighScore(inputValue, engine.getScore());
                main.swapView("menu");
                main.updateScore();

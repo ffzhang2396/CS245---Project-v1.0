@@ -22,13 +22,21 @@ public class GameEngine {
     private int wordLength;
     private MainFrame main;
     private boolean won;
-    //private 
-            String word;
+    private String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     //Constructor
     public GameEngine() {
         pickWord();
+    }
+    
+    /*
+    method: getWord
+    purpose: return word
+    */
+    
+    public String getWord(){
+        return word;
     }
 
 /*
@@ -119,7 +127,7 @@ public class GameEngine {
             }
             if (i < 5) {
                 while (i < 5) {
-                    System.out.println(i);
+//                    System.out.println(i);
                     scoreArr[i] = "AAA 0";
                     ++i;
                 }
