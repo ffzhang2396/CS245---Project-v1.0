@@ -95,8 +95,12 @@ public class GameOver extends JPanel {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // engine.setUser(input.getText) gets the user name
+               String inputValue = input.getText();
+               System.out.println(inputValue + " score:"+ engine.getScore());
+               engine.updateHighScore(inputValue, engine.getScore());
                main.swapView("menu");
+               main.updateScore();
+
             }
             
         });
