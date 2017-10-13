@@ -17,16 +17,14 @@ package cs245.v1.pkg0.pkg1;
 import java.io.*;
 import java.util.Random;
 
-public class GameEngine {
+public class HManGameEngine {
     private int finalScore;
-    private int wordLength;
-    private MainFrame main;
     private boolean won;
     private String word;
     private String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
 
     //Constructor
-    public GameEngine() {
+    public HManGameEngine() {
         pickWord();
     }
     

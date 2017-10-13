@@ -32,13 +32,13 @@ public class GameOver extends JPanel {
     private JPanel containerPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
     private MainFrame main;
-    private GameEngine engine;
-    private PlayGame game;
+    private HManGameEngine engine;
+    private HManGame game;
 
     /*
     Constructor
     */
-    public GameOver(GameEngine engine) {
+    public GameOver(HManGameEngine engine) {
         this.engine = engine;
 
         setLayout(new BorderLayout());

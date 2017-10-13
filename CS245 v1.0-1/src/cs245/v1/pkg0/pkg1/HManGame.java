@@ -30,12 +30,12 @@ import java.util.Date;
  * here for backend communication.
  *
  */
-public class PlayGame extends JPanel implements ActionListener {
+public class HManGame extends JPanel implements ActionListener {
 
     private int score = 100;
     private MainFrame main;
     private GamePanel game = new GamePanel();
-    private GameEngine engine;
+    private HManGameEngine engine;
     private JPanel btnPanel = new JPanel(new GridLayout(2, 13, 5, 5));
     private JPanel titleBar = new JPanel(new BorderLayout());
     private JPanel centerPanel = new JPanel(new BorderLayout());
@@ -51,7 +51,7 @@ public class PlayGame extends JPanel implements ActionListener {
     /*Constructor
     for Game UI panel.
      */
-    public PlayGame(GameEngine engine) {
+    public HManGame(HManGameEngine engine) {
 
         this.engine = engine;
 
@@ -66,7 +66,6 @@ public class PlayGame extends JPanel implements ActionListener {
      */
     private void loadUI() {
 
-
         addButtons();
         add(titleBar, BorderLayout.PAGE_START);
         add(centerPanel, BorderLayout.CENTER);
@@ -75,8 +74,6 @@ public class PlayGame extends JPanel implements ActionListener {
         drawTitle();
         drawGame();
         skipButton();
-
-
     }
 
     /*
@@ -140,10 +137,7 @@ public class PlayGame extends JPanel implements ActionListener {
             guessWord[i].setOpaque(true);
             guessWord[i].setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.black));
         }
-
         centerPanel.add(word, BorderLayout.PAGE_END);
-
-
     }
 
     /*
@@ -209,12 +203,9 @@ public class PlayGame extends JPanel implements ActionListener {
         // to the screen.
         JButton button = (JButton) e.getSource();
         if (engine.containsLetter(e.getActionCommand())) {
-//            System.out.println("The word is " + engine.getWord());
             int[] positions = engine.getLetterPositions(button.getText());
-
             for (int i = 0; i < positions.length; i++) {
                 guessWord[positions[i]].setText(button.getText());
-
             }
 
             button.setEnabled(false);
@@ -224,7 +215,6 @@ public class PlayGame extends JPanel implements ActionListener {
                 gameFinished(true);
             }
         } else {
-//            System.out.println("The word is " + engine.getWord());
             // if the user chooses the incorrect letter
             //increment the wrong tries count and subtract 10 from score.
             //update the count.
@@ -233,8 +223,7 @@ public class PlayGame extends JPanel implements ActionListener {
             game.addCount();
             button.setEnabled(false);
 
-            if (game.getTries() == 6) {
-                //Game Over
+            if (game.getTries() == 6) { //Game Over                
                 gameFinished(false);
                 engine.setScore(score);
             }
@@ -264,11 +253,12 @@ public class PlayGame extends JPanel implements ActionListener {
             buttons[i].setEnabled(false);
         }
 
-
+        // Timer delay for the game over screen.
+        // Probably need to change this to go to the next game
+        // After user has finished the game.
         Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
- //               System.out.println("playGame " + won);
                 engine.setWin(won);
                 engine.setScore(score);
                 main.gameOverMessage();
@@ -293,25 +283,38 @@ public class PlayGame extends JPanel implements ActionListener {
     has reached a certain number of incorrect tries.disc
      */
     private static class GamePanel extends JPanel {
-
         private int wrongTries;
 
         public GamePanel() {
 
         }
-
+        
+        /*
+        returns the number of wrong tries the user 
+        has attempted.
+        */
         public int getTries() {
             return wrongTries;
         }
 
+        /*
+        increments the number of wrong tries.
+        */
         public void addCount() {
             wrongTries++;
         }
 
+        /*
+        resets the number of wrong tries.
+        */
         public void resetCount() {
             wrongTries = 0;
         }
 
+        /*
+        Draws the hangman graphic and updates it based
+        on the number of wrong tries the user has.
+        */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;

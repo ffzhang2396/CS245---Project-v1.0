@@ -32,9 +32,9 @@ public class MainFrame extends JFrame {
     private HighScore hScore = new HighScore();
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
-    private GameEngine engine = new GameEngine();
+    private HManGameEngine engine = new HManGameEngine();
     private GameOver over = new GameOver(engine);
-    private PlayGame play = new PlayGame(engine);
+    private HManGame play = new HManGame(engine);
 
 
     private Timer timer;
@@ -46,8 +46,21 @@ public class MainFrame extends JFrame {
         initUI();
     }
 
+    /*
+    reloads and redraws the PlayGame panel and 
+    starts a new game.
+    */
     public void reload() {
         play.startNewGame();
+    }
+    
+    /*
+    accessor method for sub classes to access mainMenu class
+    method to start the timer for the main menu animation once
+    the user returns to the main menu.
+     */
+    public void startMenuTimer() {
+        mainMenu.startTimer();
     }
 
     /*
@@ -74,6 +87,10 @@ public class MainFrame extends JFrame {
         play.startNewGame();
     }
 
+    /*
+    controls which game over message is displayed.
+    either You win or you lose.
+    */
     public void gameOverMessage() {
         over.addTitle();
     }
@@ -85,14 +102,7 @@ public class MainFrame extends JFrame {
         hScore.updateHS();
     }
 
-    /*
-    accessor method for sub classes to access mainMenu class
-    method to start the timer for the main menu animation once
-    the user returns to the main menu.
-     */
-    public void startMenuTimer() {
-        mainMenu.startTimer();
-    }
+    
 
     /*
     initializer method to draw the frame and add elements to it.
