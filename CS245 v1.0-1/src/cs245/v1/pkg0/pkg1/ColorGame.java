@@ -5,10 +5,17 @@
  */
 package cs245.v1.pkg0.pkg1;
 
+import java.awt.*;
+import javax.swing.*;
+
 /**
  *
  * @author FelixZhang
  */
-public class ColorGame {
+public class ColorGame extends JPanel {
+        
+    public ColorGame() {
+    
+}
     
 }
