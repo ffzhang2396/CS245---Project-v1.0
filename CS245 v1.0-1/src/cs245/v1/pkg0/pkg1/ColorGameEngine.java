@@ -43,14 +43,15 @@ public class ColorGameEngine {
             //now we have to check if the circles at these coordinates intersect with any circle we already have.
         }
 
-        return null;
+        circles[0] = new Circle( 50, 50);
+        return circles;
     }
 
 
     /*
     object to hold the circle information.
      */
-    public class Circle {
+    public static class Circle {
 
         private int xPos, yPos;
         private int xCenter, yCenter;

@@ -33,8 +33,10 @@ public class MainFrame extends JFrame {
     private Credits credit = new Credits();
     private TitlePanel title = new TitlePanel();
     private HManGameEngine engine = new HManGameEngine();
+    private ColorGameEngine colorEngine = new ColorGameEngine();
     private GameOver over = new GameOver(engine);
     private HManGame play = new HManGame(engine);
+    private ColorGame playColor = new ColorGame(colorEngine);
 
 
     private Timer timer;
@@ -134,11 +136,13 @@ public class MainFrame extends JFrame {
         mainP.add(credit, "credits");
         mainP.add(play, "play");
         mainP.add(over, "over");
+        mainP.add(playColor, "play2");
 
         mainMenu.setMain(this);
         credit.setMain(this);
         hScore.setMain(this);
         play.setMain(this);
+        playColor.setMain(this);
         over.setMain(this);
 
 

@@ -18,16 +18,22 @@ import javax.swing.*;
  * @author FelixZhang
  */
 public class ColorGame extends JPanel implements MouseListener {
-    private ColorGameEngine engine = new ColorGameEngine();
+
+    private ColorGameEngine engine;
+    private MainFrame main;
     private CirclePanel game = new CirclePanel();
     private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
     private Random rand = new Random();
 
-    public ColorGame() {
+    public ColorGame(ColorGameEngine engine) {
         setLayout(new BorderLayout());
-        
+        this.engine = engine;
+        add(game, BorderLayout.CENTER);
 
-        
+    }
+
+    public void setMain(MainFrame main) {
+        this.main = main;
     }
 
     @Override
@@ -54,22 +60,17 @@ public class ColorGame extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
-    
-    
+
     /*
     inner panel that contains the circles. Game engine
     is supposed to calculate the circle positions and this 
     nested class just draws them.
-    */
+     */
     private class CirclePanel extends JPanel {
-       private Shape[] drawCirc = new Shape[5];
-       private Circle[] circles = engine.calcCirclePos(this.getWidth(), this.getHeight());
-       
-       
+
+        private Shape[] drawCirc = new Shape[5];
+
+        /*
        private void makeShapes() {
            int x, y, radius;
 
@@ -81,37 +82,29 @@ public class ColorGame extends JPanel implements MouseListener {
                drawCirc[i] = new Ellipse2D.Double(x, y, radius, radius);
            }
        }
-        
-        
-        
-        
+         */
         public void paintComponent(Graphics g) {
-          
-          super.paintComponent(g);
-          Graphics2D g2 = (Graphics2D) g;
-          
-          g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-          
-          g2.setStroke(new BasicStroke(1));
-          
-          g2.drawOval(0, 0, 50, 50);
-          
-          
-          //Draws the ovals based on the game engine calculated coordinates.
-          //Need to fill in with a color later.
-          for (int i = 0; i < drawCirc.length; i++) {             
-              g2.draw(drawCirc[i]);             
-          }
-            
+            drawCirc[0] = new Ellipse2D.Double(50, 50, 20, 20);
+
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            g2.setStroke(new BasicStroke(1));
+
+            g2.drawOval(0, 0, 50, 50);
+
+            //Draws the ovals based on the game engine calculated coordinates.
+            //Need to fill in with a color later.
+            /*
+            for (int i = 0; i < drawCirc.length; i++) {
+                g2.draw(drawCirc[i]);
+            }
+*/
+
         }
-        
-        
-        
-        
-        
-        
-        
+
     }
-    
 
 }

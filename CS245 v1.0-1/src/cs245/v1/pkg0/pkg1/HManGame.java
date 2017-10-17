@@ -107,9 +107,10 @@ public class HManGame extends JPanel implements ActionListener {
         skip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 engine.setWin(false);
                 main.gameOverMessage();
-                main.swapView("over");
+                main.swapView("play2");
             }
         });
     }
