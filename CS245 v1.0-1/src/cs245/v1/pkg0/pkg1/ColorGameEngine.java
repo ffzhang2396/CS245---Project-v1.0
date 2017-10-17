@@ -21,21 +21,36 @@ public class ColorGameEngine {
 
     /*
     This is used to calculate the positions of the circles with help
-    from the intersects method.
+    from the intersects method. Takes in the width and the height of the 
+    JPanel and draws circles within the bounds of the JPanel.
+    @returns a circle array to the circle panel class.
      */
-    private void calcCirclePos(int xHeight, int yHeight) {
+    public Circle[] calcCirclePos(int xHeight, int yHeight) {
         int windowH = yHeight;
         int windowW = xHeight;
         Random rand = new Random();
         int tempX, tempY;
         boolean done = false;
 
+        //Randomly generate values for tempX and tempY within the bounds of the panel
+        //Then check if the values for the randomly generated circle intersect with any
+        //circle in circle array. if so, keep getting new values until a non intersecting
+        //triangle is formed.
+        while (!done) {
+            tempX = rand.nextInt(windowW - 20); //width - 20 because we dont want to generate circles that go off screen.
+            tempY = rand.nextInt(windowH - 20); //same reason here.
+
+            //now we have to check if the circles at these coordinates intersect with any circle we already have.
+        }
+
+        return null;
     }
+
 
     /*
     object to hold the circle information.
      */
-    private static class Circle {
+    public class Circle {
 
         private int xPos, yPos;
         private int xCenter, yCenter;

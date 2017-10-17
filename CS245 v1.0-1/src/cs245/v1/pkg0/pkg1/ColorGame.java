@@ -5,22 +5,57 @@
  */
 package cs245.v1.pkg0.pkg1;
 
+import cs245.v1.pkg0.pkg1.ColorGameEngine.Circle;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
+import java.util.Random;
 import javax.swing.*;
 
 /**
  *
  * @author FelixZhang
  */
-public class ColorGame extends JPanel {
-    CirclePanel game = new CirclePanel();
-    ColorGameEngine engine = new ColorGameEngine();
+public class ColorGame extends JPanel implements MouseListener {
+    private ColorGameEngine engine = new ColorGameEngine();
+    private CirclePanel game = new CirclePanel();
+    private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
+    private Random rand = new Random();
 
     public ColorGame() {
         setLayout(new BorderLayout());
         
 
+        
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     
     
@@ -30,14 +65,28 @@ public class ColorGame extends JPanel {
     is supposed to calculate the circle positions and this 
     nested class just draws them.
     */
-    private static class CirclePanel extends JPanel {
-        private boolean done = false;
-        
+    private class CirclePanel extends JPanel {
+       private Shape[] drawCirc = new Shape[5];
+       private Circle[] circles = engine.calcCirclePos(this.getWidth(), this.getHeight());
+       
+       
+       private void makeShapes() {
+           int x, y, radius;
+
+           for (int i = 0; i < circles.length; i++) {
+               x = circles[i].getXPos();
+               y = circles[i].getYPos();
+               radius = circles[i].getRadius();
+               
+               drawCirc[i] = new Ellipse2D.Double(x, y, radius, radius);
+           }
+       }
         
         
         
         
         public void paintComponent(Graphics g) {
+          
           super.paintComponent(g);
           Graphics2D g2 = (Graphics2D) g;
           
@@ -48,8 +97,10 @@ public class ColorGame extends JPanel {
           g2.drawOval(0, 0, 50, 50);
           
           
-          while (!done) {
-              
+          //Draws the ovals based on the game engine calculated coordinates.
+          //Need to fill in with a color later.
+          for (int i = 0; i < drawCirc.length; i++) {             
+              g2.draw(drawCirc[i]);             
           }
             
         }
