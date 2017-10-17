@@ -50,7 +50,7 @@ public class ColorGameEngine {
     /*
     object to hold the circle information.
      */
-    public class Circle {
+    public static class Circle {
 
         private int xPos, yPos;
         private int xCenter, yCenter;
