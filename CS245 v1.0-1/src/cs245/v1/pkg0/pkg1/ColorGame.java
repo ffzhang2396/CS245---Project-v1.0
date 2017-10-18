@@ -7,9 +7,13 @@ package cs245.v1.pkg0.pkg1;
 
 import cs245.v1.pkg0.pkg1.ColorGameEngine.Circle;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.*;
 
@@ -19,17 +23,66 @@ import javax.swing.*;
  */
 public class ColorGame extends JPanel implements MouseListener {
 
+    
     private ColorGameEngine engine;
+    private HManGameEngine hEngine;
     private MainFrame main;
     private CirclePanel game = new CirclePanel();
     private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
     private Random rand = new Random();
-
-    public ColorGame(ColorGameEngine engine) {
-        setLayout(new BorderLayout());
+    private JPanel titleBar = new JPanel(new BorderLayout());
+    private JPanel skipPanel = new JPanel();
+    private JButton skip = new JButton("Skip");
+    private JLabel points = new JLabel();
+    
+    public ColorGame(ColorGameEngine engine,HManGameEngine hEngine) {
         this.engine = engine;
-        add(game, BorderLayout.CENTER);
+        this.hEngine = hEngine;
+        setLayout(new BorderLayout());
+        loadUI();
+        
 
+    }
+    
+    private void loadUI(){
+        add(titleBar, BorderLayout.PAGE_START);
+        add(skipPanel, BorderLayout.LINE_END);
+        add(game, BorderLayout.CENTER);
+        drawTitle();
+        skipButton();
+       
+    }
+/*
+    Draws the title bar for the hangman game where it includes the stylized drawing
+    of the hangman word as well as the current date and time.
+     */
+    private void drawTitle() {
+        JLabel time = new JLabel();
+
+        // adding the time
+        time.setHorizontalAlignment(JLabel.CENTER);
+        time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                time.setText(DateFormat.getDateTimeInstance().format(new Date()));
+            }
+        });
+        timer.setRepeats(true);
+        timer.setCoalesce(true);
+        timer.setInitialDelay(0);
+        timer.start();
+        titleBar.add(time, BorderLayout.LINE_END);
+
+       
+
+        //adding the points
+       /* points.setText("Points: ");
+        points.setFont(new Font("Arial", Font.ITALIC, 14));
+        points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
+        titleBar.add(points, BorderLayout.CENTER);
+        */
+        
     }
 
     public void setMain(MainFrame main) {
@@ -61,6 +114,28 @@ public class ColorGame extends JPanel implements MouseListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    /*
+    skip button to end game functionality needs
+    to be implemented here.
+     */
+    private void skipButton() {
+        skipPanel.add(skip);
+
+        skip.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Hangman" + hEngine.getScore());
+                engine.setScore(hEngine.getScore());
+                engine.setWin(true);
+                main.gameOverMessage();
+                main.swapView("over");
+            }
+        });
+    }
+    
+   
+    
     /*
     inner panel that contains the circles. Game engine
     is supposed to calculate the circle positions and this 

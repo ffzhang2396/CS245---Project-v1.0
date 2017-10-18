@@ -5,6 +5,12 @@
  */
 package cs245.v1.pkg0.pkg1;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -14,11 +20,112 @@ import java.util.Random;
 public class ColorGameEngine {
 
     Circle[] circles = new Circle[5];
-
+    private int score;
+    private boolean won;
     public void drawCircles() {
 
     }
+/*
+    method: setWin
+    puspose: sets the boolean won, if user won
+    */
+    public void setWin(boolean won) {
+        this.won = won;
+    }
+/*
+    /*
+    method: isWonnered
+    purpose: returns a boolean if player won or not, won = true, lost = false
+    */
+    public boolean isWonnered() {
+        return won;
+    }
+    
+    public int getScore(){
+        return score;
+    }
+    
+    
+    /*
+    method: setScore
+    purpose: setter for the score variable, sets the final score for the
+    end of the game.
+    */
+    public void setScore(int score) {
+         this.score = score;
+    }
+      /*
+    method: updateHighScore
+    purpose: Gets players score and adds it to the highscore list if its in the top 5
+    First it reads the highscores file, adds it to an array with the new score, and 
+    then overrites old file.
+     */
+    public void updateHighScore(String name, int score) {
 
+         String scoreArr[] = new String[5];
+        try {
+            File f = new File("HighScores.txt");
+            BufferedReader br = new BufferedReader(new FileReader(f));
+
+            
+            boolean replaced = false;
+            int i = 0;
+            // if File is empty
+           String line = br.readLine();
+            if (line.length() == 0 ) {  
+                scoreArr[i] = name + " " + Integer.toString(score);
+                ++i;
+            } else {
+                while ((line) != null) {
+                String[] splitted = line.split(" ");
+                if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
+                    if (i < 5) {
+                        scoreArr[i] = name + " " + Integer.toString(score);
+                        ++i;
+                    }
+                    if (i < 5) {
+                        scoreArr[i] = line;
+                        ++i;
+                    }
+                    replaced = true;
+                } else {
+                    if (i < 5) {
+                        scoreArr[i] = line;
+                        ++i;
+                    }
+                }
+                line = br.readLine();
+            }
+            }
+            if (i < 5) {
+                while (i < 5) {
+//                    System.out.println(i);
+                    scoreArr[i] = "AAA 0";
+                    ++i;
+                }
+            }
+            i = 0;
+
+            br.close();
+            f.delete();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
+
+            for (int n = 0; n < scoreArr.length; n++) {
+
+                bw.write(scoreArr[n]);
+                bw.newLine();
+                bw.flush();
+            }
+
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    
     /*
     This is used to calculate the positions of the circles with help
     from the intersects method. Takes in the width and the height of the 
