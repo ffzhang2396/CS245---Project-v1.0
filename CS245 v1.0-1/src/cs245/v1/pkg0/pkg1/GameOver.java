@@ -28,6 +28,7 @@ public class GameOver extends JPanel {
     private JButton done = new JButton();
     private JTextField input = new JTextField(10);
     private JLabel userPrompt = new JLabel();
+    private JLabel namePrompt = new JLabel();
     private JPanel titlePanel = new JPanel();
     private JPanel containerPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
@@ -87,22 +88,32 @@ public class GameOver extends JPanel {
     private void inputUserScore() {
         containerPanel.removeAll();
         userPrompt = new JLabel();
+        namePrompt = new JLabel();
         input = new JTextField(10);
         String scoreText;
-        scoreText = "Woo! You made the High Score!"+ Integer.toString(engine.getScore());
+        scoreText = "Woo! You made the High Score! Score: "+ Integer.toString(engine.getScore());
         JPanel inputPanel = new JPanel();
 
+        JButton yes = new JButton("Yes");
+        JButton no = new JButton ("No");
         JButton confirm = new JButton("OK");
         JLabel notice = new JLabel(scoreText, SwingConstants.CENTER);
-        userPrompt.setText("Enter your name! (No Spaces): ");
+        userPrompt.setText("Would you like to save score to High Score list?");
+        namePrompt.setText("Input your initials: ");
+        //userPrompt.setText("Enter your name! (No Spaces): ");
         notice.setFont(new Font("Kristen ITC", Font.BOLD, 20));
 
 
         containerPanel.setLayout(new BorderLayout());
         inputPanel.setLayout(new FlowLayout());
-
+        input.setVisible(false);
+        confirm.setVisible(false);
+        namePrompt.setVisible(false);
 
         inputPanel.add(userPrompt);
+        inputPanel.add(namePrompt);
+        inputPanel.add(yes);
+        inputPanel.add(no);
         inputPanel.add(input);
         inputPanel.add(confirm);
 
@@ -112,9 +123,35 @@ public class GameOver extends JPanel {
         inputPanel.setAlignmentX(CENTER_ALIGNMENT);
         inputPanel.setAlignmentY(GameOver.CENTER_ALIGNMENT);
 
+        yes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                yes.setVisible(false);
+                no.setVisible(false);
+                userPrompt.setVisible(false);
+                namePrompt.setVisible(true);
+                confirm.setVisible(true);
+                input.setVisible(true);
+
+            }
+
+        });
+        no.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                yes.setVisible(false);
+                no.setVisible(false);
+                userPrompt.setVisible(false);
+               main.swapView("menu");
+               main.updateScore();
+
+            }
+
+        });
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                String inputValue = input.getText();
                if(inputValue.length() == 0){
                    inputValue = "NONAME";
@@ -123,6 +160,7 @@ public class GameOver extends JPanel {
                engine.updateHighScore(inputValue, engine.getScore());
                main.swapView("menu");
                main.updateScore();
+                
 
             }
 

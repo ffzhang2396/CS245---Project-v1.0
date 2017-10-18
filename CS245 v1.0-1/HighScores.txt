@@ -1,5 +1,5 @@
-Geri 100
-Kanye 90
-Tupac 90
-NONAME 90
-NONAME 0
+Kobe 100
+Jay-Z 100
+Snoop 90
+Tupac 0
+Geri 0
