@@ -263,7 +263,7 @@ public class HManGame extends JPanel implements ActionListener {
                 engine.setWin(won);
                 engine.setScore(score);
                 main.gameOverMessage();
-                main.swapView("over");
+                main.swapView("play2");
             }
         });
         timer.setRepeats(false);

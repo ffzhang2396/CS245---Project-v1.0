@@ -34,9 +34,9 @@ public class MainFrame extends JFrame {
     private TitlePanel title = new TitlePanel();
     private HManGameEngine engine = new HManGameEngine();
     private ColorGameEngine colorEngine = new ColorGameEngine();
-    private GameOver over = new GameOver(engine);
+    private GameOver over = new GameOver(colorEngine);
     private HManGame play = new HManGame(engine);
-    private ColorGame playColor = new ColorGame(colorEngine);
+    private ColorGame playColor = new ColorGame(colorEngine,engine);
 
 
     private Timer timer;

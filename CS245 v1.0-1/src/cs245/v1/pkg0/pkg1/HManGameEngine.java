@@ -80,77 +80,7 @@ public class HManGameEngine {
         return finalScore;
     }
     
-    /*
-    method: updateHighScore
-    purpose: Gets players score and adds it to the highscore list if its in the top 5
-    First it reads the highscores file, adds it to an array with the new score, and 
-    then overrites old file.
-     */
-    public void updateHighScore(String name, int score) {
-
-         String scoreArr[] = new String[5];
-        try {
-            File f = new File("HighScores.txt");
-            BufferedReader br = new BufferedReader(new FileReader(f));
-
-            
-            boolean replaced = false;
-            int i = 0;
-            // if File is empty
-           String line = br.readLine();
-            if (line.length() == 0 ) {  
-                scoreArr[i] = name + " " + Integer.toString(score);
-                ++i;
-            } else {
-                while ((line) != null) {
-                String[] splitted = line.split(" ");
-                if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
-                    if (i < 5) {
-                        scoreArr[i] = name + " " + Integer.toString(score);
-                        ++i;
-                    }
-                    if (i < 5) {
-                        scoreArr[i] = line;
-                        ++i;
-                    }
-                    replaced = true;
-                } else {
-                    if (i < 5) {
-                        scoreArr[i] = line;
-                        ++i;
-                    }
-                }
-                line = br.readLine();
-            }
-            }
-            if (i < 5) {
-                while (i < 5) {
-//                    System.out.println(i);
-                    scoreArr[i] = "AAA 0";
-                    ++i;
-                }
-            }
-            i = 0;
-
-            br.close();
-            f.delete();
-            BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
-
-            for (int n = 0; n < scoreArr.length; n++) {
-
-                bw.write(scoreArr[n]);
-                bw.newLine();
-                bw.flush();
-            }
-
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
+  
     /*
     method: getLetterPositions
     purpose: Returns the letter position in the secret word string.

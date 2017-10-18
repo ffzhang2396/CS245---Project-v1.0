@@ -1,5 +1,5 @@
-tony 100
-123 100
-NONAME 100
-123 100
-brian 70
+Geri 100
+Kanye 90
+Tupac 90
+NONAME 90
+NONAME 0

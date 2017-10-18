@@ -32,13 +32,13 @@ public class GameOver extends JPanel {
     private JPanel containerPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
     private MainFrame main;
-    private HManGameEngine engine;
+    private ColorGameEngine engine;
     private HManGame game;
 
     /*
     Constructor
     */
-    public GameOver(HManGameEngine engine) {
+    public GameOver(ColorGameEngine engine) {
         this.engine = engine;
 
         setLayout(new BorderLayout());
@@ -88,11 +88,12 @@ public class GameOver extends JPanel {
         containerPanel.removeAll();
         userPrompt = new JLabel();
         input = new JTextField(10);
-
+        String scoreText;
+        scoreText = "Woo! You made the High Score!"+ Integer.toString(engine.getScore());
         JPanel inputPanel = new JPanel();
 
         JButton confirm = new JButton("OK");
-        JLabel notice = new JLabel("Woo! You made the High Score!", SwingConstants.CENTER);
+        JLabel notice = new JLabel(scoreText, SwingConstants.CENTER);
         userPrompt.setText("Enter your name! (No Spaces): ");
         notice.setFont(new Font("Kristen ITC", Font.BOLD, 20));
 
