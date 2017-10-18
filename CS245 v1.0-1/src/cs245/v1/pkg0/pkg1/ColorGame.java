@@ -97,7 +97,7 @@ public class ColorGame extends JPanel implements MouseListener {
 
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
-            /*
+            /* this doesnt work, need to figure out why
             for (int i = 0; i < drawCirc.length; i++) {
                 g2.draw(drawCirc[i]);
             }
