@@ -169,8 +169,8 @@ public class ColorGame extends JPanel implements MouseListener {
 
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
-            int width = r.width - 51;
-            int height = r.height - 50;
+            int width = r.width - 75;
+            int height = r.height - 75;
 
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;

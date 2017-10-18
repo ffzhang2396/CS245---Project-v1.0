@@ -26,14 +26,7 @@ public class ColorGameEngine {
     private boolean won;
 
     public ColorGameEngine() {
-        Circle circle1 = new Circle(72, 296);
-        Circle circle2 = new Circle(70, 288);
-        
-        System.out.println(circle1.intersects(circle2));
-        
-        
-        
-        //drawCircles();
+    
 
     }
 
@@ -176,10 +169,35 @@ public class ColorGameEngine {
         int windowW = xHeight;
         int counter = 0;
         Random rand = new Random();
+        Circle tempCirc;
         int tempX, tempY;
         boolean done = false;
         
+        /*
+        while the circle array is not filled, keep picking random numbers for
+        coordinates of the circle. Then check if the random circle overlaps with 
+        any circle thats already in the list. if so, repick new random coordinates.
+        */
+        while (!done) {
+            tempX = rand.nextInt(windowW);
+            tempY = rand.nextInt(windowH);
+            tempCirc = new Circle(tempX, tempY);
+            
+            if(!containsInter(tempCirc)) {
+                circles[counter] = tempCirc;
+                counter++;
+            }
+            
+            if (counter == 5) {
+                done = true;
+            }
+            
+        }
+        
+    }
+        
 
+        /*
         //Randomly generate values for tempX and tempY within the bounds of the panel
         //Then check if the values for the randomly generated circle intersect with any
         //circle in circle array. if so, keep getting new values until a non intersecting
@@ -187,7 +205,7 @@ public class ColorGameEngine {
         while (!done) {
             tempX = rand.nextInt(windowW); //width - 20 because we dont want to generate circles that go off screen.
             tempY = rand.nextInt(windowH); //same reason here.
-            Circle tempCirc = new Circle(tempX, tempY);
+            tempCirc = new Circle(tempX, tempY);
 
             //now we have to check if the circles at these coordinates intersect with any circle we already have.
             for (int i = 0; i < circles.length; i++) {
@@ -208,7 +226,7 @@ public class ColorGameEngine {
                 /* problem is that sometimes there are overlapping circles and i think its in
                 this method but im not sure where the actualy problem is. i think its in the double
                 if statements inside the for loops.
-                */
+                
             }
             // if the list is full, terminate while loop
             if (counter == 5) {
@@ -221,7 +239,20 @@ public class ColorGameEngine {
         System.out.println("====================================");
         drawCircles();
         System.out.println("====================================");
+    } */
+    
+    private boolean containsInter(Circle target) {
+        
+        for (int i = 0; i < circles.length; i++) {
+            if(circles[i] != null) {
+                if (target.intersects(circles[i])) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+
      
 
     /*
@@ -231,13 +262,13 @@ public class ColorGameEngine {
 
         private int xPos, yPos;
         private int xCenter, yCenter;
-        private final int radius = 50;
+        private final int radius = 70;
 
         public Circle(int xPos, int yPos) {
             this.xPos = xPos;
             this.yPos = yPos;
-            xCenter = xPos + 25;
-            yCenter = yPos + 25;
+            xCenter = xPos + 35;
+            yCenter = yPos + 35;
         }
 
         /*
@@ -252,11 +283,8 @@ public class ColorGameEngine {
             double distance = Math.sqrt(sum);
             
             if (radiSum >= distance) {
-                System.out.println(radiSum + "true. distance : " + distance);
-                System.out.println(this.toString() + " comp " + comp.toString());
                 return true;
             }
-            System.out.println(radiSum + " distance : " + distance);
             return false;
         }
 
