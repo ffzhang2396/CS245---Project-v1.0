@@ -32,6 +32,8 @@ public class ColorGame extends JPanel {
     private JButton skip = new JButton("Skip");
     private JLabel points = new JLabel();
     private JTextField color = new JTextField(10);
+    private JLabel target = new JLabel();
+    
 
     public ColorGame(ColorGameEngine engine, HManGameEngine hEngine) {
         this.engine = engine;
@@ -43,6 +45,11 @@ public class ColorGame extends JPanel {
     }
 
     private void loadUI() {
+    	
+    	target.setText("Color: " + engine.getTarget());
+        target.setFont(new Font("Papyrus", Font.BOLD, 18));
+        target.setForeground(Color.red);
+        titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
         add(skipPanel, BorderLayout.LINE_END);
         add(game, BorderLayout.CENTER);
@@ -71,8 +78,19 @@ public class ColorGame extends JPanel {
         timer.setCoalesce(true);
         timer.setInitialDelay(0);
         timer.start();
+        
         titleBar.add(time, BorderLayout.LINE_END);
+        
+      //adding the points
+       
 
+    }
+    
+    public Color chooseRandomColor(){
+    	Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
+    	int rnd = new Random().nextInt(colors.length);
+        Color choice = colors[rnd];
+    	return choice;
     }
 
     public void setMain(MainFrame main) {
@@ -111,6 +129,7 @@ public class ColorGame extends JPanel {
         private Shape[] drawCirc = new Shape[5];
         private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
         private Point mouse = null;
+        private String color;
         
         public CirclePanel() {
 
@@ -119,8 +138,24 @@ public class ColorGame extends JPanel {
             addMouseMotionListener(this);
         }
         
+        
+        
         public void reDraw() {
-            drawCirc = engine.getCircles(431, 284);
+        	 //titleBar.remove(target);
+        	 //titleBar.validate();
+        	 //titleBar.repaint();
+        	 target.setText("Color: " + engine.getTarget());
+             target.setFont(new Font("Papyrus", Font.BOLD, 18));
+            // target.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
+             target.setForeground(chooseRandomColor());
+             titleBar.add(target, BorderLayout.LINE_START);
+        	 
+             points.setText("Points: " + Integer.toString(engine.getScore()));
+             points.setFont(new Font("Arial", Font.ITALIC, 14));
+             points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
+             titleBar.add(points, BorderLayout.CENTER);
+             
+             drawCirc = engine.getCircles(431, 284);
         }
 
         public void paintComponent(Graphics g) {
@@ -138,7 +173,8 @@ public class ColorGame extends JPanel {
                if (mouse != null && drawCirc[i].contains(mouse)){//mouseX, mouseY)){
                     //System.out.println("inside");
                     g2.setColor(colors[i].darker());
-                } else{
+                    thisColor(i);
+                } else {
                     g2.setColor(colors[i]);
                 }
                 g2.fill(drawCirc[i]);
@@ -147,14 +183,57 @@ public class ColorGame extends JPanel {
 
 
         }
+        
+        public void thisColor(int i){
+        	switch(i){
+        	case 0:
+        		//System.out.println("red");
+        		color = "red";
+        		break;
+        	case 1:
+        		//System.out.println("yellow");
+        		color = "yellow";
+        		break;
+        	case 2:
+        		//System.out.println("green");
+        		color = "green";
+        		break;
+        	case 3:
+        		//System.out.println("blue");
+        		color = "blue";
+        		break;
+        	case 4:
+        		//System.out.println("pink");
+        		color = "pink";
+        		break;
+        	
+        	} 
+        }
 
         @Override
         public void mouseClicked(MouseEvent e) {
+        	if(engine.getRounds() <= 3){
             for (Shape shape : drawCirc) {
                 if (shape.contains(e.getPoint())) {
-                    System.out.println("click click");
+                    //System.out.println("click click");
+                    System.out.println(color);
+                    engine.matches(color);
+                    reDraw();
                 }
             }
+           } else if(engine.getRounds() == 4){
+        	   for (Shape shape : drawCirc) {
+                	if (shape.contains(e.getPoint())) {
+                    //System.out.println("click click");
+                    System.out.println(color);
+                    engine.matches(color);
+                    System.out.println("Game is over");
+                    engine.isWonnered();
+                    //reDraw();
+                } }
+           }else {
+        		System.out.println("Game is over");
+        	}
         }
 
         @Override
