@@ -39,10 +39,12 @@ public class ColorGameEngine {
     private String target;
     private int rounds = 0;
 
+
     /*
         Constructor
      */
     public ColorGameEngine() {
+
         selectTarget();
     }
 
@@ -52,6 +54,7 @@ public class ColorGameEngine {
      */
     public String getTarget() {
         return target;
+
     }
 
     /*
@@ -74,7 +77,7 @@ public class ColorGameEngine {
 
     /*
     method: setScore
-    puspose: sets the score
+    purpose: setter for the score variable
      */
     public void setScore(int x) {
         score = x;
@@ -126,6 +129,7 @@ public class ColorGameEngine {
     public void resetRounds() {
         rounds = 0;
     }
+
 
     /*
     method: drawCircleAt
@@ -192,7 +196,6 @@ public class ColorGameEngine {
         }
         return winType;
     }
-
 
     /*
     method: updateHighScore
@@ -269,7 +272,7 @@ public class ColorGameEngine {
     @returns a circle array to the circle panel class.
      */
     public void calcCirclePos(int xHeight, int yHeight) {
-
+    
         circles = new Circle[5];
         int windowH = yHeight;
         int windowW = xHeight;
@@ -293,7 +296,7 @@ public class ColorGameEngine {
                 circles[counter] = tempCirc;
                 counter++;
             }
-
+            
             if (counter == 5) {
                 done = true;
             }

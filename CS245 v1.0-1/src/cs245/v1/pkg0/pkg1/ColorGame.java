@@ -90,9 +90,12 @@ public class ColorGame extends JPanel {
         timer.start();
 
         titleBar.add(time, BorderLayout.LINE_END);
-
+        
+      //adding the points
+       
     }
-
+    
+    
     /*
     method: chooseRandomeColor
     purpose: Chooses  a randome color
@@ -145,6 +148,7 @@ public class ColorGame extends JPanel {
             addMouseListener(this);
             addMouseMotionListener(this);
         }
+
 
         /*
         method: reDraw
@@ -209,6 +213,7 @@ public class ColorGame extends JPanel {
 
             }
         }
+        
 
         /*
         method: mouseClicked
@@ -242,6 +247,7 @@ public class ColorGame extends JPanel {
                 main.swapView("over");
             }
         }
+           
 
         @Override
         public void mousePressed(MouseEvent e) {
