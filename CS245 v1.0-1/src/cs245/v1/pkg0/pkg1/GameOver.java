@@ -21,10 +21,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *This class is meant for the ending screen once user has finished the game
- * or has clicked the skip button.
+ * This class is meant for the ending screen once user has finished the game or
+ * has clicked the skip button.
  */
 public class GameOver extends JPanel {
+
     private JButton done = new JButton();
     private JTextField input = new JTextField(10);
     private JLabel userPrompt = new JLabel();
@@ -38,37 +39,43 @@ public class GameOver extends JPanel {
 
     /*
     Constructor
-    */
+     */
     public GameOver(ColorGameEngine engine) {
         this.engine = engine;
-
         setLayout(new BorderLayout());
-        //addDoneButton();
-        //inputUserScore();
-
-
     }
 
     /*
-    accesor method to allow panel switching from
+    method: setMain
+    purpose:accesor method to allow panel switching from
     within this panel.
-    */
+     */
     public void setMain(MainFrame panel) {
         this.main = panel;
     }
 
+    /*
+    method: addTitle
+    purpose: adds the title to game over panel
+     */
     public void addTitle() {
 
         JLabel title = new JLabel();
-
         titlePanel.removeAll();
-
-        if (engine.isWonnered()) {
-            // need to check if the user is in the high score or not
+        // Winner = 1,2, or 3 depending on win status
+        int winner = engine.isWinner();
+        // If payer wins and isn't in top 5 highscore
+        if (winner == 2) {
+            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore</html>");
+            buttonPanel.removeAll();
+            addDoneButton();
+        } // Else if player wins but is in top 5 highscore
+        else if (winner == 3) {
             title.setText("Congratulations! You win!");
             buttonPanel.removeAll();
             inputUserScore();
-        } else {
+        } // Else if player loses
+        else if (winner == 1) {
             title.setText("Aww you didnt win. Try again!");
             containerPanel.removeAll();
             addDoneButton();
@@ -76,33 +83,31 @@ public class GameOver extends JPanel {
 
         title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-
         titlePanel.add(title);
         add(titlePanel, BorderLayout.PAGE_START);
 
-
-
     }
 
-
+    /*
+    method: inputUserScore
+    purpose: Allows user to input their name and score if they get a high score
+    */
     private void inputUserScore() {
         containerPanel.removeAll();
         userPrompt = new JLabel();
         namePrompt = new JLabel();
         input = new JTextField(10);
         String scoreText;
-        scoreText = "Woo! You made the High Score! Score: "+ Integer.toString(engine.getScore());
+        scoreText = "Woo! You made the High Score! Score: " + Integer.toString(engine.getScore());
         JPanel inputPanel = new JPanel();
 
         JButton yes = new JButton("Yes");
-        JButton no = new JButton ("No");
+        JButton no = new JButton("No");
         JButton confirm = new JButton("OK");
         JLabel notice = new JLabel(scoreText, SwingConstants.CENTER);
         userPrompt.setText("Would you like to save score to High Score list?");
         namePrompt.setText("Input your initials: ");
-        //userPrompt.setText("Enter your name! (No Spaces): ");
         notice.setFont(new Font("Kristen ITC", Font.BOLD, 20));
-
 
         containerPanel.setLayout(new BorderLayout());
         inputPanel.setLayout(new FlowLayout());
@@ -119,10 +124,11 @@ public class GameOver extends JPanel {
 
         notice.setAlignmentX(CENTER_ALIGNMENT);
         notice.setAlignmentY(GameOver.CENTER_ALIGNMENT);
-        containerPanel.setBorder(BorderFactory.createEmptyBorder(50, 0 ,0, 0));
+        containerPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
         inputPanel.setAlignmentX(CENTER_ALIGNMENT);
         inputPanel.setAlignmentY(GameOver.CENTER_ALIGNMENT);
-
+        
+        // yes button
         yes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,63 +138,47 @@ public class GameOver extends JPanel {
                 namePrompt.setVisible(true);
                 confirm.setVisible(true);
                 input.setVisible(true);
-
             }
-
         });
+        
+        // no button
         no.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 yes.setVisible(false);
                 no.setVisible(false);
                 userPrompt.setVisible(false);
-               main.swapView("menu");
-               main.updateScore();
-
+                main.swapView("menu");
+                main.updateScore();
             }
-
         });
+        
+        // ok button
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-               String inputValue = input.getText();
-               if(inputValue.length() == 0){
-                   inputValue = "NONAME";
-               }
-//               System.out.println(inputValue + " score:"+ engine.getScore());
-               engine.updateHighScore(inputValue, engine.getScore());
-               main.swapView("menu");
-               main.updateScore();
-                
-
+                String inputValue = input.getText();
+                if (inputValue.length() == 0) {
+                    inputValue = "NONAME";
+                }
+                engine.updateHighScore(inputValue, engine.getScore());
+                main.swapView("menu");
+                main.updateScore();
             }
-
         });
-
-
-
         containerPanel.add(notice, BorderLayout.PAGE_START);
         containerPanel.add(inputPanel, BorderLayout.CENTER);
         add(containerPanel, BorderLayout.CENTER);
-
-
-
-
-
     }
 
-
-
     /*
-    adds the done button that lets the user return
+    method: addDoneButton
+    purpose:adds the done button that lets the user return
     to the main menu.
-    */
+     */
     private void addDoneButton() {
-
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(done);
-
         done.setText("End");
         done.addActionListener(new ActionListener() {
             @Override

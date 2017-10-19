@@ -24,9 +24,7 @@ import java.util.Scanner;
 import javax.swing.*;
 
 /**
- * Need to figure out how to display high scores. needs to have unselectable
- * displays
- *
+ * HighScore class
  */
 public class HighScore extends JPanel {
 
@@ -40,17 +38,16 @@ public class HighScore extends JPanel {
     Constructor
      */
     public HighScore() {
-
         setLayout(new BorderLayout());
         addTitle();
         readHighScore();
         showHighScores();
         addBackButtons();
-
     }
 
     /*
-    This method is used to set this instance of MainFrame to the current
+    method: setMain
+    purpose: This method is used to set this instance of MainFrame to the current
     main frame so that the swapview method can be accessed to change the
     panel back to the main menu once the back button is pressed.
      */
@@ -58,33 +55,37 @@ public class HighScore extends JPanel {
         this.main = panel;
     }
 
-
+    /*
+    method: addTitle
+    purpose: adds title to highscore screen
+    */
     private void addTitle() {
         JLabel title = new JLabel("High Scores");
         title.setFont(new Font("Papyrus", Font.BOLD, 30));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-
         add(title, BorderLayout.PAGE_START);
     }
 
     /*
-    Displaying the High Scores.
+    method: showHighScores
+    purpose: Displaying the High Scores.
      */
     private void showHighScores() {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
         scores.setBorder(BorderFactory.createEmptyBorder(20, 0, 0 ,0));
-
+        
         for (int i = 0; i < 5; i++) {
-
             if (names[i] != null) {
                 scores.add(names[i]);
             }
         }
+        
         add(scores, BorderLayout.CENTER);
     }
 
    /*
-    Updates the High Scores
+    method: updateHS
+    purpose: Updates the High Scores
     */
      public void updateHS(){
         scores.removeAll();
@@ -93,17 +94,16 @@ public class HighScore extends JPanel {
     }
 
     /*
-    Reading the High scores from the text file and adding
+     method: readHighScore
+     purpose: Reading the High scores from the text file and adding
     them to the JLabel array. Since There are only ever going
     to be the top 5 high scores, we can just run the loop 5 times.
      */
     private void readHighScore() {
         File file = new File("HighScores.txt");
         String[] entry;
-
         try {
             Scanner reader = new Scanner(file);
-
             for (int i = 0; i < 5; i++) {
 
                 if (reader.hasNext()) {
@@ -119,7 +119,8 @@ public class HighScore extends JPanel {
     }
 
     /*
-    adding the back button.
+    method: addBackButtons
+    purpose: adding the back button.
      */
     private void addBackButtons() {
         buttons.add(backButton, BorderLayout.LINE_START);

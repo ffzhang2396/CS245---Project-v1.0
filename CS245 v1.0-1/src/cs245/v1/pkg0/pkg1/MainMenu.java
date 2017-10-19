@@ -53,7 +53,8 @@ public class MainMenu extends JPanel {
     }
 
     /*
-    accessor method for subclasses to be able to set the
+    method: setMain
+    purpose: accessor method for subclasses to be able to set the
     current instance of the MainMenu to be able to access
     certain methods from a subclass.
     */
@@ -63,7 +64,8 @@ public class MainMenu extends JPanel {
     }
 
     /*
-    accessor method for subclasses to be able to stop the timer
+    method: stopTimer
+    purpose: accessor method for subclasses to be able to stop the timer
     once the user leaves the main menu so the animation does not keep playing.
     */
     public void stopTimer() {
@@ -71,7 +73,8 @@ public class MainMenu extends JPanel {
     }
 
     /*
-    accesssor method for sublcasses to be able to stop the timer once the user leaves
+    method: startTimer
+    purpose: accesssor method for sublcasses to be able to stop the timer once the user leaves
     the main menu so the animation does not keep going.
     */
     public void startTimer() {
@@ -80,10 +83,11 @@ public class MainMenu extends JPanel {
 
 
     /*
-    I used a java swing timer to slideshow the two
+    method: displayLogo
+    purpose: displaying the logo by using a java swing timer to slideshow the two
     logo pictures.
     */
-    //NEED TO CHANGE TO USE BUFFERED IMAGE FOR AUTOMATIC IMAGE SCALING.
+ 
     private void displayLogo() {
         ImageIcon img = new ImageIcon(new ImageIcon("thunking.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
         JLabel label = new JLabel("", img, JLabel.CENTER);
@@ -94,7 +98,6 @@ public class MainMenu extends JPanel {
         pictures.add(label2, "two");
 
         timer = new Timer(1000, new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (show) {
@@ -105,13 +108,13 @@ public class MainMenu extends JPanel {
                     show = true;
                 }
             }
-
         });
         timer.start();
     }
 
     /*
-    Method that sets the main menu buttons and adds functions
+    method: menuBtns
+    purpose: Method that sets the main menu buttons and adds functions
     to them.
     */
     private JComponent menuBtns() {
@@ -144,7 +147,6 @@ public class MainMenu extends JPanel {
         //finally add the inner panel to menu panel and return.
         menuButtons.add(buttons, BorderLayout.PAGE_END);
 
-
         // Action Listeners for the 3 main buttons.
         hScore.addActionListener(new ActionListener() {
             @Override
@@ -161,7 +163,6 @@ public class MainMenu extends JPanel {
                 main.swapView("credits");
             }
         });
-
 
         play.addActionListener(new ActionListener() {
 

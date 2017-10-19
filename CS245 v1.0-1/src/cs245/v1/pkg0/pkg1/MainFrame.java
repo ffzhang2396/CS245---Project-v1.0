@@ -49,7 +49,8 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    reloads and redraws the PlayGame panel and 
+    method: reload
+    purpose: reloads and redraws the PlayGame panel and 
     starts a new game.
     */
     public void reload() {
@@ -57,7 +58,8 @@ public class MainFrame extends JFrame {
     }
     
     /*
-    accessor method for sub classes to access mainMenu class
+    method:startMenuTimer
+    purpose: accessor method for sub classes to access mainMenu class
     method to start the timer for the main menu animation once
     the user returns to the main menu.
      */
@@ -66,7 +68,8 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    accessor method for sub classes to access mainMenu class
+    method: stopMenuTimer
+    purpose: accessor method for sub classes to access mainMenu class
     to stop the timer for the main menu animation once the
     user leaves the main menu.
      */
@@ -75,7 +78,8 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    This is used by the sub panels inside the layout to be able to change to
+    method: swapView
+    purpose: This is used by the sub panels inside the layout to be able to change to
     other panels. Not sure if this is the correct way to do this but it works.
      */
     public void swapView(String key) {
@@ -83,14 +87,17 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    redraws the game GUI elment
+    method: startNewGame
+    purpose: redraws the game GUI elment
     */
     public void startNewGame() {
         play.startNewGame();
+        playColor.startNewGame();
     }
 
     /*
-    controls which game over message is displayed.
+    method: gameOverMessage
+    purpose: controls which game over message is displayed.
     either You win or you lose.
     */
     public void gameOverMessage() {
@@ -98,16 +105,16 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    updates High Score
+    method: updateScore
+    purpose: updates High Score
     */
     public void updateScore(){
         hScore.updateHS();
     }
 
-    
-
     /*
-    initializer method to draw the frame and add elements to it.
+    method: initUI
+    purpose: initializer method to draw the frame and add elements to it.
      */
     private void initUI() {
         ImageIcon icon = new ImageIcon("thinking.jpg");
@@ -126,8 +133,8 @@ public class MainFrame extends JFrame {
     }
 
     /*
-    I moved the panel initializations into another method
-    to clean up the initUI() method.
+    method:startLayout
+    purpose: the panel initializations 
      */
     private void startLayout() {
         mainP.add(title, "title");
@@ -144,14 +151,11 @@ public class MainFrame extends JFrame {
         play.setMain(this);
         playColor.setMain(this);
         over.setMain(this);
-
-
     }
 
-
-
     /*
-    Timer to set the 3 second delay between the title panel
+    method: introTimer
+    purpose: Timer to set the 3 second delay between the title panel
     and the main menu.
      */
     private void introTimer() {

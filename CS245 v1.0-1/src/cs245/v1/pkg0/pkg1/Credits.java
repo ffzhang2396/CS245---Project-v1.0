@@ -34,14 +34,15 @@ public class Credits extends JPanel {
     public Credits() {
 
         setLayout(new BorderLayout());
-        readcredits();
-        showCreditss();
+        readCredits();
+        showCredits();
         addBackButtons();
 
     }
 
-    /*
-    This method is used to set this instance of MainFrame to the current
+    /* 
+    method: setMain
+    puspose: This method is used to set this instance of MainFrame to the current
     main frame so that the swapview method can be accessed to change the
     panel back to the main menu once the back button is pressed.
      */
@@ -51,9 +52,10 @@ public class Credits extends JPanel {
 
 
     /*
-    Displaying the Credits.
+    method: showCredits
+    puspose: Displaying the Credits.
      */
-    private void showCreditss() {
+    private void showCredits() {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < 6; i++) {
@@ -65,10 +67,11 @@ public class Credits extends JPanel {
     }
 
     /*
-    Reading the Credits from the array and adding
+    method: readCredits
+    puspose:Reading the Credits from the array and adding
     them to the JLabel array.
      */
-    private void readcredits() {
+    private void readCredits() {
 
         String[] entries = {"Credits", "Brandon Nguyen 011499566", "Charly Dang 010924537", "Colin Koo 010291242",
             "Felix Zhang 010423283", "Gerianna Geminiano 010662522"};
@@ -87,7 +90,8 @@ public class Credits extends JPanel {
     }
 
     /*
-    adding the back button.
+     method: addBackButtons
+    puspose: adding the back button.
      */
     private void addBackButtons() {
         buttons.add(backButton, BorderLayout.LINE_START);

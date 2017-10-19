@@ -13,7 +13,7 @@
  * between the displays using the buttons integrated.
  *
  *************************************************************** */
- package cs245.v1.pkg0.pkg1;
+package cs245.v1.pkg0.pkg1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,9 +61,10 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    adds all of the panels in this panel to the screen
+    method: loadUI
+    purpose: adds all of the panels in this panel to the screen
     to display them.
-     */
+     */ 
     private void loadUI() {
 
         addButtons();
@@ -76,8 +77,9 @@ public class HManGame extends JPanel implements ActionListener {
         skipButton();
     }
 
-    /*
-    need to find a way to reset the game.
+   /*
+    method: startNewGame()
+    purpose: resets variables and display for new game
      */
     public void startNewGame() {
         game.resetCount(); //reset # of wrong tries
@@ -92,13 +94,11 @@ public class HManGame extends JPanel implements ActionListener {
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(true);
         }
-
-
-
     }
 
     /*
-    skip button to end game functionality needs
+    method: skipButton
+    purpose: skip button to end game functionality needs
     to be implemented here.
      */
     private void skipButton() {
@@ -107,30 +107,27 @@ public class HManGame extends JPanel implements ActionListener {
         skip.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                engine.setWin(false);
+                engine.setScore(0);
                 main.gameOverMessage();
                 main.swapView("play2");
             }
         });
     }
-
     /*
-    Draws the visual representation of the game, which includes
+    method: drawGame
+    purpose: Draws the visual representation of the game, which includes
     the hangman as well as the places for the word.
      */
     private void drawGame() {
         JPanel word = new JPanel();
         int length = engine.getWordLength();
         guessWord = new JLabel[length];
-
+        
         centerPanel.setLayout(new BorderLayout());
         centerPanel.add(game, BorderLayout.CENTER);
-
         word.setLayout(new FlowLayout());
 
         for (int i = 0; i < length; i++) {
-
             guessWord[i] = new JLabel(" ", SwingConstants.CENTER);
             guessWord[i].setPreferredSize(new Dimension(30, 30));
             guessWord[i].setFont(new Font("Arial", Font.PLAIN, 24));
@@ -142,7 +139,8 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    Draws the title bar for the hangman game where it includes the stylized drawing
+    method: drawTitle
+    purpose: Draws the title bar for the hangman game where it includes the stylized drawing
     of the hangman word as well as the current date and time.
      */
     private void drawTitle() {
@@ -176,7 +174,8 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    adds an array of JButtons that make up the alphabet buttons for the
+    method: addButtons
+    purpose: adds an array of JButtons that make up the alphabet buttons for the
     user to click on when playing the game.
      */
     private void addButtons() {
@@ -193,7 +192,8 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    Need to implement a solution later that checks the button presed against
+    method:actionPerformed
+    purpose: checks the button presed against
     the secret word as well as disable the button once the letter is added to
     the word.
      */
@@ -213,6 +213,7 @@ public class HManGame extends JPanel implements ActionListener {
             game.repaint();
 
             if (wordFound()) {
+                engine.setScore(score);
                 gameFinished(true);
             }
         } else {
@@ -232,8 +233,9 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    checks if the word has been filled out, if it has then end the game.
-    */
+    method: wordFound
+    purpose: checks if the word has been filled out, if it has then end the game.
+     */
     private boolean wordFound() {
         boolean found = true;
         for (int i = 0; i < guessWord.length; i++) {
@@ -245,11 +247,11 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    This method is going to be used to transition into the
+    method: gameFinished
+    purpose: This method is going to be used to transition into the
     game over panel.
-    */
+     */
     private void gameFinished(boolean won) {
-
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setEnabled(false);
         }
@@ -271,7 +273,8 @@ public class HManGame extends JPanel implements ActionListener {
     }
 
     /*
-    setting the current mainFrame to the reference in this class
+    method: setMain
+    purpose: setting the current mainFrame to the reference in this class
     to allow for panel switching.
      */
     public void setMain(MainFrame panel) {
@@ -284,38 +287,43 @@ public class HManGame extends JPanel implements ActionListener {
     has reached a certain number of incorrect tries.disc
      */
     private static class GamePanel extends JPanel {
+
         private int wrongTries;
 
         public GamePanel() {
 
         }
-        
+
         /*
-        returns the number of wrong tries the user 
+        method: getTries()
+        purpose: returns the number of wrong tries the user 
         has attempted.
-        */
+         */
         public int getTries() {
             return wrongTries;
         }
 
         /*
-        increments the number of wrong tries.
-        */
+        method: addCount
+        purpose: increments the number of wrong tries.
+         */
         public void addCount() {
             wrongTries++;
         }
 
         /*
-        resets the number of wrong tries.
-        */
+        method: resetCount
+        purpose: resets the number of wrong tries.
+         */
         public void resetCount() {
             wrongTries = 0;
         }
 
         /*
-        Draws the hangman graphic and updates it based
+        method: paintComponent
+        purpose: Draws the hangman graphic and updates it based
         on the number of wrong tries the user has.
-        */
+         */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;

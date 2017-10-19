@@ -1,5 +1,5 @@
-Kobe 100
-Jay-Z 100
-Snoop 90
-Tupac 0
-Geri 0
+Test2 500
+Sup 300
+SCoreWorks 200
+GG 100
+Test1 70

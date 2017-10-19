@@ -42,7 +42,8 @@ public class TitlePanel extends JPanel {
     }
 
     /*
-    Creates the title and sets the font as well as the
+    method: drawTitle
+    purpose: Creates the title and sets the font as well as the
     positioning of the Label within the window.
     */
     private void drawTitle() {
@@ -55,7 +56,8 @@ public class TitlePanel extends JPanel {
     }
 
     /*
-    Creates the group Name and sets the font as well as the positioning
+    method: teamName
+    purpose: Creates the group Name and sets the font as well as the positioning
     of the label within the window.
     */
     private void teamName() {
