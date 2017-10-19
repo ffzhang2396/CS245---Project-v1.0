@@ -65,7 +65,7 @@ public class ColorGameEngine {
      */
     public void setTarget(int rnd) {
         target = colors[rnd];
-        System.out.println(target);
+        //System.out.println(target);
     }
 
     /*
@@ -92,24 +92,24 @@ public class ColorGameEngine {
         if (rounds <= 3) {
             if (target.equals(input)) {
                 score += 100;
-                System.out.println("Score Goes up, score: " + score);
+                //System.out.println("Correct: " + score);
                 setScore(score);
                 rounds++;
             } else {
-                System.out.println("WRONG1, score: " + score);
+                //System.out.println("WRONG: " + score);
                 rounds++;
             }
         } else if (rounds == 4) {
             if (target.equals(input)) {
                 score += 100;
-                System.out.println("Score Goes up, score: " + score);
+                //System.out.println("Correct: " + score);
                 rounds++;
             } else {
-                System.out.println("WRONG, score: " + score);
+                //System.out.println("Wrong: " + score);
                 rounds++;
             }
         } else {
-            System.out.println("Game is over");
+            //System.out.println("Game is over");
         }
     }
 

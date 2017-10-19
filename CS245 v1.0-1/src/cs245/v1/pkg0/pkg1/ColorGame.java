@@ -228,7 +228,7 @@ public class ColorGame extends JPanel {
                 }
                 for (Shape shape : drawCirc) {
                     if (shape.contains(e.getPoint())) {;
-                        System.out.println(color);
+                        //System.out.println(color);
                         engine.matches(color);
                         reDraw();
                     }
@@ -236,7 +236,7 @@ public class ColorGame extends JPanel {
             } else if (engine.getRounds() == 4) {
                 for (Shape shape : drawCirc) {
                     if (shape.contains(e.getPoint())) {
-                        System.out.println(color);
+                        //System.out.println(color);
                         engine.matches(color);
                         main.gameOverMessage();
                         main.swapView("over");
