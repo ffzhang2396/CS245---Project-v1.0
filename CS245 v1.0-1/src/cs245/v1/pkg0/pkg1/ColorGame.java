@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.Ellipse2D;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -27,12 +26,12 @@ public class ColorGame extends JPanel {
     private HManGameEngine hEngine;
     private MainFrame main;
     private CirclePanel game;
-    private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
     private Random rand = new Random();
     private JPanel titleBar = new JPanel(new BorderLayout());
     private JPanel skipPanel = new JPanel();
     private JButton skip = new JButton("Skip");
     private JLabel points = new JLabel();
+    private JTextField color = new JTextField(10);
 
     public ColorGame(ColorGameEngine engine, HManGameEngine hEngine) {
         this.engine = engine;
@@ -110,8 +109,9 @@ public class ColorGame extends JPanel {
     private class CirclePanel extends JPanel implements MouseListener, MouseMotionListener {
 
         private Shape[] drawCirc = new Shape[5];
-        private boolean highlight = false;
-
+        private Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
+        private Point mouse = null;
+        
         public CirclePanel() {
 
             drawCirc = engine.getCircles(431, 284);
@@ -125,23 +125,22 @@ public class ColorGame extends JPanel {
 
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
-            //int width = r.width - 75;
-           // int height = r.height - 75;
-
             super.paintComponent(g);
+            
             Graphics2D g2 = (Graphics2D) g;
-
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
             g2.setStroke(new BasicStroke(1));
 
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
             //drawCirc = engine.getCircles(width, height);
-
-
-            for (int i = 0; i < drawCirc.length; i++) {
-                g2.setColor(colors[i]);
+            for (int i = 0; i < drawCirc.length; ++i) {
+               if (mouse != null && drawCirc[i].contains(mouse)){//mouseX, mouseY)){
+                    //System.out.println("inside");
+                    g2.setColor(colors[i].darker());
+                } else{
+                    g2.setColor(colors[i]);
+                }
                 g2.fill(drawCirc[i]);
             }
             
@@ -159,36 +158,27 @@ public class ColorGame extends JPanel {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-        }
-
+        public void mousePressed(MouseEvent e) {}
         @Override
-        public void mouseReleased(MouseEvent e) {
-        }
-
+        public void mouseReleased(MouseEvent e) {}
         @Override
-        public void mouseEntered(MouseEvent e) {
-        }
-
+        public void mouseEntered(MouseEvent e) {}
         @Override
-        public void mouseExited(MouseEvent e) {
-        }
-
+        public void mouseExited(MouseEvent e) {}
         @Override
-        public void mouseDragged(MouseEvent e) {
-        }
-
+        public void mouseDragged(MouseEvent e) {}
         @Override
         public void mouseMoved(MouseEvent e) {
-            for (Shape shape : drawCirc) {
+            mouse = e.getPoint();
+            repaint();
+            /*for (Shape shape : drawCirc) {
                 if (shape.contains(e.getPoint())) {
-                    highlight = true;
-                    repaint();
+                    mouse = e.getPoint();
                 } else {
-                    highlight = false;
-                    repaint();
+                    mouse = e.getPoint();
                 }
-            }
+                repaint();
+            }*/
         }
 
     }
