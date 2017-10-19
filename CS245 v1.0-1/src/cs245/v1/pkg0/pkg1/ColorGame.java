@@ -91,7 +91,6 @@ public class ColorGame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.repaint();
-                System.out.println("REPAINTING======////////////////////////////////////");
                 /*
                 System.out.println("Hangman" + hEngine.getScore());
                 engine.setScore(hEngine.getScore());
@@ -119,12 +118,15 @@ public class ColorGame extends JPanel {
             addMouseListener(this);
             addMouseMotionListener(this);
         }
+        
+        public void reDraw() {
+            drawCirc = engine.getCircles(431, 284);
+        }
 
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
-            int width = r.width - 75;
-            int height = r.height - 75;
-            System.out.println(width + " and  " + height);
+            //int width = r.width - 75;
+           // int height = r.height - 75;
 
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
@@ -136,14 +138,14 @@ public class ColorGame extends JPanel {
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
             //drawCirc = engine.getCircles(width, height);
-            if (highlight) {
-                g2.setColor(Color.red);
-            }
+
 
             for (int i = 0; i < drawCirc.length; i++) {
+                g2.setColor(colors[i]);
                 g2.fill(drawCirc[i]);
-
             }
+            
+
 
         }
 
@@ -158,42 +160,34 @@ public class ColorGame extends JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            System.out.println(e.getPoint());
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            for (Shape shapes : drawCirc) {
-                if (shapes.contains(e.getPoint())) {
-                    System.out.println("mouse has entered circle");
-                }
-            }
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            for (Shape shapes : drawCirc) {
-                if (!shapes.contains(e.getPoint())) {
-                    System.out.println("this is leaving");
-                }
-            }
         }
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            System.out.println("dragging");
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            for (Shape shapes : drawCirc) {
-                highlight = shapes.contains(e.getPoint());
-                repaint();
+            for (Shape shape : drawCirc) {
+                if (shape.contains(e.getPoint())) {
+                    highlight = true;
+                    repaint();
+                } else {
+                    highlight = false;
+                    repaint();
+                }
             }
         }
 
