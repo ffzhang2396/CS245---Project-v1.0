@@ -57,10 +57,9 @@ public class ColorGame extends JPanel {
     purpose: Loads the UI for the color game
      */
     private void loadUI() {
-        target.setText("Color: " + engine.getTarget());
+        target.setText("Color: " + engine.getText());
         target.setFont(new Font("Papyrus", Font.BOLD, 18));
-        target.setForeground(Color.red);
-
+        target.setForeground(chooseRandomColor());
         titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
         add(skipPanel, BorderLayout.LINE_END);
@@ -104,6 +103,7 @@ public class ColorGame extends JPanel {
         Color[] colors = {Color.red, Color.yellow, Color.green, Color.blue, new Color(255, 0, 255)};
         int rnd = new Random().nextInt(colors.length);
         Color choice = colors[rnd];
+        engine.setTarget(rnd);
         return choice;
     }
 
@@ -155,7 +155,7 @@ public class ColorGame extends JPanel {
         purpose: redraws the screen with new color, points, and random circles
          */
         public void reDraw() {
-            target.setText("Color: " + engine.getTarget());
+            target.setText("Color: " + engine.getText());
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
             titleBar.add(target, BorderLayout.LINE_START);

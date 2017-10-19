@@ -45,24 +45,25 @@ public class ColorGameEngine {
      */
     public ColorGameEngine() {
 
-        selectTarget();
+        
     }
 
     /*
-        method: getTarget
-        purpose: returns string target (color)
+        method: getText
+        purpose: returns string of literal color word
      */
-    public String getTarget() {
+    public String getText() {
+        int ran = new Random().nextInt(colors.length);
+        target = colors[ran];
         return target;
 
     }
 
     /*
-    method: selectTarget
-    puspose: 
+    method: setTarget
+    puspose: sets the color of the text
      */
-    public void selectTarget() {
-        int rnd = new Random().nextInt(colors.length);
+    public void setTarget(int rnd) {
         target = colors[rnd];
         System.out.println(target);
     }
@@ -94,10 +95,8 @@ public class ColorGameEngine {
                 System.out.println("Score Goes up, score: " + score);
                 setScore(score);
                 rounds++;
-                selectTarget();
             } else {
-                System.out.println("WRONG, score: " + score);
-                selectTarget();
+                System.out.println("WRONG1, score: " + score);
                 rounds++;
             }
         } else if (rounds == 4) {
