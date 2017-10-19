@@ -35,7 +35,7 @@ public class ColorGameEngine {
     private int score = 0;
     private boolean won;
     private String input;
-    private String[] colors = {"red", "yellow", "green", "blue","pink"};
+    private String[] colors = {"red", "yellow", "green", "blue","purple"};
     private String target;
     private int rounds = 0;
 
