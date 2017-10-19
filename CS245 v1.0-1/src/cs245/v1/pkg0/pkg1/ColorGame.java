@@ -90,11 +90,6 @@ public class ColorGame extends JPanel {
 
         titleBar.add(time, BorderLayout.LINE_END);
 
-        //adding the points
-        points.setText("Points: " + Integer.toString(engine.getScore()));
-        points.setFont(new Font("Arial", Font.ITALIC, 14));
-        points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
-        titleBar.add(points, BorderLayout.CENTER);
     }
 
     /*
@@ -159,7 +154,7 @@ public class ColorGame extends JPanel {
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
             titleBar.add(target, BorderLayout.LINE_START);
-            points.setText("Points: " + Integer.toString(engine.getScore()));
+            
             drawCirc = engine.getCircles(431, 284);
         }
 
@@ -237,13 +232,11 @@ public class ColorGame extends JPanel {
                     if (shape.contains(e.getPoint())) {
                         System.out.println(color);
                         engine.matches(color);
-                        System.out.println("Game is over");
                         main.gameOverMessage();
                         main.swapView("over");
                     }
                 }
-            } else {
-                System.out.println("Game is over");
+            } else {;
                 main.gameOverMessage();
                 main.swapView("over");
             }
