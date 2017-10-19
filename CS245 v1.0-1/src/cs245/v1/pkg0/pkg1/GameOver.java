@@ -3,14 +3,15 @@
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.0
- * date last modified: 10/10/17
+ * assignment: Swing Project v1.1
+ * date last modified: 10/19/17
  *
- * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
- * will be able to play the classic Hangman game with 6 guesses, see the top 5
- * high scores, and the credits. You will also be able to switch back and forth
- * between the displays using the buttons integrated.
+ * will be able to play the classic Hangman game with 6 guesses, play a matching
+ * color game with 5 rounds, see the top 5 high scores, and the credits. You will
+ * also be able to switch back and forth between the displays using the buttons
+ * integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -91,7 +92,7 @@ public class GameOver extends JPanel {
     /*
     method: inputUserScore
     purpose: Allows user to input their name and score if they get a high score
-    */
+     */
     private void inputUserScore() {
         containerPanel.removeAll();
         userPrompt = new JLabel();
@@ -127,7 +128,7 @@ public class GameOver extends JPanel {
         containerPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
         inputPanel.setAlignmentX(CENTER_ALIGNMENT);
         inputPanel.setAlignmentY(GameOver.CENTER_ALIGNMENT);
-        
+
         // yes button
         yes.addActionListener(new ActionListener() {
             @Override
@@ -140,7 +141,7 @@ public class GameOver extends JPanel {
                 input.setVisible(true);
             }
         });
-        
+
         // no button
         no.addActionListener(new ActionListener() {
             @Override
@@ -152,7 +153,7 @@ public class GameOver extends JPanel {
                 main.updateScore();
             }
         });
-        
+
         // ok button
         confirm.addActionListener(new ActionListener() {
             @Override

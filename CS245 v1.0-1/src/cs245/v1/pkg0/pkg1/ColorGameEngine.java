@@ -3,14 +3,15 @@
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.0
- * date last modified: 10/10/17
+ * assignment: Swing Project v1.1
+ * date last modified: 10/19/17
  *
- * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * purpose: purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
- * will be able to play the classic Hangman game with 6 guesses, see the top 5
- * high scores, and the credits. You will also be able to switch back and forth
- * between the displays using the buttons integrated.
+ * will be able to play the classic Hangman game with 6 guesses, play a matching
+ * color game with 5 rounds, see the top 5 high scores, and the credits. You will
+ * also be able to switch back and forth between the displays using the buttons
+ * integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -126,7 +127,6 @@ public class ColorGameEngine {
         rounds = 0;
     }
 
-   
     /*
     method: drawCircleAt
     puspose: draws a circles at coordinates (x,y)
@@ -303,7 +303,7 @@ public class ColorGameEngine {
     }
 
 
-     /*
+    /*
     method: containsInter
     puspose: method to check if target circle has an intersection
     within the circle array.

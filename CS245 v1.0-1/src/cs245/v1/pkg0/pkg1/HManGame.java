@@ -1,16 +1,17 @@
 /** *************************************************************
- * file: PlayGame.java
+ * file: HManGame.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.0
- * date last modified: 10/10/17
+ * assignment: Swing Project v1.1
+ * date last modified: 10/19/17
  *
- * purpose: This program is a "Point-and-click" Hangman game. Using Swing,
+ * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
- * will be able to play the classic Hangman game with 6 guesses, see the top 5
- * high scores, and the credits. You will also be able to switch back and forth
- * between the displays using the buttons integrated.
+ * will be able to play the classic Hangman game with 6 guesses, play a matching
+ * color game with 5 rounds, see the top 5 high scores, and the credits. You will
+ * also be able to switch back and forth between the displays using the buttons
+ * integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -64,7 +65,7 @@ public class HManGame extends JPanel implements ActionListener {
     method: loadUI
     purpose: adds all of the panels in this panel to the screen
     to display them.
-     */ 
+     */
     private void loadUI() {
 
         addButtons();
@@ -77,7 +78,7 @@ public class HManGame extends JPanel implements ActionListener {
         skipButton();
     }
 
-   /*
+    /*
     method: startNewGame()
     purpose: resets variables and display for new game
      */
@@ -113,6 +114,7 @@ public class HManGame extends JPanel implements ActionListener {
             }
         });
     }
+
     /*
     method: drawGame
     purpose: Draws the visual representation of the game, which includes
@@ -122,7 +124,7 @@ public class HManGame extends JPanel implements ActionListener {
         JPanel word = new JPanel();
         int length = engine.getWordLength();
         guessWord = new JLabel[length];
-        
+
         centerPanel.setLayout(new BorderLayout());
         centerPanel.add(game, BorderLayout.CENTER);
         word.setLayout(new FlowLayout());
