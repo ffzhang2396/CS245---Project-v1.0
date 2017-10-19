@@ -22,19 +22,76 @@ import java.util.Random;
 public class ColorGameEngine {
 
     Circle[] circles = new Circle[5];
-    private int score;
+    private int score = 0;
     private boolean won;
-
-    public ColorGameEngine() {
+    private String input;
+    private String[] colors = {"red", "yellow", "green", "pink", "green"};
+    private String target;
+    private int rounds = 0;
     
 
+    public ColorGameEngine() {
+    	selectTarget();
     }
+    
+    
+    public String getTarget(){
+    	return target;
+    }
+    
+    public void selectTarget(){
+    	int rnd = new Random().nextInt(colors.length);
+         target = colors[rnd];
+         System.out.println(target);
+    }
+    public int getScore(){
+    	return score;
+    }
+    public void setScore(int x){
+    	score = x;
+    }
+    
+    public void matches(String input){
+    	if(rounds <= 3){
+    	if(target.equals(input)){
+    		score += 100;
+    		System.out.println("Score Goes up, score: " + score);
+    		setScore(score);
+    		rounds++;
+    		selectTarget();
+    	} else {
+    		System.out.println("WRONG, score: " + score);
+    		selectTarget();
+    		rounds++;
+    	}
+    	} else if(rounds == 4) {
+    		if(target.equals(input)){
+        		score += 100;
+        		System.out.println("Score Goes up, score: " + score);
+        		rounds++;
+        	} else {
+        		System.out.println("WRONG, score: " + score);
+        		rounds++;
+        	}
+    	} else {
+    		System.out.println("Game is over");
+    	}
+    }
+    public int getRounds(){
+    	return rounds;
+    }
+ 
 
     public void drawCircles() {
         for (int i = 0; i < circles.length; i++) {
             System.out.println(circles[i].getXCenter() + " " + circles[i].getYCenter());
         }
 
+    }
+    
+    public Shape drawCircleAt(int x, int y){
+    	Shape circle = new Ellipse2D.Double(x,y, 50.0f, 50.0f);
+    	return circle;
     }
     
     
@@ -72,18 +129,13 @@ public class ColorGameEngine {
         return won;
     }
 
-    public int getScore() {
-        return score;
-    }
 
     /*
     method: setScore
     purpose: setter for the score variable, sets the final score for the
     end of the game.
      */
-    public void setScore(int score) {
-        this.score = score;
-    }
+
 
     /*
     method: updateHighScore
@@ -162,7 +214,7 @@ public class ColorGameEngine {
      */
     public void calcCirclePos(int xHeight, int yHeight) {
         
-        System.out.println("running");
+        //System.out.println("running");
         
         circles = new Circle[5];
         int windowH = yHeight;
@@ -204,10 +256,8 @@ public class ColorGameEngine {
             tempX = rand.nextInt(windowW); //width - 20 because we dont want to generate circles that go off screen.
             tempY = rand.nextInt(windowH); //same reason here.
             tempCirc = new Circle(tempX, tempY);
-
             //now we have to check if the circles at these coordinates intersect with any circle we already have.
             for (int i = 0; i < circles.length; i++) {
-
                 //check to make sure were not comparing a null element thatll throw us nullpointer
                 if (circles[i] != null) {
                     //check to see if tempCirc does intersect with circles[i]
