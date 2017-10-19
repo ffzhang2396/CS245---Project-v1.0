@@ -80,7 +80,11 @@ public class ColorGameEngine {
     public int getRounds(){
     	return rounds;
     }
- 
+    
+    public void newGamePlus(){
+    	setScore(0);
+    	rounds = 0;
+    }
 
     public void drawCircles() {
         for (int i = 0; i < circles.length; i++) {
