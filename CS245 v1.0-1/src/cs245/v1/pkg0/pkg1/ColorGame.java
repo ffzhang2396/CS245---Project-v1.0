@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.text.DateFormat;
 import java.util.Date;
@@ -20,9 +21,8 @@ import javax.swing.*;
  *
  * @author FelixZhang
  */
-public class ColorGame extends JPanel implements MouseListener {
+public class ColorGame extends JPanel {
 
-    
     private ColorGameEngine engine;
     private HManGameEngine hEngine;
     private MainFrame main;
@@ -33,26 +33,26 @@ public class ColorGame extends JPanel implements MouseListener {
     private JPanel skipPanel = new JPanel();
     private JButton skip = new JButton("Skip");
     private JLabel points = new JLabel();
-    
-    public ColorGame(ColorGameEngine engine,HManGameEngine hEngine) {
+
+    public ColorGame(ColorGameEngine engine, HManGameEngine hEngine) {
         this.engine = engine;
         this.hEngine = hEngine;
         game = new CirclePanel();
         setLayout(new BorderLayout());
         loadUI();
-        
 
     }
-    
-    private void loadUI(){
+
+    private void loadUI() {
         add(titleBar, BorderLayout.PAGE_START);
         add(skipPanel, BorderLayout.LINE_END);
         add(game, BorderLayout.CENTER);
         drawTitle();
         skipButton();
-       
+
     }
-/*
+
+    /*
     Draws the title bar for the hangman game where it includes the stylized drawing
     of the hangman word as well as the current date and time.
      */
@@ -73,39 +73,13 @@ public class ColorGame extends JPanel implements MouseListener {
         timer.setInitialDelay(0);
         timer.start();
         titleBar.add(time, BorderLayout.LINE_END);
-       
+
     }
 
     public void setMain(MainFrame main) {
         this.main = main;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
     /*
     skip button to end game functionality needs
     to be implemented here.
@@ -124,53 +98,33 @@ public class ColorGame extends JPanel implements MouseListener {
                 engine.setWin(true);
                 main.gameOverMessage();
                 main.swapView("over");
-                */
+                 */
             }
         });
     }
-    
-   
-    
+
     /*
     inner panel that contains the circles. Game engine
     is supposed to calculate the circle positions and this 
     nested class just draws them.
      */
-    private class CirclePanel extends JPanel {
+    private class CirclePanel extends JPanel implements MouseListener, MouseMotionListener {
+
         private Shape[] drawCirc = new Shape[5];
+        private boolean highlight = false;
 
-        
-      
-
-       
-        
         public CirclePanel() {
 
-            //drawCirc = engine.getCircles(600, 400);
-
-
-
-            
+            drawCirc = engine.getCircles(431, 284);
+            addMouseListener(this);
+            addMouseMotionListener(this);
         }
-
-        /*
-       private void makeShapes() {
-           int x, y, radius;
-
-           for (int i = 0; i < circles.length; i++) {
-               x = circles[i].getXPos();
-               y = circles[i].getYPos();
-               radius = circles[i].getRadius();
-               
-               drawCirc[i] = new Ellipse2D.Double(x, y, radius, radius);
-           }
-       }*/
-
 
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
             int width = r.width - 75;
             int height = r.height - 75;
+            System.out.println(width + " and  " + height);
 
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
@@ -181,14 +135,66 @@ public class ColorGame extends JPanel implements MouseListener {
 
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
-            
-            drawCirc = engine.getCircles(width, height);
-            
-            
-            for (int i = 0; i < drawCirc.length; i++) {
-                g2.draw(drawCirc[i]);
+            //drawCirc = engine.getCircles(width, height);
+            if (highlight) {
+                g2.setColor(Color.red);
             }
 
+            for (int i = 0; i < drawCirc.length; i++) {
+                g2.fill(drawCirc[i]);
+
+            }
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            for (Shape shape : drawCirc) {
+                if (shape.contains(e.getPoint())) {
+                    System.out.println("click click");
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            System.out.println(e.getPoint());
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            for (Shape shapes : drawCirc) {
+                if (shapes.contains(e.getPoint())) {
+                    System.out.println("mouse has entered circle");
+                }
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for (Shape shapes : drawCirc) {
+                if (!shapes.contains(e.getPoint())) {
+                    System.out.println("this is leaving");
+                }
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            System.out.println("dragging");
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            for (Shape shapes : drawCirc) {
+                highlight = shapes.contains(e.getPoint());
+                repaint();
+            }
         }
 
     }

@@ -194,9 +194,7 @@ public class ColorGameEngine {
             
         }
         
-    }
-        
-
+    }     
         /*
         //Randomly generate values for tempX and tempY within the bounds of the panel
         //Then check if the values for the randomly generated circle intersect with any
@@ -241,6 +239,10 @@ public class ColorGameEngine {
         System.out.println("====================================");
     } */
     
+    /*
+    method to check if target circle has an intersection
+    within the circle array.
+    */
     private boolean containsInter(Circle target) {
         
         for (int i = 0; i < circles.length; i++) {
