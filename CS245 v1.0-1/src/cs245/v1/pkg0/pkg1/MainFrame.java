@@ -35,9 +35,11 @@ public class MainFrame extends JFrame {
     private TitlePanel title = new TitlePanel();
     private HManGameEngine engine = new HManGameEngine();
     private ColorGameEngine colorEngine = new ColorGameEngine();
+    private SudokuGameEngine sudokuEngine = new SudokuGameEngine();
     private GameOver over = new GameOver(colorEngine);
     private HManGame play = new HManGame(engine);
     private ColorGame playColor = new ColorGame(colorEngine, engine);
+    private SudokuGame sudoku = new SudokuGame(sudokuEngine);
 
     private Timer timer;
 
@@ -144,13 +146,16 @@ public class MainFrame extends JFrame {
         mainP.add(play, "play");
         mainP.add(over, "over");
         mainP.add(playColor, "play2");
+        mainP.add(sudoku,"play3");
 
         mainMenu.setMain(this);
         credit.setMain(this);
         hScore.setMain(this);
         play.setMain(this);
         playColor.setMain(this);
+        sudoku.setMain(this);
         over.setMain(this);
+        
     }
 
     /*
