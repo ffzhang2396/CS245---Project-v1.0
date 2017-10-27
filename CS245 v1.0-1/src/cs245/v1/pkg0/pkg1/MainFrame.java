@@ -19,6 +19,9 @@ package cs245.v1.pkg0.pkg1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
 /**
@@ -40,6 +43,7 @@ public class MainFrame extends JFrame {
     private HManGame play = new HManGame(engine);
     private ColorGame playColor = new ColorGame(colorEngine, engine);
     private SudokuGame sudoku = new SudokuGame(sudokuEngine);
+    private JFrame frame;
 
     private Timer timer;
 
@@ -85,6 +89,7 @@ public class MainFrame extends JFrame {
     other panels. Not sure if this is the correct way to do this but it works.
      */
     public void swapView(String key) {
+        checkEscape();
         layout.show(mainP, key);
     }
 
@@ -120,7 +125,6 @@ public class MainFrame extends JFrame {
      */
     private void initUI() {
         ImageIcon icon = new ImageIcon("thinking.jpg");
-
         startLayout();
         introTimer();
 
@@ -129,16 +133,17 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(icon.getImage());
-
+        
         add(mainP);
         pack();
-    }
+           }
 
     /*
     method:startLayout
     purpose: the panel initializations 
      */
     private void startLayout() {
+        title.setToolTipText("Welcome User!");
         mainP.add(title, "title");
         mainP.add(mainMenu, "menu");
         mainP.add(hScore, "High Score");
@@ -155,8 +160,9 @@ public class MainFrame extends JFrame {
         playColor.setMain(this);
         sudoku.setMain(this);
         over.setMain(this);
-        
     }
+    
+
 
     /*
     method: introTimer
@@ -182,9 +188,26 @@ public class MainFrame extends JFrame {
      * the GUI to freeze or lag.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            MainFrame menu = new MainFrame();
+        MainFrame menu = new MainFrame();
+        menu.checkEscape();
+            EventQueue.invokeLater(() -> {
             menu.setVisible(true);
+        });
+    }
+    public void checkEscape(){
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {  // handler
+            	if(ke.getKeyCode() == ke.VK_ESCAPE) {
+                    System.out.println("escaped ?");
+                    //setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // trying to close
+                    System.exit(0);
+                 } else if(ke.getKeyCode() == ke.VK_F1){
+                     JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                             + "\nGerianna Geminiano 010662522");
+                    System.out.println("display credit like screen");
+                  }
+           } 
         });
     }
 }
