@@ -1,7 +1,7 @@
 /** *************************************************************
  * file: MainMenu.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
- * class: CS 245 – Programming Graphical User Interface
+ * class: CS 245 � Programming Graphical User Interface
  *
  * assignment: Swing Project v1.1
  * date last modified: 10/19/17
@@ -91,7 +91,8 @@ public class MainMenu extends JPanel {
         JLabel label = new JLabel("", img, JLabel.CENTER);
         ImageIcon img2 = new ImageIcon(new ImageIcon("thunking2.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
         JLabel label2 = new JLabel("", img2, JLabel.CENTER);
-
+        label.setToolTipText("Thunking man! Right!");
+        label2.setToolTipText("Thunking man! Left!");
         pictures.add(label, "one");
         pictures.add(label2, "two");
 
@@ -124,11 +125,30 @@ public class MainMenu extends JPanel {
         buttons.setPreferredSize(new Dimension(200, 150));
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
+        String ACTION_KEY = "The Action";
+        Action actionListener = new AbstractAction() {
+        public void actionPerformed(ActionEvent actionEvent) {
+        JButton source = (JButton) actionEvent.getSource();
+        System.exit(0);
+        //System.out.println("Activated: " + source.getText());
+        }
+        };
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+        InputMap inputMap = play.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(escape, ACTION_KEY);
+        ActionMap actionMap = play.getActionMap();
+        actionMap.put(ACTION_KEY, actionListener);
+        play.setActionMap(actionMap);
+        play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
         buttons.add(play);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
+        hScore.setToolTipText("Press this button to go to the highScores!");
         buttons.add(hScore);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
+        
+        
+        
+        credit.setToolTipText("Press this button to see the group members name's and bronco ids");
         buttons.add(credit);
 
         //resizing the buttons so it looks like the example
