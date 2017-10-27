@@ -1,7 +1,7 @@
 /** *************************************************************
  * file: ColorGame.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
- * class: CS 245 – Programming Graphical User Interface
+ * class: CS 245 � Programming Graphical User Interface
  *
  * assignment: Swing Project v1.1
  * date last modified: 10/19/17
@@ -19,6 +19,8 @@ package cs245.v1.pkg0.pkg1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -50,6 +52,7 @@ public class ColorGame extends JPanel {
         game = new CirclePanel();
         setLayout(new BorderLayout());
         loadUI();
+        
     }
 
     /*
@@ -57,11 +60,29 @@ public class ColorGame extends JPanel {
     purpose: Loads the UI for the color game
      */
     private void loadUI() {
-        target.setText("Color: " + engine.getText());
+        String targetedColor = engine.getText();
+        target.setText("Color: " + targetedColor);
+        target.setToolTipText("Your goal is the color: " + targetedColor);
         target.setFont(new Font("Papyrus", Font.BOLD, 18));
         target.setForeground(chooseRandomColor());
         titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
+        
+        String ACTION_KEY = "The Action";
+        Action actionListener = new AbstractAction() {
+        public void actionPerformed(ActionEvent actionEvent) {
+        JPanel source = (JPanel) actionEvent.getSource();
+        System.exit(0);
+        //System.out.println("Activated: " + source.getText());
+        }
+        };
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+        InputMap inputMap = skipPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(escape, ACTION_KEY);
+        ActionMap actionMap = skipPanel.getActionMap();
+        actionMap.put(ACTION_KEY, actionListener);
+        skipPanel.setActionMap(actionMap);
+        
         add(skipPanel, BorderLayout.LINE_END);
         add(game, BorderLayout.CENTER);
         drawTitle();
@@ -87,7 +108,7 @@ public class ColorGame extends JPanel {
         timer.setCoalesce(true);
         timer.setInitialDelay(0);
         timer.start();
-
+        time.setToolTipText("The Current Time!");
         titleBar.add(time, BorderLayout.LINE_END);
         
       //adding the points
@@ -145,6 +166,7 @@ public class ColorGame extends JPanel {
          */
         public CirclePanel() {
             drawCirc = engine.getCircles(431, 284);
+            //checkEscape();
             addMouseListener(this);
             addMouseMotionListener(this);
         }
@@ -155,7 +177,9 @@ public class ColorGame extends JPanel {
         purpose: redraws the screen with new color, points, and random circles
          */
         public void reDraw() {
-            target.setText("Color: " + engine.getText());
+            String targetedColor = engine.getText();
+            target.setText("Color: " + targetedColor);
+            target.setToolTipText("Your goal is the color: " + targetedColor);
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
             titleBar.add(target, BorderLayout.LINE_START);
@@ -168,9 +192,10 @@ public class ColorGame extends JPanel {
         purpose: paints the circles 
          */
         public void paintComponent(Graphics g) {
+            
             Rectangle r = this.getBounds();
             super.paintComponent(g);
-
+            super.setToolTipText("This color is " + color);
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(1));
@@ -178,7 +203,9 @@ public class ColorGame extends JPanel {
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
             for (int i = 0; i < drawCirc.length; ++i) {
+                
                 if (mouse != null && drawCirc[i].contains(mouse)) {//mouseX, mouseY)){
+                    checkEscape();
                     g2.setColor(colors[i].darker());
                     thisColor(i);
                 } else {
@@ -213,6 +240,7 @@ public class ColorGame extends JPanel {
 
             }
         }
+        
         
 
         /*
@@ -278,7 +306,20 @@ public class ColorGame extends JPanel {
             mouse = e.getPoint();
             repaint();
         }
-
+            public void checkEscape(){
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {  // handler
+            	if(ke.getKeyCode() == ke.VK_ESCAPE) {
+                    System.out.println("escaped ?");
+                    //setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // trying to close
+                    System.exit(0);
+                 } else if(ke.getKeyCode() == ke.VK_F1){
+                    System.out.println("display credit like screen");
+                  }
+           } 
+        });
+    }
+        
     }
 
 }
