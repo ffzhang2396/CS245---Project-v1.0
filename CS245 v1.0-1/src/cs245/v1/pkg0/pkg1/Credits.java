@@ -1,7 +1,7 @@
 /** *************************************************************
  * file: Credits.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
- * class: CS 245 – Programming Graphical User Interface
+ * class: CS 245 � Programming Graphical User Interface
  *
  * assignment: Swing Project v1.1
  * date last modified: 10/19/17
@@ -19,8 +19,14 @@ package cs245.v1.pkg0.pkg1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
-
+import javax.swing.KeyStroke;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
+import javax.swing.InputMap;
 public class Credits extends JPanel {
 
     private MainFrame main;
@@ -28,6 +34,8 @@ public class Credits extends JPanel {
     private JLabel[] names = new JLabel[6];
     private JPanel scores = new JPanel();
     private JPanel buttons = new JPanel(new BorderLayout());
+    private static Action enterAction;
+
 
     /*
     Constructor
@@ -38,6 +46,8 @@ public class Credits extends JPanel {
         readCredits();
         showCredits();
         addBackButtons();
+        requestFocusInWindow();
+       
 
     }
 
@@ -64,6 +74,7 @@ public class Credits extends JPanel {
                 scores.add(names[i]);
             }
         }
+        scores.setToolTipText("These are the names/brc ids of the project group memebers");
         add(scores, BorderLayout.CENTER);
     }
 
@@ -88,6 +99,7 @@ public class Credits extends JPanel {
             names[i].setFont(new Font("Papyrus", Font.BOLD, 24));
             names[i].setAlignmentX(Component.CENTER_ALIGNMENT);
         }
+        
     }
 
     /*
@@ -95,6 +107,25 @@ public class Credits extends JPanel {
     puspose: adding the back button.
      */
     private void addBackButtons() {
+        String ACTION_KEY = "The Action";
+        Action actionListener = new AbstractAction() {
+        public void actionPerformed(ActionEvent actionEvent) {
+        JButton source = (JButton) actionEvent.getSource();
+        System.exit(0);
+        //System.out.println("Activated: " + source.getText());
+        }
+        };
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+        InputMap inputMap = backButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(escape, ACTION_KEY);
+        ActionMap actionMap = backButton.getActionMap();
+        actionMap.put(ACTION_KEY, actionListener);
+        backButton.setActionMap(actionMap);
+                
+        
+        
+        
+        backButton.setToolTipText("Press the bacl button to go back to the main menu");
         buttons.add(backButton, BorderLayout.LINE_START);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.PAGE_END);
@@ -107,4 +138,7 @@ public class Credits extends JPanel {
             }
         });
     }
+     // class EnterAction is an AbstractAction that defines what will occur
+    // when the enter key is pressed. 
+    
 }
