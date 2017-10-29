@@ -62,9 +62,9 @@ public class ColorGame extends JPanel {
     private void loadUI() {
         String targetedColor = engine.getText();
         target.setText("Color: " + targetedColor);
-        target.setToolTipText("Your goal is the color: " + targetedColor);
         target.setFont(new Font("Papyrus", Font.BOLD, 18));
         target.setForeground(chooseRandomColor());
+        target.setToolTipText("Your goal is the color: " + engine.getTarget());
         titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
         
@@ -179,9 +179,9 @@ public class ColorGame extends JPanel {
         public void reDraw() {
             String targetedColor = engine.getText();
             target.setText("Color: " + targetedColor);
-            target.setToolTipText("Your goal is the color: " + targetedColor);
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
+            target.setToolTipText("Your goal is the color: " + engine.getTarget());
             titleBar.add(target, BorderLayout.LINE_START);
 
             drawCirc = engine.getCircles(431, 284);
