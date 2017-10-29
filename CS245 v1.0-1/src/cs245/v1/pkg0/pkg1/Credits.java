@@ -125,7 +125,7 @@ public class Credits extends JPanel {
         
         
         
-        backButton.setToolTipText("Press the bacl button to go back to the main menu");
+        backButton.setToolTipText("Press the back button to go back to the main menu");
         buttons.add(backButton, BorderLayout.LINE_START);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.PAGE_END);
