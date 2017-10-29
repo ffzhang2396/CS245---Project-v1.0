@@ -58,6 +58,10 @@ public class ColorGameEngine {
         return target;
 
     }
+    
+    public String getTarget(){
+        return target;
+    }
 
     /*
     method: setTarget
