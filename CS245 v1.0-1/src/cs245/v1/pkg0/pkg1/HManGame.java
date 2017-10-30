@@ -48,6 +48,7 @@ public class HManGame extends JPanel implements ActionListener {
     private String[] letters = {"A", "B", "C", "D", "E", "F",
         "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
         "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    private JFrame frame;
     
 
     /*Constructor
@@ -59,7 +60,7 @@ public class HManGame extends JPanel implements ActionListener {
         setLayout(new BorderLayout());
         loadUI();
         requestFocusInWindow();
-        checkEscape();
+       
 
     }
 
@@ -109,9 +110,15 @@ public class HManGame extends JPanel implements ActionListener {
         String ACTION_KEY = "The Action";
         Action actionListener = new AbstractAction() {
         public void actionPerformed(ActionEvent actionEvent) {
-        JButton source = (JButton) actionEvent.getSource();
-        System.exit(0);
-        //System.out.println("Activated: " + source.getText());
+        String source = actionEvent.getActionCommand();
+        System.out.println("The command:" + source);
+        if(source.equals(" ")){
+            JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                             + "\nGerianna Geminiano 010662522");
+        } else {
+            System.exit(0);
+        }
         }
         };
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
@@ -123,6 +130,12 @@ public class HManGame extends JPanel implements ActionListener {
         
         
         skip.setToolTipText("Press this button to skip the Hangman Game and go directly to the Color Game");
+        
+        KeyStroke space = KeyStroke.getKeyStroke(' ');//supposed to be KeyEvent.VK_F1, 0 , true);
+        inputMap = skipPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(space, ACTION_KEY);
+        skipPanel.setActionMap(actionMap);
+        
         skipPanel.add(skip);
 
         skip.addActionListener(new ActionListener() {
@@ -132,19 +145,6 @@ public class HManGame extends JPanel implements ActionListener {
                 main.gameOverMessage();
                 main.swapView("play2");
             }
-        });
-    }
-    private void checkEscape(){
-         addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent ke) {  // handler
-            	if(ke.getKeyCode() == ke.VK_ESCAPE) {
-                    System.out.println("escaped ?");
-                    //setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // trying to close
-                    System.exit(0);
-                 } else if(ke.getKeyCode() == ke.VK_F1){
-                    System.out.println("display credit like screen");
-                  }
-           } 
         });
     }
     /*
