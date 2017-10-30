@@ -46,8 +46,6 @@ public class SudokuGame extends JPanel {
      */
     private void createBoard() {
         board.setLayout(new GridLayout(9, 9));
-        
-        
 
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes.length; j++) {
@@ -69,7 +67,7 @@ public class SudokuGame extends JPanel {
         JPanel title = new JPanel(new BorderLayout());
         JLabel sudoku = new JLabel("SUDOKU");
         JLabel time = new JLabel();
-        
+
         //adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
         time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
@@ -84,8 +82,7 @@ public class SudokuGame extends JPanel {
         timer.setInitialDelay(0);
         timer.start();
         title.add(time, BorderLayout.LINE_END);
-        
-        
+
         //adding stylized sudoku name
         sudoku.setFont(new Font("Papyrus", Font.BOLD, 18));
         title.add(sudoku, BorderLayout.LINE_START);
@@ -100,20 +97,51 @@ public class SudokuGame extends JPanel {
     private void submitButton() {
         JButton submit = new JButton("Submit");
         JPanel buttons = new JPanel(new BorderLayout());
-        
+
         //formatting
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
         buttons.add(submit, BorderLayout.PAGE_END);
         add(buttons, BorderLayout.LINE_START);
-        
+
         //adding actionListener
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //add actionlistener actions for submitting
+                checkInput();
+
             }
-            
         });
+    }
+
+    /*
+    checks the boxes of sudoku puzzle
+    and compares with the answer board. will highlight the boxes
+    red if the answer does not match, green if it is correct. need to
+    choose a less bright color.
+    */
+    private void checkInput() {
+        int[][] answers = engine.getAns();
+        String ans = "";
+        JFrame pop = new JFrame();
+
+        for (int i = 0; i < boxes.length; i++) {
+            for (int j = 0; j < boxes.length; j++) {
+
+                try {
+                    ans = boxes[i][j].getText().replaceAll("\\s+", "");
+
+                    if (Integer.parseInt(ans) == answers[i][j]) {
+                        boxes[i][j].setBackground(Color.green);
+                    } else {
+                        boxes[i][j].setBackground(Color.red);
+                    }
+                } catch (NumberFormatException n) {
+                    boxes[i][j].setBackground(Color.red);
+                    continue;
+                }
+
+            }
+        }
     }
 
     /*
@@ -123,20 +151,19 @@ public class SudokuGame extends JPanel {
     private void quitButton() {
         JButton quit = new JButton("Quit");
         JPanel btns = new JPanel(new BorderLayout());
-        
+
         //formatting
         btns.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
         btns.add(quit, BorderLayout.PAGE_END);
         add(btns, BorderLayout.LINE_END);
-        
 
         //adding actionListener
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
- 
+
             }
-            
+
         });
     }
 
@@ -146,30 +173,30 @@ public class SudokuGame extends JPanel {
      */
     private void initBoard() {
         int[][] board = engine.getBoard();
-        
-        
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                boxes[i][j] = new JTextField();
+                boxes[i][j] = new JTextField(1);
                 if (board[i][j] != 0) {
                     boxes[i][j].setText(Integer.toString(board[i][j]));
                     boxes[i][j].setEditable(false);
                 } else {
                     boxes[i][j].setText(" ");
                     boxes[i][j].setEditable(true);
-                }                              
+                }
             }
         }
-        
         beautifyBorders();
     }
-    
+
+    /*
+    method to draw the black bars for sudoku
+    to make the board more appealling to the eye.
+     */
     private void beautifyBorders() {
-        
+
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes.length; j++) {
-                
                 if (j == 2 || j == 5) {
                     boxes[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 3, Color.black));
                 } else if (i == 2 || i == 5) {
@@ -177,39 +204,13 @@ public class SudokuGame extends JPanel {
                 } else {
                     boxes[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 }
-                
                 boxes[2][5].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
                 boxes[2][2].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
                 boxes[5][2].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
                 boxes[5][5].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-                
+
                 boxes[i][j].setHorizontalAlignment(JTextField.CENTER);
             }
         }
     }
-
-    /*
-    need to add a separate action listener that listens to 
-    when the JtextFields are modified with user input.
-    This listener needs to be different so that it does not 
-    mess with the action listeners for the buttons.
-     */
-    private class gridListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JTextField src = (JTextField) e.getSource();
-
-        }
-
-        /*
-        this method is used for finding the x and y values
-        for the engine to check if the value is a valid input.x
-         */
-        private void findSrc() {
-
-        }
-
-    }
-
 }

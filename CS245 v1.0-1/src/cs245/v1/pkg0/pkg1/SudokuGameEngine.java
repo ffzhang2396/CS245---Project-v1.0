@@ -57,6 +57,10 @@ public class SudokuGameEngine {
         return board;
     }
     
+    public int[][] getAns() {
+        return answer;
+    }
+    
     /*
     This method is called whenver the user enters a number
     into the text field to check if it is a valid input.
