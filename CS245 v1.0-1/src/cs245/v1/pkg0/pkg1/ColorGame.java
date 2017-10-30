@@ -60,6 +60,7 @@ public class ColorGame extends JPanel {
         target.setText("Color: " + engine.getText());
         target.setFont(new Font("Papyrus", Font.BOLD, 18));
         target.setForeground(chooseRandomColor());
+        target.setToolTipText("Your goal is the color: " + engine.getTarget());
         titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
         add(skipPanel, BorderLayout.LINE_END);
@@ -87,7 +88,7 @@ public class ColorGame extends JPanel {
         timer.setCoalesce(true);
         timer.setInitialDelay(0);
         timer.start();
-
+        time.setToolTipText("The Current Time!");
         titleBar.add(time, BorderLayout.LINE_END);
         
       //adding the points
@@ -158,6 +159,7 @@ public class ColorGame extends JPanel {
             target.setText("Color: " + engine.getText());
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
+            target.setToolTipText("Your goal is the color: " + engine.getTarget());
             titleBar.add(target, BorderLayout.LINE_START);
 
             drawCirc = engine.getCircles(431, 284);
@@ -170,7 +172,7 @@ public class ColorGame extends JPanel {
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
             super.paintComponent(g);
-
+            super.setToolTipText("This color is " + color);
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(1));
@@ -208,7 +210,7 @@ public class ColorGame extends JPanel {
                     color = "blue";
                     break;
                 case 4:
-                    color = "pink";
+                    color = "purple";
                     break;
 
             }

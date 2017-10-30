@@ -50,7 +50,7 @@ public class TitlePanel extends JPanel {
         projName.setFont(new Font("Kristen ITC", Font.ITALIC, 50));
         projName.setHorizontalAlignment(SwingConstants.CENTER);
         projName.setForeground(Color.white);
-
+        projName.setToolTipText("Thinking....Thikning....Thinking...Eureka!");
         add(projName, BorderLayout.PAGE_START);
     }
 
@@ -65,7 +65,7 @@ public class TitlePanel extends JPanel {
         groupName.setHorizontalAlignment(SwingConstants.CENTER);
         groupName.setForeground(Color.white);
         groupName.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
-
+        groupName.setToolTipText("This game was built by Team NoF.lame");
         add(groupName, BorderLayout.PAGE_END);
     }
 }
