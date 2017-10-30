@@ -223,7 +223,7 @@ public class SudokuGame extends JPanel {
                     boxes[i][j].setText(Integer.toString(board[i][j]));
                     boxes[i][j].setEditable(false);
                 } else {
-                    boxes[i][j].setText(" ");
+                    boxes[i][j].setText("");
                     boxes[i][j].setEditable(true);
                 }
             }
