@@ -91,7 +91,8 @@ public class MainMenu extends JPanel {
         JLabel label = new JLabel("", img, JLabel.CENTER);
         ImageIcon img2 = new ImageIcon(new ImageIcon("thunking2.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
         JLabel label2 = new JLabel("", img2, JLabel.CENTER);
-
+        label.setToolTipText("Thunking man! Right!");
+        label2.setToolTipText("Thunking man! Left!");
         pictures.add(label, "one");
         pictures.add(label2, "two");
 
@@ -135,16 +136,19 @@ public class MainMenu extends JPanel {
         //also setting all of the buttons to be the same size
         hScore.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
         play.setMaximumSize(hScore.getMaximumSize());
+        play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
         credit.setMaximumSize(hScore.getMaximumSize());
 
         //right aligningt the buttons
         play.setAlignmentX(Component.RIGHT_ALIGNMENT);
         hScore.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        hScore.setToolTipText("Press this button to go to the highScores!");
         credit.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        credit.setToolTipText("Press this button to see the group members name's and bronco ids");
 
         //finally add the inner panel to menu panel and return.
         menuButtons.add(buttons, BorderLayout.PAGE_END);
-
+        menuButtons.setToolTipText("Welcome to the main menu. Please select a feature.");
         // Action Listeners for the 3 main buttons.
         hScore.addActionListener(new ActionListener() {
             @Override
