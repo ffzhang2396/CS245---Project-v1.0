@@ -38,6 +38,7 @@ public class GameOver extends JPanel {
     private MainFrame main;
     private ColorGameEngine engine;
     private HManGame game;
+    private JFrame frame;
 
     /*
     Constructor
@@ -87,6 +88,33 @@ public class GameOver extends JPanel {
 
         title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
         title.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        String ACTION_KEY = "The Action";
+        Action actionListener = new AbstractAction() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        String source = actionEvent.getActionCommand();
+        System.out.println("YOOOOO");
+        if(source==null){
+            JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                             + "\nGerianna Geminiano 010662522");
+        } else {
+           System.exit(0);
+        }
+        }
+        };
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+        InputMap inputMap = title.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(escape, ACTION_KEY);
+        ActionMap actionMap = title.getActionMap();
+        actionMap.put(ACTION_KEY, actionListener);
+        title.setActionMap(actionMap);
+        
+        KeyStroke f1 = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0 , true);//supposed to be KeyEvent.VK_F1, 0 , true);
+        inputMap = titlePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(f1, ACTION_KEY);
+        titlePanel.setActionMap(actionMap);
+        
         titlePanel.add(title);
         add(titlePanel, BorderLayout.PAGE_START);
 
