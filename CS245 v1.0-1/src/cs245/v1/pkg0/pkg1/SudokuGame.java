@@ -113,6 +113,7 @@ public class SudokuGame extends JPanel {
 
 
                //add actionlistener actions for submitting
+               //
                // Game Over Score is Sudoku Score + previous games Score
                /*
                engine.setScore(cEngine.getScore()+engine.getFinalScore());
