@@ -225,6 +225,7 @@ public class SudokuGame extends JPanel {
                 } else {
                     boxes[i][j].setText("");
                     boxes[i][j].setEditable(true);
+                    boxes[i][j].setInputVerifier(new Verifier());
                 }
             }
         }
@@ -253,6 +254,42 @@ public class SudokuGame extends JPanel {
 
                 boxes[i][j].setHorizontalAlignment(JTextField.CENTER);
             }
+        }
+    }
+    
+    private class Verifier extends InputVerifier {
+
+        @Override
+        public boolean shouldYieldFocus(JComponent input) {
+            if (verify(input)) {
+                return true;
+            }
+            JOptionPane.showMessageDialog(input, "Only numbers beetween 1 and 9 are allowed", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        @Override
+        public boolean verify(JComponent input) {
+            String text = ((JTextField) input).getText();
+            try {
+                
+                int value = Integer.parseInt(text);
+                if (1 <= value && value <= 9) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                if (text.isEmpty()) {
+                 //   System.out.println(text);
+                    return true;
+                }
+                
+                        
+                return false;
+            }
+
         }
     }
 }
