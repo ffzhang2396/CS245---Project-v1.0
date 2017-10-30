@@ -73,8 +73,10 @@ public class SudokuGameEngine {
     public SudokuGameEngine() {
 
     }
-
-    //used to update the backend board.
+/*
+ * method: updateBoard
+ * purpose: used to update the backend board.
+ */
     public void updateBoard(int[][] newBoard) {
 
         for (int i = 0; i < board.length; i++) {
@@ -85,21 +87,33 @@ public class SudokuGameEngine {
     }
 
     /*
-    used to return the board so the GUI can use it
-    to populate the visual.
+     * method: getBoard
+     * purpose: used to return the board so the GUI can use it
+     * to populate the visual.
     */
     public int[][] getBoard() {
         return board;
     }
-
+/*
+ * method getAns
+ * purpose: getter for answer
+ */
     public int[][] getAns() {
         return answer;
     }
+    
+    /*
+     * method getWrong
+     * purpose: getter for wrong
+     */
     public int[][] getWrong() {
         return wrong;
 
     }
-
+    /*
+     * method setWrong
+     * purpose: setter for wrong
+     */
     public void setWrong(int [][] wrongBoxes){
         wrong = wrongBoxes ;
     }
