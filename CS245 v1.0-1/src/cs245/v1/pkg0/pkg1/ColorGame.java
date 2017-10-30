@@ -89,10 +89,9 @@ public class ColorGame extends JPanel {
         timer.setInitialDelay(0);
         timer.start();
         time.setToolTipText("The Current Time!");
+        
         titleBar.add(time, BorderLayout.LINE_END);
         
-      //adding the points
-       
     }
     
     
