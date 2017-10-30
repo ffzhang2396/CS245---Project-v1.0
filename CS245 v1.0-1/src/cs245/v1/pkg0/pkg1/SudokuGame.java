@@ -48,7 +48,7 @@ public class SudokuGame extends JPanel {
     public void startNewGame() {
         engine.setScore(540); // reset the score back to 0
         // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
-
+        initBoard();
     }
 
     /*

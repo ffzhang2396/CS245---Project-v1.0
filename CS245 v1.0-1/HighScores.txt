@@ -2,4 +2,4 @@ Migos 600
 NONAME 540
 Test2 500
 SupG 490
-NONAME 300
+Homie 400

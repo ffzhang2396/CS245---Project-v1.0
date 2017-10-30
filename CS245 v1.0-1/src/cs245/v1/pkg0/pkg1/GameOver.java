@@ -66,7 +66,7 @@ public class GameOver extends JPanel {
         int winner = engine.isWinner();
         // If payer wins and isn't in top 5 highscore
         if (winner == 2) {
-            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore</html>");
+            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore <html>");
             buttonPanel.removeAll();
             addDoneButton();
         } // Else if player wins but is in top 5 highscore
