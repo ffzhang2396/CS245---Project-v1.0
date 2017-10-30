@@ -91,7 +91,8 @@ public class MainMenu extends JPanel {
         JLabel label = new JLabel("", img, JLabel.CENTER);
         ImageIcon img2 = new ImageIcon(new ImageIcon("thunking2.png").getImage().getScaledInstance(375, 375, Image.SCALE_SMOOTH));
         JLabel label2 = new JLabel("", img2, JLabel.CENTER);
-
+        label.setToolTipText("Thinking man! Right!");
+        label2.setToolTipText("Thinking man! Left!");
         pictures.add(label, "one");
         pictures.add(label2, "two");
 
@@ -124,10 +125,12 @@ public class MainMenu extends JPanel {
         buttons.setPreferredSize(new Dimension(200, 150));
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
+        play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
         buttons.add(play);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
+        hScore.setToolTipText("Press this button to go to the highScores!");
         buttons.add(hScore);
+        credit.setToolTipText("Press this button to see the group members name's and bronco ids");
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
         buttons.add(credit);
 
@@ -136,15 +139,15 @@ public class MainMenu extends JPanel {
         hScore.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
         play.setMaximumSize(hScore.getMaximumSize());
         credit.setMaximumSize(hScore.getMaximumSize());
-
+        
         //right aligningt the buttons
         play.setAlignmentX(Component.RIGHT_ALIGNMENT);
         hScore.setAlignmentX(Component.RIGHT_ALIGNMENT);
         credit.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         //finally add the inner panel to menu panel and return.
+        menuButtons.setToolTipText("Welcome to the main menu. Please select a feature.");
         menuButtons.add(buttons, BorderLayout.PAGE_END);
-
         // Action Listeners for the 3 main buttons.
         hScore.addActionListener(new ActionListener() {
             @Override
