@@ -36,6 +36,7 @@ public class MainMenu extends JPanel {
     private boolean show = false;
     private Timer timer;
     private MainFrame main;
+    private static JFrame frame;
 
     /*
     Constructor for the mainMenu class
@@ -126,10 +127,20 @@ public class MainMenu extends JPanel {
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         String ACTION_KEY = "The Action";
-        Action actionListener = new AbstractAction() {
+       
+        
+        Action actionListenerEscape = new AbstractAction() {
         public void actionPerformed(ActionEvent actionEvent) {
         JButton source = (JButton) actionEvent.getSource();
-        System.exit(0);
+        String help = source.getText();
+        if(help.equals("Play")){
+        System.exit(0);    
+        } else if(help.equals("High Score")){
+              JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                             + "\nGerianna Geminiano 010662522");
+                }
+        
         //System.out.println("Activated: " + source.getText());
         }
         };
@@ -137,10 +148,14 @@ public class MainMenu extends JPanel {
         InputMap inputMap = play.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(escape, ACTION_KEY);
         ActionMap actionMap = play.getActionMap();
-        actionMap.put(ACTION_KEY, actionListener);
+        actionMap.put(ACTION_KEY, actionListenerEscape);
         play.setActionMap(actionMap);
         play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
         buttons.add(play);
+        KeyStroke space = KeyStroke.getKeyStroke(' ');
+        inputMap = hScore.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(space, ACTION_KEY);
+        hScore.setActionMap(actionMap);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
         hScore.setToolTipText("Press this button to go to the highScores!");
         buttons.add(hScore);
