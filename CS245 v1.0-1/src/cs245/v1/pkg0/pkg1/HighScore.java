@@ -137,8 +137,7 @@ public class HighScore extends JPanel {
         Action actionListener = new AbstractAction() {
         public void actionPerformed(ActionEvent actionEvent) {
         String source = actionEvent.getActionCommand();
-        System.out.println("The command:" + source);
-        if(source.equals(" ")){
+        if(source==null){
             JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
                              + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
                              + "\nGerianna Geminiano 010662522");
@@ -159,7 +158,7 @@ public class HighScore extends JPanel {
         
         backButton.setToolTipText("Press this button to go back to the main menu!");
         
-        KeyStroke space = KeyStroke.getKeyStroke(' ');//supposed to be KeyEvent.VK_F1, 0 , true);
+        KeyStroke space = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0 , true);
         inputMap = buttons.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(space, ACTION_KEY);
         buttons.setActionMap(actionMap);
