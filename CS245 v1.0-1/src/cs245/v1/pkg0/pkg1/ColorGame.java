@@ -3,15 +3,15 @@
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.1
- * date last modified: 10/19/17
+ * assignment: Swing Project v1.2
+ * date last modified: 10/30/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
  * will be able to play the classic Hangman game with 6 guesses, play a matching
- * color game with 5 rounds, see the top 5 high scores, and the credits. You will
- * also be able to switch back and forth between the displays using the buttons
- * integrated.
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and
+ * the credits. You will also be able to switch back and forth between the
+ * displays using the buttons integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -89,12 +89,12 @@ public class ColorGame extends JPanel {
         timer.setInitialDelay(0);
         timer.start();
         time.setToolTipText("The Current Time!");
-        
+
         titleBar.add(time, BorderLayout.LINE_END);
-        
+
     }
-    
-    
+
+
     /*
     method: chooseRandomeColor
     purpose: Chooses  a randome color
@@ -130,7 +130,7 @@ public class ColorGame extends JPanel {
 
     /*
     inner panel that contains the circles. Game engine
-    is supposed to calculate the circle positions and this 
+    is supposed to calculate the circle positions and this
     nested class just draws them.
      */
     private class CirclePanel extends JPanel implements MouseListener, MouseMotionListener {
@@ -166,7 +166,7 @@ public class ColorGame extends JPanel {
 
         /*
         method: paintComponent
-        purpose: paints the circles 
+        purpose: paints the circles
          */
         public void paintComponent(Graphics g) {
             Rectangle r = this.getBounds();
@@ -214,7 +214,7 @@ public class ColorGame extends JPanel {
 
             }
         }
-        
+
 
         /*
         method: mouseClicked
@@ -249,7 +249,7 @@ public class ColorGame extends JPanel {
                 main.swapView("play3");
             }
         }
-           
+
 
         @Override
         public void mousePressed(MouseEvent e) {

@@ -1,8 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/** *************************************************************
+ * file: SudokuGameEngine.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.2
+ * date last modified: 10/30/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, play a matching
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and
+ * the credits. You will also be able to switch back and forth between the
+ * displays using the buttons integrated.
+ *
+ *************************************************************** */
 package cs245.v1.pkg0.pkg1;
 
 import java.io.BufferedReader;
@@ -20,7 +31,7 @@ import java.util.logging.Logger;
  * @author dieha
  */
 public class SudokuGameEngine {
-    
+
     private int score = 540;
     private boolean won;
     private int[][] answer = {
@@ -34,7 +45,7 @@ public class SudokuGameEngine {
         {9, 8, 1, 3, 4, 5, 2, 7, 6},
         {3, 7, 4, 9, 6, 2, 8, 1, 5}};
 
-    //initial starting board, -1 means the 
+    //initial starting board, -1 means the
     //box should be empty.
     private int[][] board = {
         { 8, 0, 0, 4, 0, 6, 0, 0, 7},
@@ -46,7 +57,7 @@ public class SudokuGameEngine {
         { 0, 5, 2, 0, 0, 0, 0, 9, 0},
         { 0, 0, 1, 0, 0, 0, 0, 0, 0},
         { 3, 0, 0, 9, 0, 2, 0, 0, 5}};
-    
+
     // Keeps track of boxes submitted with wrong answers
      private int[][] wrong = {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -58,12 +69,12 @@ public class SudokuGameEngine {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    
+
     public SudokuGameEngine() {
-        
+
     }
 
-    //used to update the backend board. 
+    //used to update the backend board.
     public void updateBoard(int[][] newBoard) {
 
         for (int i = 0; i < board.length; i++) {
@@ -80,20 +91,20 @@ public class SudokuGameEngine {
     public int[][] getBoard() {
         return board;
     }
-    
+
     public int[][] getAns() {
         return answer;
     }
     public int[][] getWrong() {
         return wrong;
-    
+
     }
-    
+
     public void setWrong(int [][] wrongBoxes){
         wrong = wrongBoxes ;
     }
-    
-    
+
+
        /*
     method: getFinalScore
     puspose: returns score
@@ -109,7 +120,7 @@ public class SudokuGameEngine {
     public void setScore(int x) {
         score = x;
     }
-    
+
     /*
     method: isWinner
     puspose: returns a number depeding on if player wins or loses
@@ -149,7 +160,7 @@ public class SudokuGameEngine {
     /*
     method: updateHighScore
     purpose: Gets players score and adds it to the highscore list if its in the top 5
-    First it reads the highscores file, adds it to an array with the new score, and 
+    First it reads the highscores file, adds it to an array with the new score, and
     then overrites old file.
      */
     public void updateHighScore(String name, int score) {

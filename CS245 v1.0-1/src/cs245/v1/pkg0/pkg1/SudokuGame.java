@@ -1,8 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/** *************************************************************
+ * file: SudokuGame.java
+ * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
+ * class: CS 245 – Programming Graphical User Interface
+ *
+ * assignment: Swing Project v1.2
+ * date last modified: 10/30/17
+ *
+ * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
+ * we created a game that is controlled by your mouse and keyboard. The user
+ * will be able to play the classic Hangman game with 6 guesses, play a matching
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and the credits. You will
+ * also be able to switch back and forth between the displays using the buttons
+ * integrated.
+ *
+ *************************************************************** */
 package cs245.v1.pkg0.pkg1;
 
 import java.awt.*;
@@ -48,12 +59,12 @@ public class SudokuGame extends JPanel {
     public void startNewGame() {
         engine.setScore(540); // reset the score back to 540
         // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
-        
+
     }
 
     /*
     For the sudoku board we are going to use a
-    9x9 gridLayout for the inner JPanel thats going to be in the center of the 
+    9x9 gridLayout for the inner JPanel thats going to be in the center of the
     outer JPanel which is an instance of this class.
      */
     private void createBoard() {
@@ -73,7 +84,7 @@ public class SudokuGame extends JPanel {
     /*
     This method draws the title bar of the game panel.
     Title bar should include the time as well as a stylized
-    version of the game name. 
+    version of the game name.
      */
     private void titleBar() {
         JPanel title = new JPanel(new BorderLayout());
@@ -173,8 +184,8 @@ public class SudokuGame extends JPanel {
 
             }
         }
-        
-        // Update wrong boxes array 
+
+        // Update wrong boxes array
         //Meant so that can't be dedcuted more than once for each box
         engine.setWrong(wrongAns);
         System.out.println("Score: " + engine.getFinalScore());
@@ -183,7 +194,7 @@ public class SudokuGame extends JPanel {
 
     /*
     This method adds in the submit button that goes on the right
-    side of the game board. 
+    side of the game board.
      */
     private void quitButton() {
         JButton quit = new JButton("Quit");
@@ -256,7 +267,7 @@ public class SudokuGame extends JPanel {
             }
         }
     }
-    
+
     private class Verifier extends InputVerifier {
 
         @Override
@@ -273,7 +284,7 @@ public class SudokuGame extends JPanel {
         public boolean verify(JComponent input) {
             String text = ((JTextField) input).getText();
             try {
-                
+
                 int value = Integer.parseInt(text);
                 if (1 <= value && value <= 9) {
                     return true;
@@ -285,8 +296,8 @@ public class SudokuGame extends JPanel {
                  //   System.out.println(text);
                     return true;
                 }
-                
-                        
+
+
                 return false;
             }
 
