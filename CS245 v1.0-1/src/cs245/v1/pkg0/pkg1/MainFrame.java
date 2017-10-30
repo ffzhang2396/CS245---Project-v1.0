@@ -205,7 +205,6 @@ public class MainFrame extends JFrame {
                      JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
                              + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
                              + "\nGerianna Geminiano 010662522");
-                    System.out.println("display credit like screen");
                   }
            } 
         });
