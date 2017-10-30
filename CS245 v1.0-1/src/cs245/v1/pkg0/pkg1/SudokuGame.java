@@ -46,9 +46,9 @@ public class SudokuGame extends JPanel {
     purpose: Resets the game.
      */
     public void startNewGame() {
-        engine.setScore(540); // reset the score back to 0
+        engine.setScore(540); // reset the score back to 540
         // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
-        initBoard();
+        
     }
 
     /*
@@ -120,8 +120,8 @@ public class SudokuGame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                
-            if(checkInput()){
+             boolean check = checkInput();
+            if(check){
                System.out.println("Sudoku Score: " + engine.getFinalScore());
                engine.setScore(cEngine.getScore()+engine.getFinalScore());
                System.out.println("Final Score: " + engine.getFinalScore());
