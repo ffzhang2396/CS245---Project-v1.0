@@ -130,20 +130,17 @@ public class MainMenu extends JPanel {
        
         
         Action actionListenerEscape = new AbstractAction() {
-        public void actionPerformed(ActionEvent actionEvent) {
-        JButton source = (JButton) actionEvent.getSource();
-        String help = source.getText();
-        if(help.equals("Play")){
-        System.exit(0);    
-        } else if(help.equals("High Score")){
-              JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
-                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
-                             + "\nGerianna Geminiano 010662522");
+        	public void actionPerformed(ActionEvent actionEvent) {
+                String source = actionEvent.getActionCommand();
+                if(source==null){
+                    JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                                     + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                                     + "\nGerianna Geminiano 010662522");
+                } else {
+                   System.exit(0);
                 }
-        
-        //System.out.println("Activated: " + source.getText());
-        }
-        };
+                }
+                };
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
         InputMap inputMap = play.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(escape, ACTION_KEY);
@@ -152,9 +149,9 @@ public class MainMenu extends JPanel {
         play.setActionMap(actionMap);
         play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
         buttons.add(play);
-        KeyStroke space = KeyStroke.getKeyStroke(' ');
+        KeyStroke f1 = KeyStroke.getKeyStroke(KeyEvent.VK_F1,0,true);
         inputMap = hScore.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(space, ACTION_KEY);
+        inputMap.put(f1, ACTION_KEY);
         hScore.setActionMap(actionMap);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
         hScore.setToolTipText("Press this button to go to the highScores!");
