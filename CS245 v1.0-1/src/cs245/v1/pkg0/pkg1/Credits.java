@@ -35,7 +35,7 @@ public class Credits extends JPanel {
     private JPanel scores = new JPanel();
     private JPanel buttons = new JPanel(new BorderLayout());
     private static Action enterAction;
-
+    private static JFrame frame;
 
     /*
     Constructor
@@ -109,10 +109,17 @@ public class Credits extends JPanel {
     private void addBackButtons() {
         String ACTION_KEY = "The Action";
         Action actionListener = new AbstractAction() {
-        public void actionPerformed(ActionEvent actionEvent) {
-        JButton source = (JButton) actionEvent.getSource();
-        System.exit(0);
-        //System.out.println("Activated: " + source.getText());
+      public void actionPerformed(ActionEvent actionEvent) {
+        String source = actionEvent.getActionCommand();
+        System.out.println("YOOOOO");
+        System.out.println("The command:" + source);
+        if(source.equals(" ")){
+            JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                             + "\nGerianna Geminiano 010662522");
+        } else {
+           // System.exit(0);
+        }
         }
         };
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
@@ -121,11 +128,13 @@ public class Credits extends JPanel {
         ActionMap actionMap = backButton.getActionMap();
         actionMap.put(ACTION_KEY, actionListener);
         backButton.setActionMap(actionMap);
-                
         
+        KeyStroke space = KeyStroke.getKeyStroke(' ');//supposed to be KeyEvent.VK_F1, 0 , true);
+        inputMap = buttons.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(space, ACTION_KEY);
+        buttons.setActionMap(actionMap);
         
-        
-        backButton.setToolTipText("Press the back button to go back to the main menu");
+        backButton.setToolTipText("Press the bacl button to go back to the main menu");
         buttons.add(backButton, BorderLayout.LINE_START);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.PAGE_END);
