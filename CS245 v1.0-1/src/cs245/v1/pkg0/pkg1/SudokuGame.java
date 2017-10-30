@@ -35,6 +35,11 @@ public class SudokuGame extends JPanel {
     private JTextField[][] boxes = new JTextField[9][9];
     private JPanel board = new JPanel();
 
+    /**
+     * constructor
+     * @param engine
+     * @param cEngine
+     */
     public SudokuGame(SudokuGameEngine engine, ColorGameEngine cEngine) {
         this.engine = engine;
         this.cEngine = cEngine;
@@ -63,6 +68,8 @@ public class SudokuGame extends JPanel {
     }
 
     /*
+     *  method: startNewGame
+     *  purpose: Resets the game.
     For the sudoku board we are going to use a
     9x9 gridLayout for the inner JPanel thats going to be in the center of the
     outer JPanel which is an instance of this class.
@@ -82,9 +89,10 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    This method draws the title bar of the game panel.
-    Title bar should include the time as well as a stylized
-    version of the game name.
+     * method: titleBar
+     * purpose: This method draws the title bar of the game panel.
+     * Title bar should include the time as well as a stylized
+     * version of the game name.
      */
     private void titleBar() {
         JPanel title = new JPanel(new BorderLayout());
@@ -114,8 +122,9 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    adds in the submit button that goes on the left
-    side of the game board.
+     * method: submitButton
+     * purpose: adds in the submit button that goes on the left 
+     * side of the game board.
      */
     private void submitButton() {
         JButton submit = new JButton("Submit");
@@ -144,10 +153,11 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    checks the boxes of sudoku puzzle
-    and compares with the answer board. will highlight the boxes
-    red if the answer does not match, green if it is correct. need to
-   ol choose a less bright color.
+     * method: checkInput
+     * purpose: checks the boxes of sudoku puzzle 
+     * and compares with the answer board. will highlight the boxes 
+     * red if the answer does not match, green if it is correct. need to 
+     * ol choose a less bright color.
      */
     private boolean checkInput() {
         int[][] answers = engine.getAns();
@@ -193,8 +203,9 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    This method adds in the submit button that goes on the right
-    side of the game board.
+     * method: quitButton
+     * purpose: This method adds in the submit button that goes on the right
+     * side of the game board.
      */
     private void quitButton() {
         JButton quit = new JButton("Quit");
@@ -221,8 +232,9 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    initializes the board to a new state.
-    Probably can use this to restart the game.
+     * method: initBoard
+     * purpose: initializes the board to a new state.
+     * Probably can use this to restart the game.
      */
     private void initBoard() {
         int[][] board = engine.getBoard();
@@ -236,7 +248,7 @@ public class SudokuGame extends JPanel {
                 } else {
                     boxes[i][j].setText("");
                     boxes[i][j].setEditable(true);
-                    boxes[i][j].setInputVerifier(new Verifier());
+                    boxes[i][j].setInputVerifier(new Verifier()); //used for check input
                 }
             }
         }
@@ -244,8 +256,9 @@ public class SudokuGame extends JPanel {
     }
 
     /*
-    method to draw the black bars for sudoku
-    to make the board more appealling to the eye.
+     * method: beautifyBorders
+     * purpose: method to draw the black bars for sudoku
+     * to make the board more appealling to the eye.
      */
     private void beautifyBorders() {
 
@@ -267,9 +280,17 @@ public class SudokuGame extends JPanel {
             }
         }
     }
-
+    
+    /*
+     * class to verify input
+     */
     private class Verifier extends InputVerifier {
 
+        /*
+         * method: shouldYieldFocus
+         * purpose: doesn't allow focus to change if input is not valid
+         * pops a warning dialog box informing user of the invalid input
+         */
         @Override
         public boolean shouldYieldFocus(JComponent input) {
             if (verify(input)) {
@@ -279,7 +300,12 @@ public class SudokuGame extends JPanel {
                     JOptionPane.WARNING_MESSAGE);
             return false;
         }
-
+        
+        /*
+         * method; verify
+         * purpose: verifies if input is between 1 and 9. also if contains any non number characters
+         * a null character is accepted as valid input to allow the user to change previous answers
+         */
         @Override
         public boolean verify(JComponent input) {
             String text = ((JTextField) input).getText();
