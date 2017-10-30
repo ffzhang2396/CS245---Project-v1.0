@@ -210,7 +210,7 @@ public class ColorGame extends JPanel {
                     color = "blue";
                     break;
                 case 4:
-                    color = "pink";
+                    color = "purple";
                     break;
 
             }
