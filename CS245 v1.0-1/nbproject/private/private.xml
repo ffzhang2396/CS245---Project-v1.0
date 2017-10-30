@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/MainMenu.java</file>
             <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/ColorGame.java</file>
+            <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/ColorGameEngine.java</file>
             <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/SudokuGame.java</file>
             <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/MainFrame.java</file>
             <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/SudokuGameEngine.java</file>
-=======
-            <file>file:/C:/Users/Quokka/Documents/NetBeansProjects/CS245---Project-v1.0/CS245%20v1.0-1/src/cs245/v1/pkg0/pkg1/MainFrame.java</file>
->>>>>>> Added method in sudoku game engine to reset everything for new game, but need to still add other code to it
         </group>
     </open-files>
 </project-private>

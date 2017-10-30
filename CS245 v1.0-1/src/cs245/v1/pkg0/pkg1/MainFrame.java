@@ -170,7 +170,6 @@ public class MainFrame extends JFrame {
                         if (ke.getID() == KeyEvent.KEY_PRESSED) {
                             // For Esc key
                             if (ke.getKeyCode() == ke.VK_ESCAPE) {
-                                System.out.println("escaped ?");
                                 System.exit(0);
                             } // For F1 key
                             else if (ke.getKeyCode() == ke.VK_F1) {

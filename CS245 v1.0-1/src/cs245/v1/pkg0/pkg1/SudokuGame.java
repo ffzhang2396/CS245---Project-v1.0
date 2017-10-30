@@ -17,13 +17,14 @@ import javax.swing.*;
  *
  */
 public class SudokuGame extends JPanel {
-    private ColorGameEngine cEngine; 
+
+    private ColorGameEngine cEngine;
     private SudokuGameEngine engine;
     private MainFrame main;
     private JTextField[][] boxes = new JTextField[9][9];
     private JPanel board = new JPanel();
 
-    public SudokuGame(SudokuGameEngine engine,ColorGameEngine cEngine) {
+    public SudokuGame(SudokuGameEngine engine, ColorGameEngine cEngine) {
         this.engine = engine;
         this.cEngine = cEngine;
         setLayout(new BorderLayout());
@@ -39,15 +40,15 @@ public class SudokuGame extends JPanel {
         this.main = main;
 
     }
-    
-     /*
+
+    /*
     method: startNewGame
     purpose: Resets the game.
      */
     public void startNewGame() {
         engine.setScore(540); // reset the score back to 0
         // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
-        
+
     }
 
     /*
@@ -119,19 +120,14 @@ public class SudokuGame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                checkInput();
-
-
-               //add actionlistener actions for submitting
-               //
-               // Game Over Score is Sudoku Score + previous games Score
-               /*
-               engine.setScore(cEngine.getScore()+engine.getFinalScore());
+                
+            if(checkInput()){
                System.out.println("Sudoku Score: " + engine.getFinalScore());
+               engine.setScore(cEngine.getScore()+engine.getFinalScore());
+               System.out.println("Final Score: " + engine.getFinalScore());
                main.gameOverMessage();
                main.swapView("over");
-               */
-
+            }
             }
         });
     }
@@ -140,12 +136,14 @@ public class SudokuGame extends JPanel {
     checks the boxes of sudoku puzzle
     and compares with the answer board. will highlight the boxes
     red if the answer does not match, green if it is correct. need to
-    choose a less bright color.
-    */
-    private void checkInput() {
+   ol choose a less bright color.
+     */
+    private boolean checkInput() {
         int[][] answers = engine.getAns();
+        int[][] wrongAns = engine.getWrong(); // Array that tells which box had wrong answer
         String ans = "";
         JFrame pop = new JFrame();
+        boolean finish = true;
 
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes.length; j++) {
@@ -156,15 +154,31 @@ public class SudokuGame extends JPanel {
                     if (Integer.parseInt(ans) == answers[i][j]) {
                         boxes[i][j].setBackground(Color.green);
                     } else {
+                        if (wrongAns[i][j] == 0) {
+                            engine.setScore(engine.getFinalScore() - 10);
+                            wrongAns[i][j] = 1;
+                        }
+                        finish = false;
                         boxes[i][j].setBackground(Color.red);
                     }
                 } catch (NumberFormatException n) {
+                    if (wrongAns[i][j] == 0) {
+                        engine.setScore(engine.getFinalScore() - 10);
+                        wrongAns[i][j] = 1;
+                    }
+                    finish = false;
                     boxes[i][j].setBackground(Color.red);
                     continue;
                 }
 
             }
         }
+        
+        // Update wrong boxes array 
+        //Meant so that can't be dedcuted more than once for each box
+        engine.setWrong(wrongAns);
+        System.out.println("Score: " + engine.getFinalScore());
+        return finish;
     }
 
     /*
@@ -187,7 +201,7 @@ public class SudokuGame extends JPanel {
                 // If choose to quit then Socuku score is 0
                 // So Ending score is previous games Score
                 engine.setScore(cEngine.getScore());
-                System.out.println("Sudoku Score: " + engine.getFinalScore());
+                System.out.println("Final Score: " + engine.getFinalScore());
                 main.gameOverMessage();
                 main.swapView("over");
             }

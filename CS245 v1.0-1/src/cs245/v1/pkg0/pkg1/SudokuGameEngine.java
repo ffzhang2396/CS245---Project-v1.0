@@ -50,7 +50,7 @@ public class SudokuGameEngine {
     // Keeps track of boxes submitted with wrong answers
      private int[][] wrong = {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {  0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -84,20 +84,15 @@ public class SudokuGameEngine {
     public int[][] getAns() {
         return answer;
     }
+    public int[][] getWrong() {
+        return wrong;
     
-    /*
-    This method is called whenver the user enters a number
-    into the text field to check if it is a valid input.
-    */
-    public boolean checkInput(int row, int col) {
-        boolean rowValid = false;
-        boolean colValid = false;
-        
-        for (int i = 0; i < board.length; i++) {
-            
-        }       
-        return false;
     }
+    
+    public void setWrong(int [][] wrongBoxes){
+        wrong = wrongBoxes ;
+    }
+    
     
        /*
     method: getFinalScore
