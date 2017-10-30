@@ -112,7 +112,6 @@ public class Credits extends JPanel {
       public void actionPerformed(ActionEvent actionEvent) {
         String source = actionEvent.getActionCommand();
         System.out.println("YOOOOO");
-        System.out.println("The command:" + source);
         if(source==null){
             JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
                              + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
