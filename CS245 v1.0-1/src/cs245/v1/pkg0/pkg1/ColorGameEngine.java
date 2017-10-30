@@ -1,7 +1,7 @@
 /** *************************************************************
  * file: ColorGameEngine.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
- * class: CS 245 â€“ Programming Graphical User Interface
+ * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.1
  * date last modified: 10/19/17
