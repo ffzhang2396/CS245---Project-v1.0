@@ -1,5 +1,5 @@
 /** *************************************************************
- * file: SudokuGame.java
+ * file: SudokuGameEngine.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
@@ -9,324 +9,233 @@
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
  * will be able to play the classic Hangman game with 6 guesses, play a matching
- * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and the credits. You will
- * also be able to switch back and forth between the displays using the buttons
- * integrated.
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and
+ * the credits. You will also be able to switch back and forth between the
+ * displays using the buttons integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.util.Date;
-import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- *
+ * @author dieha
  */
-public class SudokuGame extends JPanel {
+public class SudokuGameEngine {
 
-    private ColorGameEngine cEngine;
-    private SudokuGameEngine engine;
-    private MainFrame main;
-    private JTextField[][] boxes = new JTextField[9][9];
-    private JPanel board = new JPanel();
+    private int score = 540;
+    private boolean won;
+    private int[][] answer = {
+        {8, 3, 5, 4, 1, 6, 9, 2, 7},
+        {2, 9, 6, 8, 5, 7, 4, 3, 1},
+        {4, 1, 7, 2, 9, 3, 6, 5, 8},
+        {5, 6, 9, 1, 3, 4, 7, 8, 2},
+        {1, 2, 3, 6, 7, 8, 5, 4, 9},
+        {7, 4, 8, 5, 2, 9, 1, 6, 3},
+        {6, 5, 2, 7, 8, 1, 3, 9, 4},
+        {9, 8, 1, 3, 4, 5, 2, 7, 6},
+        {3, 7, 4, 9, 6, 2, 8, 1, 5}};
 
-    /**
-     * constructor
-     * @param engine
-     * @param cEngine
-     */
-    public SudokuGame(SudokuGameEngine engine, ColorGameEngine cEngine) {
-        this.engine = engine;
-        this.cEngine = cEngine;
-        setLayout(new BorderLayout());
+    //initial starting board, -1 means the
+    //box should be empty.
+    private int[][] board = {
+        { 8, 0, 0, 4, 0, 6, 0, 0, 7},
+        { 0, 0, 0, 0, 0, 0, 4, 0, 0},
+        { 0, 1, 0, 0, 0, 0, 6, 5, 0},
+        { 5, 0, 9, 0, 3, 0, 7, 8, 0},
+        { 0, 0, 0, 0, 7, 0, 0, 0, 0},
+        { 0, 4, 8, 0, 2, 0, 1, 0, 3},
+        { 0, 5, 2, 0, 0, 0, 0, 9, 0},
+        { 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 3, 0, 0, 9, 0, 2, 0, 0, 5}};
 
-        initBoard();
-        createBoard();
-        titleBar();
-        submitButton();
-        quitButton();
-    }
+    // Keeps track of boxes submitted with wrong answers
+     private int[][] wrong = {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-    public void setMain(MainFrame main) {
-        this.main = main;
-
-    }
-
-    /*
-    method: startNewGame
-    purpose: Resets the game.
-     */
-    public void startNewGame() {
-        engine.setScore(540); // reset the score back to 540
-        // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
-
-    }
-
-    /*
-     *  method: startNewGame
-     *  purpose: Resets the game.
-    For the sudoku board we are going to use a
-    9x9 gridLayout for the inner JPanel thats going to be in the center of the
-    outer JPanel which is an instance of this class.
-     */
-    private void createBoard() {
-        board.setLayout(new GridLayout(9, 9));
-
-        for (int i = 0; i < boxes.length; i++) {
-            for (int j = 0; j < boxes.length; j++) {
-
-                board.add(boxes[i][j]);
-            }
-        }
-
-        board.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        add(board, BorderLayout.CENTER);
-    }
-
-    /*
-     * method: titleBar
-     * purpose: This method draws the title bar of the game panel.
-     * Title bar should include the time as well as a stylized
-     * version of the game name.
-     */
-    private void titleBar() {
-        JPanel title = new JPanel(new BorderLayout());
-        JLabel sudoku = new JLabel("SUDOKU");
-        JLabel time = new JLabel();
-
-        //adding the time
-        time.setHorizontalAlignment(JLabel.CENTER);
-        time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
-        Timer timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                time.setText(DateFormat.getDateTimeInstance().format(new Date()));
-            }
-        });
-        timer.setRepeats(true);
-        timer.setCoalesce(true);
-        timer.setInitialDelay(0);
-        timer.start();
-        title.add(time, BorderLayout.LINE_END);
-
-        //adding stylized sudoku name
-        sudoku.setFont(new Font("Papyrus", Font.BOLD, 18));
-        title.add(sudoku, BorderLayout.LINE_START);
-        add(title, BorderLayout.PAGE_START);
+    public SudokuGameEngine() {
 
     }
-
-    /*
-     * method: submitButton
-     * purpose: adds in the submit button that goes on the left 
-     * side of the game board.
-     */
-    private void submitButton() {
-        JButton submit = new JButton("Submit");
-        JPanel buttons = new JPanel(new BorderLayout());
-
-        //formatting
-        buttons.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
-        buttons.add(submit, BorderLayout.PAGE_END);
-        add(buttons, BorderLayout.LINE_START);
-
-        //adding actionListener
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-             boolean check = checkInput();
-            if(check){
-               System.out.println("Sudoku Score: " + engine.getFinalScore());
-               engine.setScore(cEngine.getScore()+engine.getFinalScore());
-               System.out.println("Final Score: " + engine.getFinalScore());
-               main.gameOverMessage();
-               main.swapView("over");
-            }
-            }
-        });
-    }
-
-    /*
-     * method: checkInput
-     * purpose: checks the boxes of sudoku puzzle 
-     * and compares with the answer board. will highlight the boxes 
-     * red if the answer does not match, green if it is correct. need to 
-     * ol choose a less bright color.
-     */
-    private boolean checkInput() {
-        int[][] answers = engine.getAns();
-        int[][] wrongAns = engine.getWrong(); // Array that tells which box had wrong answer
-        String ans = "";
-        JFrame pop = new JFrame();
-        boolean finish = true;
-
-        for (int i = 0; i < boxes.length; i++) {
-            for (int j = 0; j < boxes.length; j++) {
-
-                try {
-                    ans = boxes[i][j].getText().replaceAll("\\s+", "");
-
-                    if (Integer.parseInt(ans) == answers[i][j]) {
-                        boxes[i][j].setBackground(Color.green);
-                    } else {
-                        if (wrongAns[i][j] == 0) {
-                            engine.setScore(engine.getFinalScore() - 10);
-                            wrongAns[i][j] = 1;
-                        }
-                        finish = false;
-                        boxes[i][j].setBackground(Color.red);
-                    }
-                } catch (NumberFormatException n) {
-                    if (wrongAns[i][j] == 0) {
-                        engine.setScore(engine.getFinalScore() - 10);
-                        wrongAns[i][j] = 1;
-                    }
-                    finish = false;
-                    boxes[i][j].setBackground(Color.red);
-                    continue;
-                }
-
-            }
-        }
-
-        // Update wrong boxes array
-        //Meant so that can't be dedcuted more than once for each box
-        engine.setWrong(wrongAns);
-        System.out.println("Score: " + engine.getFinalScore());
-        return finish;
-    }
-
-    /*
-     * method: quitButton
-     * purpose: This method adds in the submit button that goes on the right
-     * side of the game board.
-     */
-    private void quitButton() {
-        JButton quit = new JButton("Quit");
-        JPanel btns = new JPanel(new BorderLayout());
-
-        //formatting
-        btns.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
-        btns.add(quit, BorderLayout.PAGE_END);
-        add(btns, BorderLayout.LINE_END);
-
-        //adding actionListener
-        quit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // If choose to quit then Socuku score is 0
-                // So Ending score is previous games Score
-                engine.setScore(cEngine.getScore());
-                System.out.println("Final Score: " + engine.getFinalScore());
-                main.gameOverMessage();
-                main.swapView("over");
-            }
-
-        });
-    }
-
-    /*
-     * method: initBoard
-     * purpose: initializes the board to a new state.
-     * Probably can use this to restart the game.
-     */
-    private void initBoard() {
-        int[][] board = engine.getBoard();
+/*
+ * method: updateBoard
+ * purpose: used to update the backend board.
+ */
+    public void updateBoard(int[][] newBoard) {
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                boxes[i][j] = new JTextField(1);
-                if (board[i][j] != 0) {
-                    boxes[i][j].setText(Integer.toString(board[i][j]));
-                    boxes[i][j].setEditable(false);
-                } else {
-                    boxes[i][j].setText("");
-                    boxes[i][j].setEditable(true);
-                    boxes[i][j].setInputVerifier(new Verifier()); //used for check input
-                }
+                board[i][j] = newBoard[i][j];
             }
         }
-        beautifyBorders();
     }
 
     /*
-     * method: beautifyBorders
-     * purpose: method to draw the black bars for sudoku
-     * to make the board more appealling to the eye.
-     */
-    private void beautifyBorders() {
-
-        for (int i = 0; i < boxes.length; i++) {
-            for (int j = 0; j < boxes.length; j++) {
-                if (j == 2 || j == 5) {
-                    boxes[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 3, Color.black));
-                } else if (i == 2 || i == 5) {
-                    boxes[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 1, Color.black));
-                } else {
-                    boxes[i][j].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-                }
-                boxes[2][5].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-                boxes[2][2].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-                boxes[5][2].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-                boxes[5][5].setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-
-                boxes[i][j].setHorizontalAlignment(JTextField.CENTER);
-            }
-        }
+     * method: getBoard
+     * purpose: used to return the board so the GUI can use it
+     * to populate the visual.
+    */
+    public int[][] getBoard() {
+        return board;
+    }
+/*
+ * method getAns
+ * purpose: getter for answer
+ */
+    public int[][] getAns() {
+        return answer;
     }
     
     /*
-     * class to verify input
+     * method getWrong
+     * purpose: getter for wrong
      */
-    private class Verifier extends InputVerifier {
+    public int[][] getWrong() {
+        return wrong;
 
-        /*
-         * method: shouldYieldFocus
-         * purpose: doesn't allow focus to change if input is not valid
-         * pops a warning dialog box informing user of the invalid input
-         */
-        @Override
-        public boolean shouldYieldFocus(JComponent input) {
-            if (verify(input)) {
-                return true;
+    }
+    /*
+     * method setWrong
+     * purpose: setter for wrong
+     */
+    public void setWrong(int [][] wrongBoxes){
+        wrong = wrongBoxes ;
+    }
+
+
+       /*
+    method: getFinalScore
+    puspose: returns score
+     */
+    public int getFinalScore() {
+        return score;
+    }
+
+    /*
+    method: setScore
+    purpose: setter for the score variable
+     */
+    public void setScore(int x) {
+        score = x;
+    }
+
+    /*
+    method: isWinner
+    puspose: returns a number depeding on if player wins or loses
+    1 = loss, 2 = win but not highscore, 3 = win and highscore
+     */
+    public int isWinner() {
+        int winType = 0;
+        int lowestScore = 0;
+
+        try {
+            File file = new File("HighScores.txt");
+            BufferedReader buff = new BufferedReader(new FileReader(file));
+            String line = buff.readLine();
+            // Gets lowest highscore
+            while ((line) != null) {
+                String[] splitted = line.split(" ");
+                lowestScore = Integer.parseInt(splitted[1]);
+                line = buff.readLine();
             }
-            JOptionPane.showMessageDialog(input, "Only numbers beetween 1 and 9 are allowed", "Warning",
-                    JOptionPane.WARNING_MESSAGE);
-            return false;
+            buff.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ColorGameEngine.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ColorGameEngine.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        /*
-         * method; verify
-         * purpose: verifies if input is between 1 and 9. also if contains any non number characters
-         * a null character is accepted as valid input to allow the user to change previous answers
-         */
-        @Override
-        public boolean verify(JComponent input) {
-            String text = ((JTextField) input).getText();
-            try {
 
-                int value = Integer.parseInt(text);
-                if (1 <= value && value <= 9) {
-                    return true;
-                } else {
-                    return false;
+        if (score <= 40) { // If score is 40(all guesses used) or less then a loss
+            winType = 1;
+        } else if (score < lowestScore) {// If score is less than lowest highscore
+            winType = 2;
+        } else if (score >= lowestScore) { // If score is higher than lowest highscore
+            winType = 3;
+        }
+        return winType;
+    }
+
+    /*
+    method: updateHighScore
+    purpose: Gets players score and adds it to the highscore list if its in the top 5
+    First it reads the highscores file, adds it to an array with the new score, and
+    then overrites old file.
+     */
+    public void updateHighScore(String name, int score) {
+
+        String scoreArr[] = new String[5];
+        try {
+            File f = new File("HighScores.txt");
+            BufferedReader br = new BufferedReader(new FileReader(f));
+
+            boolean replaced = false;
+            int i = 0;
+            // if File is empty
+            String line = br.readLine();
+            if (line.length() == 0) {
+                scoreArr[i] = name + " " + Integer.toString(score);
+                ++i;
+            } else {
+                while ((line) != null) {
+                    String[] splitted = line.split(" ");
+                    if ((Integer.parseInt(splitted[1]) <= score) && replaced == false) {
+                        if (i < 5) {
+                            scoreArr[i] = name + " " + Integer.toString(score);
+                            ++i;
+                        }
+                        if (i < 5) {
+                            scoreArr[i] = line;
+                            ++i;
+                        }
+                        replaced = true;
+                    } else {
+                        if (i < 5) {
+                            scoreArr[i] = line;
+                            ++i;
+                        }
+                    }
+                    line = br.readLine();
                 }
-            } catch (NumberFormatException e) {
-                if (text.isEmpty()) {
-                 //   System.out.println(text);
-                    return true;
+            }
+            if (i < 5) {
+                while (i < 5) {
+                    scoreArr[i] = "AAA 0";
+                    ++i;
                 }
-
-
-                return false;
             }
 
+            i = 0;
+            br.close();
+            f.delete();
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter("HighScores.txt"));
+            for (int n = 0; n < scoreArr.length; n++) {
+                bw.write(scoreArr[n]);
+                bw.newLine();
+                bw.flush();
+            }
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
+
 }
