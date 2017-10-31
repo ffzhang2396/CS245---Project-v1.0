@@ -36,7 +36,7 @@ public class SudokuGameEngine {
 
     //initial starting board, -1 means the 
     //box should be empty.
-    private int[][] board = {
+  /*  private int[][] board = {
         { 8, 0, 0, 4, 0, 6, 0, 0, 7},
         { 0, 0, 0, 0, 0, 0, 4, 0, 0},
         { 0, 1, 0, 0, 0, 0, 6, 5, 0},
@@ -58,7 +58,9 @@ public class SudokuGameEngine {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0},
         { 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    
+    */
+    private int[][] board;
+    private int[][] wrong;
     public SudokuGameEngine() {
         
     }
@@ -71,6 +73,31 @@ public class SudokuGameEngine {
                 board[i][j] = newBoard[i][j];
             }
         }
+    }
+    
+    public void initBoard(){
+        board = new int[][]{
+            { 8, 0, 0, 4, 0, 6, 0, 0, 7},
+            { 0, 0, 0, 0, 0, 0, 4, 0, 0},
+            { 0, 1, 0, 0, 0, 0, 6, 5, 0},
+            { 5, 0, 9, 0, 3, 0, 7, 8, 0},
+            { 0, 0, 0, 0, 7, 0, 0, 0, 0},
+            { 0, 4, 8, 0, 2, 0, 1, 0, 3},
+            { 0, 5, 2, 0, 0, 0, 0, 9, 0},
+            { 0, 0, 1, 0, 0, 0, 0, 0, 0},
+            { 3, 0, 0, 9, 0, 2, 0, 0, 5}};
+    }
+    public void initWrong(){
+        wrong = new int[][] {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0}};
     }
 
     /*

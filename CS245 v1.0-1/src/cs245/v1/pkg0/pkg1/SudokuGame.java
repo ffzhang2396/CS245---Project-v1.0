@@ -49,6 +49,10 @@ public class SudokuGame extends JPanel {
         engine.setScore(540); // reset the score back to 540
         // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
         
+        boxes = new JTextField[9][9];
+        board.removeAll();
+        initBoard();
+        createBoard();
     }
 
     /*
@@ -133,6 +137,7 @@ public class SudokuGame extends JPanel {
                System.out.println("Final Score: " + engine.getFinalScore());
                main.gameOverMessage();
                main.swapView("over");
+               startNewGame();
             }
             }
         });
@@ -211,6 +216,8 @@ public class SudokuGame extends JPanel {
                 System.out.println("Final Score: " + engine.getFinalScore());
                 main.gameOverMessage();
                 main.swapView("over");
+                
+                startNewGame();
             }
 
         });
@@ -221,6 +228,8 @@ public class SudokuGame extends JPanel {
     Probably can use this to restart the game.
      */
     private void initBoard() {
+        engine.initBoard();
+        engine.initWrong();
         int[][] board = engine.getBoard();
 
         for (int i = 0; i < board.length; i++) {
