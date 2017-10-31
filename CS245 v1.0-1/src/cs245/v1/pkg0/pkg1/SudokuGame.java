@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -72,11 +72,12 @@ public class SudokuGame extends JPanel {
         initBoard();
         createBoard();
     }
-    
+
     /*
-    Updates the score at the beginning of the game so it is 
+    method: updateScore
+    purpose: Updates the score at the beginning of the game so it is 
     continuously tracked within each game.
-    */
+     */
     public void updateScore() {
         points.setText("Points: " + engine.getFinalScore());
     }
@@ -114,7 +115,7 @@ public class SudokuGame extends JPanel {
         JPanel title = new JPanel(new BorderLayout());
         JLabel sudoku = new JLabel("SUDOKU");
         JLabel time = new JLabel();
-        
+
         time.setToolTipText("The current time!");
         sudoku.setToolTipText("Welcome to the Sudoku Game!");
         //adding the time
@@ -155,7 +156,7 @@ public class SudokuGame extends JPanel {
     private void submitButton() {
         JButton submit = new JButton("Submit");
         JPanel buttons = new JPanel(new BorderLayout());
-        
+
         submit.setToolTipText("Press this button to submit your answer.");
         //formatting
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));

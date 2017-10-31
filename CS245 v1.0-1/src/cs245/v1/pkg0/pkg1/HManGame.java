@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -48,7 +48,7 @@ public class HManGame extends JPanel implements ActionListener {
     private String[] letters = {"A", "B", "C", "D", "E", "F",
         "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
         "S", "T", "U", "V", "W", "X", "Y", "Z"};
-	private JFrame frame;
+    private JFrame frame;
 
     /*Constructor
     for Game UI panel.
@@ -104,18 +104,18 @@ public class HManGame extends JPanel implements ActionListener {
      */
     private void skipButton() {
 
-		String ACTION_KEY = "The Action";
+        String ACTION_KEY = "The Action";
         Action actionListener = new AbstractAction() {
-        public void actionPerformed(ActionEvent actionEvent) {
-        String source = actionEvent.getActionCommand();
-        if(source==null){
-            JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
-                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
-                             + "\nGerianna Geminiano 010662522");
-        } else {
-            System.exit(0);
-        }
-        }
+            public void actionPerformed(ActionEvent actionEvent) {
+                String source = actionEvent.getActionCommand();
+                if (source == null) {
+                    JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
+                            + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
+                            + "\nGerianna Geminiano 010662522");
+                } else {
+                    System.exit(0);
+                }
+            }
         };
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
         InputMap inputMap = skip.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -126,7 +126,7 @@ public class HManGame extends JPanel implements ActionListener {
 
         skip.setToolTipText("Press this button to skip the Hangman Game and go directly to the Color Game");
 
-        KeyStroke space = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0 , true);
+        KeyStroke space = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0, true);
         inputMap = skipPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(space, ACTION_KEY);
         skipPanel.setActionMap(actionMap);
@@ -163,7 +163,7 @@ public class HManGame extends JPanel implements ActionListener {
             word.add(guessWord[i]);
             guessWord[i].setOpaque(true);
             guessWord[i].setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.black));
-			guessWord[i].setToolTipText("Guess this word!!");
+            guessWord[i].setToolTipText("Guess this word!!");
         }
         centerPanel.add(word, BorderLayout.PAGE_END);
     }
@@ -176,8 +176,8 @@ public class HManGame extends JPanel implements ActionListener {
     private void drawTitle() {
         JLabel hangman = new JLabel("HANGMAN");
         JLabel time = new JLabel();
-		time.setToolTipText("The current time!");
-		hangman.setToolTipText("Welcome to the Hangman Game!");
+        time.setToolTipText("The current time!");
+        hangman.setToolTipText("Welcome to the Hangman Game!");
         // adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
         time.setFont(new Font("Papyrus", Font.BOLD, 12));
@@ -201,7 +201,7 @@ public class HManGame extends JPanel implements ActionListener {
         points.setText("Points: " + score);
         points.setFont(new Font("Papyrus", Font.BOLD, 18));
         points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
-		points.setToolTipText("Your current total of points: " + score);
+        points.setToolTipText("Your current total of points: " + score);
         titleBar.add(points, BorderLayout.CENTER);
     }
 
@@ -217,7 +217,7 @@ public class HManGame extends JPanel implements ActionListener {
             buttons[i].addActionListener(this);
             buttons[i].setMargin(new Insets(0, 0, 0, 0));
             //buttons[i].setFont(new Font("Papyrus", Font.BOLD, 9));
-			buttons[i].setToolTipText("Press " + letters[i]);
+            buttons[i].setToolTipText("Press " + letters[i]);
             btnPanel.add(buttons[i]);
         }
 
@@ -358,7 +358,7 @@ public class HManGame extends JPanel implements ActionListener {
          */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-			super.setToolTipText("The gallows demand a body! Number of wrong guesses: " + getTries() + "!");
+            super.setToolTipText("The gallows demand a body! Number of wrong guesses: " + getTries() + "!");
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

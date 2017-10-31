@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -73,7 +73,7 @@ public class HManGameEngine {
         finalScore = score;
     }
 
-    /*/*
+    /*
     method: getScore
     purpose: getter for the score variable, gets the final score for the
     end of the game.

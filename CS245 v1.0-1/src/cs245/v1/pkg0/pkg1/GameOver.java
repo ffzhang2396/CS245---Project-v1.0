@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -62,12 +62,12 @@ public class GameOver extends JPanel {
 
         JLabel title = new JLabel();
         titlePanel.removeAll();
-       
+
         // Winner = 1,2, or 3 depending on win status
         int winner = engine.isWinner();
         // If payer wins and isn't in top 5 highscore
         if (winner == 2) {
-            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore. <br> Score: " + Integer.toString(engine.getFinalScore())+ "<html>");
+            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore. <br> Score: " + Integer.toString(engine.getFinalScore()) + "<html>");
             buttonPanel.removeAll();
             addDoneButton();
         } // Else if player wins but is in top 5 highscore
@@ -105,13 +105,12 @@ public class GameOver extends JPanel {
         JButton yes = new JButton("Yes");
         JButton no = new JButton("No");
         JButton confirm = new JButton("OK");
-        
-        
+
         yes.setToolTipText("Press this button if you don't to record your highscore.");
         no.setToolTipText("Press this button if you don't to record your highscore.");
         confirm.setToolTipText("Press this button to submit your name.");
         input.setToolTipText("Type your name/ initials here.");
-        
+
         JLabel notice = new JLabel(scoreText, SwingConstants.CENTER);
         userPrompt.setText("Would you like to save score to High Score list?");
         namePrompt.setText("Input your initials: ");
