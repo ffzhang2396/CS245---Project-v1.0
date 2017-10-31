@@ -173,9 +173,10 @@ public class MainFrame extends JFrame {
                                 System.exit(0);
                             } // For F1 key
                             else if (ke.getKeyCode() == ke.VK_F1) {
-                                JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
-                                        + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
-                                        + "\nGerianna Geminiano 010662522");
+                                JOptionPane.showMessageDialog(frame, "Thinkman's Hangman\n" 
+                                        + "Fall Quarter\nCharly Dang 010924537"
+                                        + "\nBrandon Nguyen 011499566\nColin Koo 010291241"
+                                        + "\nFelix Zhang 01042383\nGerianna Geminiano 010662522");
                             }
                         }
                         return false;
