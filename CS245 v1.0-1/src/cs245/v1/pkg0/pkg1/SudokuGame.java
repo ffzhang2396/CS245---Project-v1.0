@@ -228,8 +228,6 @@ public class SudokuGame extends JPanel {
     Probably can use this to restart the game.
      */
     private void initBoard() {
-        engine.initBoard();
-        engine.initWrong();
         int[][] board = engine.getBoard();
 
         for (int i = 0; i < board.length; i++) {
