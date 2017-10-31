@@ -51,6 +51,15 @@ public class ColorGame extends JPanel {
         setLayout(new BorderLayout());
         loadUI();
     }
+    
+    
+    /*
+    Updates the score at the start of the game so that 
+    the scores are continously trackked.
+    */
+    public void updateScore() {
+        points.setText("Points: " + hEngine.getScore());
+    }
 
     /*
     method: loadUI
@@ -250,6 +259,7 @@ public class ColorGame extends JPanel {
                         //System.out.println(color);
                         engine.matches(color);
                         //System.out.println("ColorScre:" + engine.getScore());
+                        main.updateSudokuScore();
                         main.swapView("play3");
                     }
                 }

@@ -64,13 +64,21 @@ public class SudokuGame extends JPanel {
     purpose: Resets the game.
      */
     public void startNewGame() {
-        engine.setScore(540); // reset the score back to 540
+        //engine.setScore(540); // reset the score back to 540
         points.setText("Points: " + engine.getFinalScore());
         points.setToolTipText("Your current total of points: " + engine.getFinalScore());
         boxes = new JTextField[9][9];
         board.removeAll();
         initBoard();
         createBoard();
+    }
+    
+    /*
+    Updates the score at the beginning of the game so it is 
+    continuously tracked within each game.
+    */
+    public void updateScore() {
+        points.setText("Points: " + engine.getFinalScore());
     }
 
     /*

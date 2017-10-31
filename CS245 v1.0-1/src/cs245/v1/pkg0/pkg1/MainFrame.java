@@ -100,6 +100,24 @@ public class MainFrame extends JFrame {
         playColor.startNewGame();
         sudoku.startNewGame();
     }
+    
+    /*
+    method: updateSudokuScore
+    purpose: updates the score in sudoku to reflect
+    the score from the previous game.
+    */
+    public void updateSudokuScore() {
+        sudoku.updateScore();
+    }
+    
+    /*
+    method: updateColorScore
+    purpose: updates the score in color game to
+    reflect the score from the previous game.
+    */
+    public void updateColorScore() {
+        playColor.updateScore();
+    }
 
     /*
     method: gameOverMessage
