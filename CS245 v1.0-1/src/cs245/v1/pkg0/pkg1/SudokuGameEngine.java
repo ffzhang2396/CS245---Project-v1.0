@@ -165,7 +165,7 @@ public class SudokuGameEngine {
             winType = 1;
         } else if (score < lowestScore) {// If score is less than lowest highscore
             winType = 2;
-        } else if (score > lowestScore) { // If score is higher than lowest highscore
+        } else if (score >= lowestScore) { // If score is higher than lowest highscore
             winType = 3;
         }
         return winType;
