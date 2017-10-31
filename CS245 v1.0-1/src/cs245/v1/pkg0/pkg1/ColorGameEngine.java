@@ -3,15 +3,15 @@
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.1
- * date last modified: 10/19/17
+ * assignment: Swing Project v1.2
+ * date last modified: 10/30/17
  *
- * purpose: purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
+ * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
  * will be able to play the classic Hangman game with 6 guesses, play a matching
- * color game with 5 rounds, see the top 5 high scores, and the credits. You will
- * also be able to switch back and forth between the displays using the buttons
- * integrated.
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and
+ * the credits. You will also be able to switch back and forth between the
+ * displays using the buttons integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -45,7 +45,7 @@ public class ColorGameEngine {
      */
     public ColorGameEngine() {
 
-        
+
     }
 
     /*
@@ -171,14 +171,14 @@ public class ColorGameEngine {
     /*
 
     method: calcCirclePos
-    purpose: 
+    purpose:
     This is used to calculate the positions of the circles with help
-    from the intersects method. Takes in the width and the height of the 
+    from the intersects method. Takes in the width and the height of the
     JPanel and draws circles within the bounds of the JPanel.
     @returns a circle array to the circle panel class.
      */
     public void calcCirclePos(int xHeight, int yHeight) {
-    
+
         circles = new Circle[5];
         int windowH = yHeight;
         int windowW = xHeight;
@@ -190,7 +190,7 @@ public class ColorGameEngine {
 
         /*
         while the circle array is not filled, keep picking random numbers for
-        coordinates of the circle. Then check if the random circle overlaps with 
+        coordinates of the circle. Then check if the random circle overlaps with
         any circle thats already in the list. if so, repick new random coordinates.
          */
         while (!done) {
@@ -202,7 +202,7 @@ public class ColorGameEngine {
                 circles[counter] = tempCirc;
                 counter++;
             }
-            
+
             if (counter == 5) {
                 done = true;
             }
@@ -248,7 +248,7 @@ public class ColorGameEngine {
         /*
         method: intersects
         purpose: checks if two circles are intersecting given the two
-        circle objects. 
+        circle objects.
          */
         public boolean intersects(Circle comp) {
             double radiSum = (radius * 2) + 10;

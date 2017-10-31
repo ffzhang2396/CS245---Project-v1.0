@@ -3,15 +3,15 @@
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
  * class: CS 245 – Programming Graphical User Interface
  *
- * assignment: Swing Project v1.1
- * date last modified: 10/19/17
+ * assignment: Swing Project v1.2
+ * date last modified: 10/30/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
  * will be able to play the classic Hangman game with 6 guesses, play a matching
- * color game with 5 rounds, see the top 5 high scores, and the credits. You will
- * also be able to switch back and forth between the displays using the buttons
- * integrated.
+ * color game with 5 rounds, and a game of Sudoku see the top 5 high scores, and
+ * the credits. You will also be able to switch back and forth between the
+ * displays using the buttons integrated.
  *
  *************************************************************** */
 package cs245.v1.pkg0.pkg1;
@@ -103,7 +103,7 @@ public class HManGame extends JPanel implements ActionListener {
     to be implemented here.
      */
     private void skipButton() {
-		
+
 		String ACTION_KEY = "The Action";
         Action actionListener = new AbstractAction() {
         public void actionPerformed(ActionEvent actionEvent) {
@@ -123,15 +123,15 @@ public class HManGame extends JPanel implements ActionListener {
         ActionMap actionMap = skip.getActionMap();
         actionMap.put(ACTION_KEY, actionListener);
         skip.setActionMap(actionMap);
-        
-        
+
+
         skip.setToolTipText("Press this button to skip the Hangman Game and go directly to the Color Game");
-        
+
         KeyStroke space = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0 , true);
         inputMap = skipPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(space, ACTION_KEY);
         skipPanel.setActionMap(actionMap);
-	
+
         skipPanel.add(skip);
 
         skip.addActionListener(new ActionListener() {
@@ -258,7 +258,7 @@ public class HManGame extends JPanel implements ActionListener {
             game.addCount();
             button.setEnabled(false);
 
-            if (game.getTries() == 6) { //Game Over                
+            if (game.getTries() == 6) { //Game Over
                 gameFinished(false);
                 engine.setScore(score);
             }
@@ -328,7 +328,7 @@ public class HManGame extends JPanel implements ActionListener {
 
         /*
         method: getTries()
-        purpose: returns the number of wrong tries the user 
+        purpose: returns the number of wrong tries the user
         has attempted.
          */
         public int getTries() {
