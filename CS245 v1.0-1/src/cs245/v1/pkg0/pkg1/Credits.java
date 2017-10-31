@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -43,7 +43,7 @@ public class Credits extends JPanel {
 
     /*
     method: setMain
-    puspose: This method is used to set this instance of MainFrame to the current
+    purpose: This method is used to set this instance of MainFrame to the current
     main frame so that the swapview method can be accessed to change the
     panel back to the main menu once the back button is pressed.
      */
@@ -54,7 +54,7 @@ public class Credits extends JPanel {
 
     /*
     method: showCredits
-    puspose: Displaying the Credits.
+    purpose: Displaying the Credits.
      */
     private void showCredits() {
         scores.setLayout(new BoxLayout(scores, BoxLayout.Y_AXIS));
@@ -69,7 +69,7 @@ public class Credits extends JPanel {
 
     /*
     method: readCredits
-    puspose:Reading the Credits from the array and adding
+    purpose:Reading the Credits from the array and adding
     them to the JLabel array.
      */
     private void readCredits() {
@@ -92,7 +92,7 @@ public class Credits extends JPanel {
 
     /*
      method: addBackButtons
-    puspose: adding the back button.
+    purpose: adding the back button.
      */
     private void addBackButtons() {
         backButton.setToolTipText("Press this button to go back to Main Menu");

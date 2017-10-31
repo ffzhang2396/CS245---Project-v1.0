@@ -59,8 +59,7 @@ public class ColorGameEngine {
     }
 
     /**
-     * method: getTarget 
-     * purpose: returns the target
+     * method: getTarget purpose: returns the target
      *
      */
     public String getTarget() {
@@ -261,19 +260,19 @@ public class ColorGameEngine {
             }
             return false;
         }
-        
+
         /*
         method: getXCenter
         purpose: return xCenter
-        */
+         */
         public int getXCenter() {
             return xCenter;
         }
-        
+
         /*
         method: getYCenter
         purpose: return yCenter
-        */
+         */
         public int getYCenter() {
             return yCenter;
 
@@ -282,15 +281,15 @@ public class ColorGameEngine {
         /*
         method: getXPos
         purpose: return xPos
-        */
+         */
         public int getXPos() {
             return xPos;
         }
-        
+
         /*
         method: getYPos
         purpose: return yPos
-        */
+         */
         public int getYPos() {
             return yPos;
         }
@@ -298,7 +297,7 @@ public class ColorGameEngine {
         /*
         method: getRadius
         purpose: return radius
-        */
+         */
         public int getRadius() {
             return radius;
         }
@@ -306,7 +305,7 @@ public class ColorGameEngine {
         /*
         method: setXpos
         purpsoe: sets xPos and xCenter
-        */
+         */
         public void setXPos(int xPos) {
             this.xPos = xPos;
             xCenter = xPos + 25;
@@ -315,16 +314,16 @@ public class ColorGameEngine {
         /*
         method setYPos
         purpose; sets yPos and ycenter
-        */
+         */
         public void setYPos(int yPos) {
             this.yPos = yPos;
             yCenter = yPos + 25;
         }
-        
+
         /*
         method: toString
         purpose: overrides toString to return xCenter and yCenter
-        */
+         */
         public String toString() {
             String retString = this.xCenter + " " + this.yCenter;
             return retString;
