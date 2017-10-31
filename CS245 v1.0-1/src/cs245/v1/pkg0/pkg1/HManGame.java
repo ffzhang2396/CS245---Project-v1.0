@@ -137,6 +137,7 @@ public class HManGame extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 engine.setScore(0);
+                main.updateColorScore();
                 main.swapView("play2");
             }
         });
