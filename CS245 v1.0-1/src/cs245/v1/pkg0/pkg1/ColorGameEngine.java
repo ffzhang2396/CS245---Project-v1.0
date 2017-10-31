@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -35,7 +35,7 @@ public class ColorGameEngine {
     private int score = 0;
     private boolean won;
     private String input;
-    private String[] colors = {"red", "yellow", "green", "blue","purple"};
+    private String[] colors = {"red", "yellow", "green", "blue", "purple"};
     private String target;
     private int rounds = 0;
 
@@ -44,7 +44,6 @@ public class ColorGameEngine {
         Constructor
      */
     public ColorGameEngine() {
-
 
     }
 
@@ -60,10 +59,11 @@ public class ColorGameEngine {
     }
 
     /**
-        method: getTarget
-        purpose: returns the target
-     **/
-    public String getTarget(){
+     * method: getTarget 
+     * purpose: returns the target
+     *
+     */
+    public String getTarget() {
         return target;
     }
 
@@ -171,8 +171,7 @@ public class ColorGameEngine {
     /*
 
     method: calcCirclePos
-    purpose:
-    This is used to calculate the positions of the circles with help
+    purpose: This is used to calculate the positions of the circles with help
     from the intersects method. Takes in the width and the height of the
     JPanel and draws circles within the bounds of the JPanel.
     @returns a circle array to the circle panel class.
@@ -262,38 +261,70 @@ public class ColorGameEngine {
             }
             return false;
         }
-
+        
+        /*
+        method: getXCenter
+        purpose: return xCenter
+        */
         public int getXCenter() {
             return xCenter;
         }
-
+        
+        /*
+        method: getYCenter
+        purpose: return yCenter
+        */
         public int getYCenter() {
             return yCenter;
 
         }
 
+        /*
+        method: getXPos
+        purpose: return xPos
+        */
         public int getXPos() {
             return xPos;
         }
-
+        
+        /*
+        method: getYPos
+        purpose: return yPos
+        */
         public int getYPos() {
             return yPos;
         }
 
+        /*
+        method: getRadius
+        purpose: return radius
+        */
         public int getRadius() {
             return radius;
         }
 
+        /*
+        method: setXpos
+        purpsoe: sets xPos and xCenter
+        */
         public void setXPos(int xPos) {
             this.xPos = xPos;
             xCenter = xPos + 25;
         }
 
+        /*
+        method setYPos
+        purpose; sets yPos and ycenter
+        */
         public void setYPos(int yPos) {
             this.yPos = yPos;
             yCenter = yPos + 25;
         }
-
+        
+        /*
+        method: toString
+        purpose: overrides toString to return xCenter and yCenter
+        */
         public String toString() {
             String retString = this.xCenter + " " + this.yCenter;
             return retString;
