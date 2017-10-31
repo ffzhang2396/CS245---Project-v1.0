@@ -47,7 +47,7 @@ public class TitlePanel extends JPanel {
      */
     private void drawTitle() {
         projName.setText("ThinkMan's Hangman");
-        projName.setFont(new Font("Kristen ITC", Font.ITALIC, 50));
+        projName.setFont(new Font("Papyrus", Font.ITALIC, 50));
         projName.setHorizontalAlignment(SwingConstants.CENTER);
         projName.setForeground(Color.white);
         projName.setToolTipText("Thinking....Thikning....Thinking...Eureka!");

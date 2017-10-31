@@ -124,7 +124,6 @@ public class HManGame extends JPanel implements ActionListener {
         actionMap.put(ACTION_KEY, actionListener);
         skip.setActionMap(actionMap);
 
-
         skip.setToolTipText("Press this button to skip the Hangman Game and go directly to the Color Game");
 
         KeyStroke space = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0 , true);
@@ -160,7 +159,7 @@ public class HManGame extends JPanel implements ActionListener {
         for (int i = 0; i < length; i++) {
             guessWord[i] = new JLabel(" ", SwingConstants.CENTER);
             guessWord[i].setPreferredSize(new Dimension(30, 30));
-            guessWord[i].setFont(new Font("Arial", Font.PLAIN, 24));
+            guessWord[i].setFont(new Font("Papyrus", Font.PLAIN, 24));
             word.add(guessWord[i]);
             guessWord[i].setOpaque(true);
             guessWord[i].setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, Color.black));
@@ -181,7 +180,7 @@ public class HManGame extends JPanel implements ActionListener {
 		hangman.setToolTipText("Welcome to the Hangman Game!");
         // adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
-        time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
+        time.setFont(new Font("Papyrus", Font.BOLD, 12));
         Timer timer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,7 +199,7 @@ public class HManGame extends JPanel implements ActionListener {
 
         //adding the points
         points.setText("Points: " + score);
-        points.setFont(new Font("Arial", Font.ITALIC, 14));
+        points.setFont(new Font("Papyrus", Font.BOLD, 18));
         points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
 		points.setToolTipText("Your current total of points: " + score);
         titleBar.add(points, BorderLayout.CENTER);
@@ -216,8 +215,8 @@ public class HManGame extends JPanel implements ActionListener {
         for (int i = 0; i < letters.length; i++) {
             buttons[i] = new JButton(letters[i]);
             buttons[i].addActionListener(this);
-            // buttons[i].setFont(new Font("Calibri", Font.PLAIN, 11));
             buttons[i].setMargin(new Insets(0, 0, 0, 0));
+            //buttons[i].setFont(new Font("Papyrus", Font.BOLD, 9));
 			buttons[i].setToolTipText("Press " + letters[i]);
             btnPanel.add(buttons[i]);
         }

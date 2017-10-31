@@ -66,7 +66,7 @@ public class GameOver extends JPanel {
         int winner = engine.isWinner();
         // If payer wins and isn't in top 5 highscore
         if (winner == 2) {
-            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore <html>");
+            title.setText("<html>Congratulations! You win!<br> But you didn't get a highscore. <html>");
             buttonPanel.removeAll();
             addDoneButton();
         } // Else if player wins but is in top 5 highscore
@@ -81,7 +81,7 @@ public class GameOver extends JPanel {
             addDoneButton();
         }
 
-        title.setFont(new Font("Kristen ITC", Font.BOLD, 30));
+        title.setFont(new Font("Papyrus", Font.BOLD, 34));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         titlePanel.add(title);
         add(titlePanel, BorderLayout.PAGE_START);
@@ -104,10 +104,19 @@ public class GameOver extends JPanel {
         JButton yes = new JButton("Yes");
         JButton no = new JButton("No");
         JButton confirm = new JButton("OK");
+        
+        
+        yes.setToolTipText("Press this button if you don't to record your highscore.");
+        no.setToolTipText("Press this button if you don't to record your highscore.");
+        confirm.setToolTipText("Press this button to submit your name.");
+        input.setToolTipText("Type your name/ initials here.");
+        
         JLabel notice = new JLabel(scoreText, SwingConstants.CENTER);
         userPrompt.setText("Would you like to save score to High Score list?");
         namePrompt.setText("Input your initials: ");
-        notice.setFont(new Font("Kristen ITC", Font.BOLD, 20));
+        notice.setFont(new Font("Papyrus", Font.BOLD, 18));
+        userPrompt.setFont(new Font("Papyrus", Font.BOLD, 18));
+        userPrompt.setFont(new Font("Papyrus", Font.BOLD, 18));
 
         containerPanel.setLayout(new BorderLayout());
         inputPanel.setLayout(new FlowLayout());
@@ -180,6 +189,7 @@ public class GameOver extends JPanel {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(done);
         done.setText("End");
+        done.setToolTipText("Press this button to return to the main menu.");
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

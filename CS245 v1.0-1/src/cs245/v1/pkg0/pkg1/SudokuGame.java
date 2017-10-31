@@ -34,9 +34,11 @@ public class SudokuGame extends JPanel {
     private MainFrame main;
     private JTextField[][] boxes = new JTextField[9][9];
     private JPanel board = new JPanel();
+    private JLabel points = new JLabel();
 
     /**
      * constructor
+     *
      * @param engine
      * @param cEngine
      */
@@ -84,6 +86,8 @@ public class SudokuGame extends JPanel {
             for (int j = 0; j < boxes.length; j++) {
 
                 board.add(boxes[i][j]);
+                board.setToolTipText("Sudoku Board! Come play!");
+                boxes[i][j].setToolTipText("The current coordiantes are: [" + i + "][" + j + "]");
             }
         }
 
@@ -101,10 +105,13 @@ public class SudokuGame extends JPanel {
         JPanel title = new JPanel(new BorderLayout());
         JLabel sudoku = new JLabel("SUDOKU");
         JLabel time = new JLabel();
-
+        
+        time.setToolTipText("The current time!");
+        sudoku.setToolTipText("Welcome to the Sudoku Game!");
         //adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
-        time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
+        time.setFont(new Font("Papyrus", Font.BOLD, 12));
+        //time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
         Timer timer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +129,13 @@ public class SudokuGame extends JPanel {
         title.add(sudoku, BorderLayout.LINE_START);
         add(title, BorderLayout.PAGE_START);
 
+        //adding the points
+        points.setText("Points: " + engine.getFinalScore());
+        points.setFont(new Font("Papyrus", Font.BOLD, 18));
+        points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
+        points.setToolTipText("Your current total of points: " + engine.getFinalScore());
+        title.add(points, BorderLayout.CENTER);
+
     }
 
     /*
@@ -132,7 +146,8 @@ public class SudokuGame extends JPanel {
     private void submitButton() {
         JButton submit = new JButton("Submit");
         JPanel buttons = new JPanel(new BorderLayout());
-
+        
+        submit.setToolTipText("Press this button to submit your answer.");
         //formatting
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
         buttons.add(submit, BorderLayout.PAGE_END);
@@ -142,16 +157,15 @@ public class SudokuGame extends JPanel {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-             boolean check = checkInput();
-            if(check){
-               System.out.println("Sudoku Score: " + engine.getFinalScore());
-               engine.setScore(cEngine.getScore()+engine.getFinalScore());
-               System.out.println("Final Score: " + engine.getFinalScore());
-               main.gameOverMessage();
-               main.swapView("over");
-               startNewGame();
-            }
+                boolean check = checkInput();
+                if (check) {
+                    //System.out.println("Sudoku Score: " + engine.getFinalScore());
+                    engine.setScore(cEngine.getScore() + engine.getFinalScore());
+                    //System.out.println("Final Score: " + engine.getFinalScore());
+                    main.gameOverMessage();
+                    main.swapView("over");
+                    startNewGame();
+                }
             }
         });
     }
@@ -202,7 +216,7 @@ public class SudokuGame extends JPanel {
         // Update wrong boxes array
         //Meant so that can't be dedcuted more than once for each box
         engine.setWrong(wrongAns);
-        System.out.println("Score: " + engine.getFinalScore());
+        points.setText("Points: " + engine.getFinalScore());  // Update points
         return finish;
     }
 
@@ -214,7 +228,7 @@ public class SudokuGame extends JPanel {
     private void quitButton() {
         JButton quit = new JButton("Quit");
         JPanel btns = new JPanel(new BorderLayout());
-
+        quit.setToolTipText("Press this button to quit the game.");
         //formatting
         btns.setBorder(BorderFactory.createEmptyBorder(10, 25, 25, 25));
         btns.add(quit, BorderLayout.PAGE_END);
@@ -227,10 +241,10 @@ public class SudokuGame extends JPanel {
                 // If choose to quit then Socuku score is 0
                 // So Ending score is previous games Score
                 engine.setScore(cEngine.getScore());
-                System.out.println("Final Score: " + engine.getFinalScore());
+                //System.out.println("Final Score: " + engine.getFinalScore());
                 main.gameOverMessage();
                 main.swapView("over");
-                
+
                 startNewGame();
             }
 
@@ -286,7 +300,7 @@ public class SudokuGame extends JPanel {
             }
         }
     }
-    
+
     /*
      * class to verify input
      */
@@ -306,7 +320,7 @@ public class SudokuGame extends JPanel {
                     JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        
+
         /*
          * method; verify
          * purpose: verifies if input is between 1 and 9. also if contains any non number characters
@@ -325,10 +339,9 @@ public class SudokuGame extends JPanel {
                 }
             } catch (NumberFormatException e) {
                 if (text.isEmpty()) {
-                 //   System.out.println(text);
+                    System.out.println(text);
                     return true;
                 }
-
 
                 return false;
             }

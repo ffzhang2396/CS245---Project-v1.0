@@ -123,6 +123,7 @@ public class HighScore extends JPanel {
     purpose: adding the back button.
      */
     private void addBackButtons() {
+        backButton.setToolTipText("Press this button to go back to Main Menu");
         buttons.add(backButton, BorderLayout.LINE_START);
         buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(buttons, BorderLayout.PAGE_END);

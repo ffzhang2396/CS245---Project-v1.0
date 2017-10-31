@@ -77,7 +77,7 @@ public class ColorGame extends JPanel {
 
         // adding the time
         time.setHorizontalAlignment(JLabel.CENTER);
-        time.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 12));
+        time.setFont(new Font("Papyrus", Font.BOLD, 12));
         Timer timer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +92,12 @@ public class ColorGame extends JPanel {
 
         titleBar.add(time, BorderLayout.LINE_END);
 
+        //adding the points
+        points.setText("Points: " + hEngine.getScore());
+        points.setFont(new Font("Papyrus", Font.BOLD, 18));
+        points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
+		points.setToolTipText("Your current total of points: " + hEngine.getScore());
+        titleBar.add(points, BorderLayout.CENTER);
     }
 
 
@@ -155,6 +161,8 @@ public class ColorGame extends JPanel {
         purpose: redraws the screen with new color, points, and random circles
          */
         public void reDraw() {
+            points.setText("Points: " + engine.getScore());
+            points.setToolTipText("Your current total of points: " + engine.getScore());
             target.setText("Color: " + engine.getText());
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
@@ -226,14 +234,14 @@ public class ColorGame extends JPanel {
                 // If its initial round first get the score from hangman
                 if (engine.getRounds() == 0) {
                     engine.setScore(hEngine.getScore());
-                    System.out.println("HangmanScore:" + hEngine.getScore());
+                    //System.out.println("HangmanScore:" + hEngine.getScore());
                 }
                 for (Shape shape : drawCirc) {
                     if (shape.contains(e.getPoint())) {;
                         //System.out.println(color);
                         engine.matches(color);
                         reDraw();
-                        System.out.println("ColorScre:" + engine.getScore());
+                        //System.out.println("ColorScre:" + engine.getScore());
                     }
                 }
             } else if (engine.getRounds() == 4) {
@@ -241,7 +249,7 @@ public class ColorGame extends JPanel {
                     if (shape.contains(e.getPoint())) {
                         //System.out.println(color);
                         engine.matches(color);
-                        System.out.println("ColorScre:" + engine.getScore());
+                        //System.out.println("ColorScre:" + engine.getScore());
                         main.swapView("play3");
                     }
                 }
@@ -261,6 +269,7 @@ public class ColorGame extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+            
         }
 
         @Override

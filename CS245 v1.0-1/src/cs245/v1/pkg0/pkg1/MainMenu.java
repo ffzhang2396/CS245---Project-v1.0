@@ -127,10 +127,14 @@ public class MainMenu extends JPanel {
         buttons.setPreferredSize(new Dimension(200, 150));
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        play.setToolTipText("Click this button to start playing the Hangman, Color and Sudoku games!");
+
+        play.setToolTipText("Press this button to start playing the Hangman, Color and Sudoku games!");
+        hScore.setToolTipText("Press this button to go to the highScores!");
+        credit.setToolTipText("Press this button to see the group members name's and bronco ids");
+
         buttons.add(play);
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
-        hScore.setToolTipText("Press this button to go to the highScores!");
+
         buttons.add(hScore);
         credit.setToolTipText("Press this button to see the group members name's and bronco ids");
         buttons.add(Box.createRigidArea(new Dimension(0, 10)));
