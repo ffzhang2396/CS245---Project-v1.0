@@ -120,8 +120,8 @@ public class SudokuGame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-             
-            if(checkInput()){
+             boolean check = checkInput();
+            if(check){
                System.out.println("Sudoku Score: " + engine.getFinalScore());
                engine.setScore(cEngine.getScore()+engine.getFinalScore());
                System.out.println("Final Score: " + engine.getFinalScore());
