@@ -4,7 +4,7 @@
  * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.2
- * date last modified: 10/30/17
+ * date last modified: 10/31/17
  *
  * purpose: This program is a "Point-and-click" Hangman and Color game. Using Swing,
  * we created a game that is controlled by your mouse and keyboard. The user
@@ -51,12 +51,12 @@ public class ColorGame extends JPanel {
         setLayout(new BorderLayout());
         loadUI();
     }
-    
-    
+
     /*
-    Updates the score at the start of the game so that 
+    method: updateScore
+    purpose: Updates the score at the start of the game so that 
     the scores are continously trackked.
-    */
+     */
     public void updateScore() {
         points.setText("Points: " + hEngine.getScore());
     }
@@ -105,7 +105,7 @@ public class ColorGame extends JPanel {
         points.setText("Points: " + hEngine.getScore());
         points.setFont(new Font("Papyrus", Font.BOLD, 18));
         points.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 10));
-		points.setToolTipText("Your current total of points: " + hEngine.getScore());
+        points.setToolTipText("Your current total of points: " + hEngine.getScore());
         titleBar.add(points, BorderLayout.CENTER);
     }
 
@@ -268,7 +268,6 @@ public class ColorGame extends JPanel {
             }
         }
 
-
         @Override
         public void mousePressed(MouseEvent e) {
         }
@@ -279,7 +278,7 @@ public class ColorGame extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            
+
         }
 
         @Override
