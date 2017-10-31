@@ -138,7 +138,6 @@ public class HManGame extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 engine.setScore(0);
-                main.gameOverMessage();
                 main.swapView("play2");
             }
         });
@@ -298,7 +297,6 @@ public class HManGame extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 engine.setWin(won);
                 engine.setScore(score);
-                main.gameOverMessage();
                 main.swapView("play2");
             }
         });
