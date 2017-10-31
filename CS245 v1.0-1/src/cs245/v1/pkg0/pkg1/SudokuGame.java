@@ -65,7 +65,8 @@ public class SudokuGame extends JPanel {
      */
     public void startNewGame() {
         engine.setScore(540); // reset the score back to 540
-        // NEED TO ADD MORE CODE TO RESET EVERYTHINE ELSE
+        points.setText("Points: " + engine.getFinalScore());
+        points.setToolTipText("Your current total of points: " + engine.getFinalScore());
         boxes = new JTextField[9][9];
         board.removeAll();
         initBoard();
