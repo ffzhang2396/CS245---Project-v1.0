@@ -1,7 +1,7 @@
 /** *************************************************************
  * file: ColorGame.java
  * author: Brandon Nguyen, Charly Dang, Colin Koo, Felix Zhang, Gerianna Geminiano
- * class: CS 245 � Programming Graphical User Interface
+ * class: CS 245 – Programming Graphical User Interface
  *
  * assignment: Swing Project v1.1
  * date last modified: 10/19/17
@@ -19,8 +19,6 @@ package cs245.v1.pkg0.pkg1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -28,7 +26,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 import javax.swing.*;
-
 
 public class ColorGame extends JPanel {
 
@@ -43,7 +40,6 @@ public class ColorGame extends JPanel {
     private JLabel points = new JLabel();
     private JTextField color = new JTextField(10);
     private JLabel target = new JLabel();
-    private JFrame frame;
 
     /*
     Constructor
@@ -54,7 +50,6 @@ public class ColorGame extends JPanel {
         game = new CirclePanel();
         setLayout(new BorderLayout());
         loadUI();
-        
     }
 
     /*
@@ -62,47 +57,12 @@ public class ColorGame extends JPanel {
     purpose: Loads the UI for the color game
      */
     private void loadUI() {
-        String targetedColor = engine.getText();
-        target.setText("Color: " + targetedColor);
+        target.setText("Color: " + engine.getText());
         target.setFont(new Font("Papyrus", Font.BOLD, 18));
         target.setForeground(chooseRandomColor());
         target.setToolTipText("Your goal is the color: " + engine.getTarget());
-        
-        String ACTION_KEY = "The Action";
-        Action actionListener = new AbstractAction() {
-        public void actionPerformed(ActionEvent actionEvent) {
-        String source = actionEvent.getActionCommand();
-        if(source==null){
-            JOptionPane.showMessageDialog(frame, "Winter Quarter\nCharly Dang 010924537"
-                             + "\nBrandon Nguyen 011499566\nColin Koo 010291241\nFelix Zhang 01042383"
-                             + "\nGerianna Geminiano 010662522");
-        } else {
-            System.exit(0);
-        }
-        }
-        };
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
-        InputMap inputMap = titleBar.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(escape, ACTION_KEY);
-        ActionMap actionMap = titleBar.getActionMap();
-        actionMap.put(ACTION_KEY, actionListener);
-        titleBar.setActionMap(actionMap);
-        
-        
-        //skip.setToolTipText("Press this button to skip the Hangman Game and go directly to the Color Game");
-        
-        KeyStroke f1 = KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0, true);//supposed to be KeyEvent.VK_F1, 0 , true);
-        inputMap = skipPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(f1, ACTION_KEY);
-        skipPanel.setActionMap(actionMap);
-        
         titleBar.add(target, BorderLayout.LINE_START);
         add(titleBar, BorderLayout.PAGE_START);
-        
-        
-        titleBar.add(target, BorderLayout.LINE_START);
-        add(titleBar, BorderLayout.PAGE_START);
-        
         add(skipPanel, BorderLayout.LINE_END);
         add(game, BorderLayout.CENTER);
         drawTitle();
@@ -129,10 +89,9 @@ public class ColorGame extends JPanel {
         timer.setInitialDelay(0);
         timer.start();
         time.setToolTipText("The Current Time!");
+        
         titleBar.add(time, BorderLayout.LINE_END);
         
-      //adding the points
-       
     }
     
     
@@ -186,7 +145,6 @@ public class ColorGame extends JPanel {
          */
         public CirclePanel() {
             drawCirc = engine.getCircles(431, 284);
-            //checkEscape();
             addMouseListener(this);
             addMouseMotionListener(this);
         }
@@ -197,8 +155,7 @@ public class ColorGame extends JPanel {
         purpose: redraws the screen with new color, points, and random circles
          */
         public void reDraw() {
-            String targetedColor = engine.getText();
-            target.setText("Color: " + targetedColor);
+            target.setText("Color: " + engine.getText());
             target.setFont(new Font("Papyrus", Font.BOLD, 18));
             target.setForeground(chooseRandomColor());
             target.setToolTipText("Your goal is the color: " + engine.getTarget());
@@ -212,7 +169,6 @@ public class ColorGame extends JPanel {
         purpose: paints the circles 
          */
         public void paintComponent(Graphics g) {
-            
             Rectangle r = this.getBounds();
             super.paintComponent(g);
             super.setToolTipText("This color is " + color);
@@ -223,7 +179,6 @@ public class ColorGame extends JPanel {
             //Draws the ovals based on the game engine calculated coordinates.
             //Need to fill in with a color later.
             for (int i = 0; i < drawCirc.length; ++i) {
-                
                 if (mouse != null && drawCirc[i].contains(mouse)) {//mouseX, mouseY)){
                     g2.setColor(colors[i].darker());
                     thisColor(i);
@@ -254,12 +209,11 @@ public class ColorGame extends JPanel {
                     color = "blue";
                     break;
                 case 4:
-                    color = "pink";
+                    color = "purple";
                     break;
 
             }
         }
-        
         
 
         /*
@@ -272,12 +226,14 @@ public class ColorGame extends JPanel {
                 // If its initial round first get the score from hangman
                 if (engine.getRounds() == 0) {
                     engine.setScore(hEngine.getScore());
+                    System.out.println("HangmanScore:" + hEngine.getScore());
                 }
                 for (Shape shape : drawCirc) {
                     if (shape.contains(e.getPoint())) {;
                         //System.out.println(color);
                         engine.matches(color);
                         reDraw();
+                        System.out.println("ColorScre:" + engine.getScore());
                     }
                 }
             } else if (engine.getRounds() == 4) {
@@ -285,13 +241,12 @@ public class ColorGame extends JPanel {
                     if (shape.contains(e.getPoint())) {
                         //System.out.println(color);
                         engine.matches(color);
-                        main.gameOverMessage();
-                        main.swapView("over");
+                        System.out.println("ColorScre:" + engine.getScore());
+                        main.swapView("play3");
                     }
                 }
             } else {;
-                main.gameOverMessage();
-                main.swapView("over");
+                main.swapView("play3");
             }
         }
            
@@ -325,7 +280,7 @@ public class ColorGame extends JPanel {
             mouse = e.getPoint();
             repaint();
         }
-           
+
     }
 
 }
