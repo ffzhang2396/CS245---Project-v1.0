@@ -150,7 +150,7 @@ public class SudokuGameEngine {
             String line = buff.readLine();
             // Gets lowest highscore
             while ((line) != null) {
-                String[] splitted = line.split(" ");
+                String[] splitted =  line.split(" ");
                 lowestScore = Integer.parseInt(splitted[1]);
                 line = buff.readLine();
             }

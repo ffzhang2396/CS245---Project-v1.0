@@ -167,6 +167,7 @@ public class SudokuGame extends JPanel {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                engine.setScore(engine.getFinalScore());
                 boolean check = checkInput();
                 if (check) {
                     //System.out.println("Sudoku Score: " + engine.getFinalScore());
